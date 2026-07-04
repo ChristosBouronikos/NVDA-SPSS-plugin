@@ -1,0 +1,26 @@
+name: Validate NVDA add-on
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Install packaging tools
+        run: sudo apt-get update && sudo apt-get install -y gettext zip unzip rsync ripgrep
+
+      - name: Validate package
+        run: scripts/validate.sh
+
+      - name: Upload add-on package
+        uses: actions/upload-artifact@v4
+        with:
+          name: nvda-addon
+          path: |
+            dist/*.nvda-addon
+            dist/SHA256SUMS

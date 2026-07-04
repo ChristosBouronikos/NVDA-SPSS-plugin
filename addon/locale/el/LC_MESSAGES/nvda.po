@@ -1,0 +1,1049 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: spssAccessibility 1.1.0\n"
+"POT-Creation-Date: 2026-06-20 00:00+0000\n"
+"PO-Revision-Date: 2026-06-20 00:00+0000\n"
+"Last-Translator: Bouronikos Christos <chrisbouronikos@gmail.com>\n"
+"Language-Team: Greek\n"
+"Language: el\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+msgid "Output Viewer. The left outline lists result blocks such as logs, notes, tables, charts, and statistical procedures. The right document area contains the selected output. Use the outline to move between results, then use the read output command for a concise summary."
+msgstr "Προβολή αποτελεσμάτων. Το αριστερό outline περιέχει blocks αποτελεσμάτων, όπως logs, σημειώσεις, πίνακες, γραφήματα και στατιστικές διαδικασίες. Η δεξιά περιοχή εγγράφου περιέχει το επιλεγμένο αποτέλεσμα. Χρησιμοποιήστε το outline για μετακίνηση μεταξύ αποτελεσμάτων και μετά την εντολή ανάγνωσης αποτελέσματος για σύντομη περίληψη."
+
+msgid "Data View. Rows are cases and columns are variables. Use arrow keys to move cell by cell. The data-cell command reports the case number, variable name, and current value when SPSS exposes that information."
+msgstr "Προβολή δεδομένων. Οι γραμμές είναι περιπτώσεις και οι στήλες είναι μεταβλητές. Χρησιμοποιήστε τα βελάκια για μετακίνηση κελί προς κελί. Η εντολή κελιού δεδομένων αναφέρει τον αριθμό περίπτωσης, το όνομα μεταβλητής και την τρέχουσα τιμή όταν το SPSS δίνει αυτές τις πληροφορίες."
+
+msgid "Variable View. Each row defines one variable. Columns describe properties such as name, type, width, decimals, label, values, missing values, measure, and role. Use the variable command to report the current property and value."
+msgstr "Προβολή μεταβλητών. Κάθε γραμμή ορίζει μία μεταβλητή. Οι στήλες περιγράφουν ιδιότητες όπως όνομα, τύπος, πλάτος, δεκαδικά, ετικέτα, τιμές, ελλείπουσες τιμές, μέτρο και ρόλος. Χρησιμοποιήστε την εντολή μεταβλητής για να ακούσετε την τρέχουσα ιδιότητα και τιμή."
+
+msgid "Syntax Editor. This is the command text area. You can review, edit, and run SPSS syntax. Dialog Paste buttons often place commands here before execution."
+msgstr "Επεξεργαστής σύνταξης. Αυτή είναι η περιοχή κειμένου εντολών. Μπορείτε να ελέγξετε, να επεξεργαστείτε και να εκτελέσετε σύνταξη SPSS. Τα κουμπιά Paste στους διαλόγους συχνά τοποθετούν εδώ τις εντολές πριν από την εκτέλεση."
+
+msgid "SPSS menus. File manages files and import or export. Data changes cases and datasets. Transform computes and recodes variables. Analyze runs statistics. Graphs creates charts. Utilities and Extensions manage metadata and add-ons."
+msgstr "Μενού SPSS. Το File διαχειρίζεται αρχεία, εισαγωγή και εξαγωγή. Το Data αλλάζει περιπτώσεις και datasets. Το Transform υπολογίζει και επανακωδικοποιεί μεταβλητές. Το Analyze εκτελεί στατιστικές αναλύσεις. Το Graphs δημιουργεί γραφήματα. Τα Utilities και Extensions διαχειρίζονται μεταδεδομένα και πρόσθετα."
+
+msgid "File: open, save, import, export, print, and manage SPSS data, syntax, and output files."
+msgstr "File: άνοιγμα, αποθήκευση, εισαγωγή, εξαγωγή, εκτύπωση και διαχείριση αρχείων δεδομένων, σύνταξης και αποτελεσμάτων SPSS."
+
+msgid "Edit: undo, copy, paste, find, and change SPSS options."
+msgstr "Edit: αναίρεση, αντιγραφή, επικόλληση, εύρεση και αλλαγή επιλογών SPSS."
+
+msgid "View: show or hide toolbars, status information, value labels, and switch visible panels."
+msgstr "View: εμφάνιση ή απόκρυψη γραμμών εργαλείων, πληροφοριών κατάστασης, ετικετών τιμών και ορατών περιοχών."
+
+msgid "Data: sort cases, select cases, split files, weight cases, merge files, and restructure datasets."
+msgstr "Data: ταξινόμηση περιπτώσεων, επιλογή περιπτώσεων, διαχωρισμός αρχείων, στάθμιση περιπτώσεων, συγχώνευση αρχείων και αναδιάρθρωση datasets."
+
+msgid "Transform: compute variables, recode values, count values, rank cases, and prepare derived fields."
+msgstr "Transform: υπολογισμός μεταβλητών, επανακωδικοποίηση τιμών, μέτρηση τιμών, κατάταξη περιπτώσεων και δημιουργία παραγόμενων πεδίων."
+
+msgid "Analyze: run descriptive statistics, crosstabs, compare means, correlations, regression, nonparametric tests, and models."
+msgstr "Analyze: εκτέλεση περιγραφικών στατιστικών, crosstabs, σύγκρισης μέσων, συσχετίσεων, παλινδρόμησης, μη παραμετρικών ελέγχων και μοντέλων."
+
+msgid "Graphs: open Chart Builder, legacy dialogs, and graph editing commands."
+msgstr "Graphs: άνοιγμα Chart Builder, παλιών διαλόγων και εντολών επεξεργασίας γραφημάτων."
+
+msgid "Utilities: inspect variables, file information, sets, and dictionaries."
+msgstr "Utilities: έλεγχος μεταβλητών, πληροφοριών αρχείου, sets και dictionaries."
+
+msgid "Extensions: run extension commands, Python or R integrations, and custom procedures when installed."
+msgstr "Extensions: εκτέλεση εντολών επεκτάσεων, ενσωματώσεων Python ή R και προσαρμοσμένων διαδικασιών όταν είναι εγκατεστημένες."
+
+msgid "Window: move between open Data Editor, Output Viewer, Syntax Editor, and dialog windows."
+msgstr "Window: μετακίνηση μεταξύ ανοιχτών παραθύρων Data Editor, Output Viewer, Syntax Editor και διαλόγων."
+
+msgid "Help: open SPSS help, tutorials, command syntax reference, and product information."
+msgstr "Help: άνοιγμα βοήθειας SPSS, tutorials, αναφοράς σύνταξης εντολών και πληροφοριών προϊόντος."
+
+msgid "Name"
+msgstr "Όνομα"
+
+msgid "Type"
+msgstr "Τύπος"
+
+msgid "Width"
+msgstr "Πλάτος"
+
+msgid "Decimals"
+msgstr "Δεκαδικά"
+
+msgid "Label"
+msgstr "Ετικέτα"
+
+msgid "Values"
+msgstr "Τιμές"
+
+msgid "Missing"
+msgstr "Ελλείπουσες"
+
+msgid "Columns"
+msgstr "Στήλες"
+
+msgid "Align"
+msgstr "Στοίχιση"
+
+msgid "Measure"
+msgstr "Μέτρο"
+
+msgid "Role"
+msgstr "Ρόλος"
+
+msgid "OK"
+msgstr "OK"
+
+msgid "Cancel"
+msgstr "Άκυρο"
+
+msgid "Apply"
+msgstr "Εφαρμογή"
+
+msgid "Close"
+msgstr "Κλείσιμο"
+
+msgid "Continue"
+msgstr "Συνέχεια"
+
+msgid "Reset"
+msgstr "Επαναφορά"
+
+msgid "Paste syntax"
+msgstr "Επικόλληση σύνταξης"
+
+msgid "Run command"
+msgstr "Εκτέλεση εντολής"
+
+msgid "Open"
+msgstr "Άνοιγμα"
+
+msgid "Save"
+msgstr "Αποθήκευση"
+
+msgid "Print"
+msgstr "Εκτύπωση"
+
+msgid "Browse"
+msgstr "Αναζήτηση"
+
+msgid "Options"
+msgstr "Επιλογές"
+
+msgid "Statistics"
+msgstr "Στατιστικά"
+
+msgid "Charts"
+msgstr "Γραφήματα"
+
+msgid "Plots"
+msgstr "Διαγράμματα"
+
+msgid "Post Hoc"
+msgstr "Post Hoc"
+
+msgid "Contrasts"
+msgstr "Contrasts"
+
+msgid "Bootstrap"
+msgstr "Bootstrap"
+
+msgid "Exact tests"
+msgstr "Ακριβείς έλεγχοι"
+
+msgid "Style"
+msgstr "Στυλ"
+
+msgid "Format"
+msgstr "Μορφοποίηση"
+
+msgid "Data View"
+msgstr "Προβολή δεδομένων"
+
+msgid "Variable View"
+msgstr "Προβολή μεταβλητών"
+
+msgid "Output Viewer"
+msgstr "Προβολή αποτελεσμάτων"
+
+msgid "Syntax Editor"
+msgstr "Επεξεργαστής σύνταξης"
+
+msgid "Chart Builder"
+msgstr "Δημιουργός γραφημάτων"
+
+msgid "Variable"
+msgstr "Μεταβλητή"
+
+msgid "Variables"
+msgstr "Μεταβλητές"
+
+msgid "Dependent variable"
+msgstr "Εξαρτημένη μεταβλητή"
+
+msgid "Independent variable"
+msgstr "Ανεξάρτητη μεταβλητή"
+
+msgid "Covariates"
+msgstr "Συμμεταβλητές"
+
+msgid "Factor"
+msgstr "Παράγοντας"
+
+msgid "Labels"
+msgstr "Ετικέτες"
+
+msgid "Value labels"
+msgstr "Ετικέτες τιμών"
+
+msgid "IBM SPSS Statistics"
+msgstr "IBM SPSS Statistics"
+
+msgid "SPSS menu bar"
+msgstr "Γραμμή μενού SPSS"
+
+msgid "SPSS table"
+msgstr "Πίνακας SPSS"
+
+msgid "Move to the SPSS Output Viewer or describe how to use it"
+msgstr "Μετάβαση στην Προβολή αποτελεσμάτων SPSS ή περιγραφή χρήσης της"
+
+msgid "Move to SPSS Data View"
+msgstr "Μετάβαση στο Data View του SPSS"
+
+msgid "Move to SPSS Variable View"
+msgstr "Μετάβαση στο Variable View του SPSS"
+
+msgid "Move to the SPSS menu bar"
+msgstr "Μετάβαση στη γραμμή μενού του SPSS"
+
+msgid "Move to the SPSS Syntax Editor"
+msgstr "Μετάβαση στον Syntax Editor του SPSS"
+
+msgid "Describe the current SPSS pane"
+msgstr "Περιγραφή της τρέχουσας περιοχής SPSS"
+
+msgid "Describe SPSS menus and what each menu contains"
+msgstr "Περιγραφή των μενού του SPSS και του τι περιέχουν"
+
+msgid "Read the current SPSS tab and table context"
+msgstr "Ανάγνωση της τρέχουσας καρτέλας και του πλαισίου πίνακα στο SPSS"
+
+msgid "Read the current SPSS output item or selected output block"
+msgstr "Ανάγνωση του τρέχοντος στοιχείου αποτελέσματος ή επιλεγμένου block αποτελέσματος SPSS"
+
+msgid "Read the current SPSS Data View cell with row, variable, and value"
+msgstr "Ανάγνωση του τρέχοντος κελιού στο Data View με γραμμή, μεταβλητή και τιμή"
+
+msgid "Read the current SPSS Variable View definition cell"
+msgstr "Ανάγνωση του τρέχοντος κελιού ορισμού στο Variable View"
+
+msgid "NVDA+Control+Alt+O: Output Viewer."
+msgstr "NVDA+Control+Alt+O: Προβολή αποτελεσμάτων."
+
+msgid "NVDA+Control+Alt+D: Data View."
+msgstr "NVDA+Control+Alt+D: Προβολή δεδομένων."
+
+msgid "NVDA+Control+Alt+V: Variable View."
+msgstr "NVDA+Control+Alt+V: Προβολή μεταβλητών."
+
+msgid "NVDA+Control+Alt+M: Menu bar."
+msgstr "NVDA+Control+Alt+M: Γραμμή μενού."
+
+msgid "NVDA+Control+Alt+S: Syntax Editor."
+msgstr "NVDA+Control+Alt+S: Επεξεργαστής σύνταξης."
+
+msgid "NVDA+Control+Alt+T: read current tab and table context."
+msgstr "NVDA+Control+Alt+T: ανάγνωση τρέχουσας καρτέλας και πλαισίου πίνακα."
+
+msgid "NVDA+Control+Alt+Shift+O: read current output item."
+msgstr "NVDA+Control+Alt+Shift+O: ανάγνωση τρέχοντος αποτελέσματος."
+
+msgid "NVDA+Control+Alt+Shift+D: read current data cell."
+msgstr "NVDA+Control+Alt+Shift+D: ανάγνωση τρέχοντος κελιού δεδομένων."
+
+msgid "NVDA+Control+Alt+Shift+V: read current variable definition."
+msgstr "NVDA+Control+Alt+Shift+V: ανάγνωση τρέχοντος ορισμού μεταβλητής."
+
+msgid "NVDA+Control+Alt+Shift+P: describe current pane."
+msgstr "NVDA+Control+Alt+Shift+P: περιγραφή τρέχουσας περιοχής."
+
+msgid "NVDA+Control+Alt+Shift+M: describe SPSS menus."
+msgstr "NVDA+Control+Alt+Shift+M: περιγραφή μενού SPSS."
+
+msgid "NVDA+Control+Alt+Shift+H: list these shortcuts."
+msgstr "NVDA+Control+Alt+Shift+H: λίστα αυτών των συντομεύσεων."
+
+msgid "List SPSS accessibility add-on shortcuts"
+msgstr "Λίστα συντομεύσεων του πρόσθετου προσβασιμότητας SPSS"
+
+msgid "Data table"
+msgstr "Πίνακας δεδομένων"
+
+msgid "Variables table"
+msgstr "Πίνακας μεταβλητών"
+
+msgid "Output table"
+msgstr "Πίνακας αποτελεσμάτων"
+
+msgid "Output Viewer was not found. Run an analysis or open an SPSS output file, then use the Window menu to bring the Output Viewer forward."
+msgstr "Η Προβολή αποτελεσμάτων δεν βρέθηκε. Εκτελέστε μια ανάλυση ή ανοίξτε αρχείο αποτελεσμάτων SPSS και μετά χρησιμοποιήστε το μενού Window για να φέρετε την Προβολή αποτελεσμάτων μπροστά."
+
+msgid "Syntax Editor was not found. Open a syntax file or use Paste from an SPSS dialog to create syntax."
+msgstr "Ο Syntax Editor δεν βρέθηκε. Ανοίξτε ένα αρχείο σύνταξης ή χρησιμοποιήστε Paste από διάλογο του SPSS για να δημιουργήσετε σύνταξη."
+
+msgid "Current SPSS pane could not be identified. Use Tab, Shift+Tab, or the SPSS Window menu to move between open windows."
+msgstr "Η τρέχουσα περιοχή SPSS δεν αναγνωρίστηκε. Χρησιμοποιήστε Tab, Shift+Tab ή το μενού Window του SPSS για μετακίνηση μεταξύ ανοιχτών παραθύρων."
+
+msgid "No SPSS tab or table context is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη καρτέλα ή πλαίσιο πίνακα SPSS στην τρέχουσα εστίαση."
+
+msgid "No readable SPSS output item was found at the current focus. Try moving to the Output Viewer outline or document area first."
+msgstr "Δεν βρέθηκε αναγνώσιμο στοιχείο αποτελέσματος SPSS στην τρέχουσα εστίαση. Δοκιμάστε πρώτα να μετακινηθείτε στο outline ή στην περιοχή εγγράφου της Προβολής αποτελεσμάτων."
+
+msgid "No SPSS data cell information is available at the current focus."
+msgstr "Δεν υπάρχουν διαθέσιμες πληροφορίες κελιού δεδομένων SPSS στην τρέχουσα εστίαση."
+
+msgid "No SPSS variable definition information is available at the current focus."
+msgstr "Δεν υπάρχουν διαθέσιμες πληροφορίες ορισμού μεταβλητής SPSS στην τρέχουσα εστίαση."
+
+msgid "Selected tab: {tab}"
+msgstr "Επιλεγμένη καρτέλα: {tab}"
+
+msgid "current variable"
+msgstr "τρέχουσα μεταβλητή"
+
+msgid "current property"
+msgstr "τρέχουσα ιδιότητα"
+
+msgid "{name} was not found in the current SPSS window."
+msgstr "Το {name} δεν βρέθηκε στο τρέχον παράθυρο SPSS."
+
+msgid "Output Viewer. {summary}"
+msgstr "Προβολή αποτελεσμάτων. {summary}"
+
+msgid "{tab}. {table}"
+msgstr "{tab}. {table}"
+
+msgid "Selected tab: {tab}. {description}"
+msgstr "Επιλεγμένη καρτέλα: {tab}. {description}"
+
+msgid "{tab} cell"
+msgstr "Κελί στην καρτέλα {tab}"
+
+msgid "Variable View. {summary}"
+msgstr "Προβολή μεταβλητών. {summary}"
+
+msgid "{column}: {value}"
+msgstr "{column}: {value}"
+
+msgid "Row {row}: {value}"
+msgstr "Γραμμή {row}: {value}"
+
+msgid "Table: {name}"
+msgstr "Πίνακας: {name}"
+
+msgid "{name} was not found in the current SPSS window. Open the Data Editor, then use the Data View or Variable View tabs at the bottom of the editor."
+msgstr "Το {name} δεν βρέθηκε στο τρέχον παράθυρο SPSS. Ανοίξτε τον Data Editor και μετά χρησιμοποιήστε τις καρτέλες Data View ή Variable View στο κάτω μέρος του editor."
+
+msgid "{table}. {cell}"
+msgstr "{table}. {cell}"
+
+msgid "Variable {variable}"
+msgstr "Μεταβλητή {variable}"
+
+msgid "Property {property}"
+msgstr "Ιδιότητα {property}"
+
+msgid "{tab} table cell"
+msgstr "Κελί πίνακα στην καρτέλα {tab}"
+
+msgid "Cell {cell}"
+msgstr "Κελί {cell}"
+
+msgid "Case {row}"
+msgstr "Περίπτωση {row}"
+
+msgid "Row header {header}"
+msgstr "Κεφαλίδα γραμμής {header}"
+
+msgid "Value {value}"
+msgstr "Τιμή {value}"
+
+msgid "Table in {tab}"
+msgstr "Πίνακας στην καρτέλα {tab}"
+
+msgid "Column {column}"
+msgstr "Στήλη {column}"
+
+msgid "Row {row}"
+msgstr "Γραμμή {row}"
+
+msgid "Column header {header}"
+msgstr "Κεφαλίδα στήλης {header}"
+
+msgid "{role}: {name}"
+msgstr "{role}: {name}"
+
+msgid "Overview"
+msgstr "Επισκόπηση"
+
+msgid "Overview. This Data Editor view summarizes the active dataset. It can help you check variable and data quality before moving to Data View or Variable View. Use the Update control when SPSS asks for a refreshed representation of the data."
+msgstr "Επισκόπηση. Αυτή η προβολή του Data Editor συνοψίζει το ενεργό σύνολο δεδομένων. Βοηθά στον έλεγχο μεταβλητών και ποιότητας δεδομένων πριν μεταβείτε στο Data View ή στο Variable View. Χρησιμοποιήστε το Update όταν το SPSS ζητά ανανέωση της αναπαράστασης των δεδομένων."
+
+msgid "Output Viewer. The left outline lists result blocks such as logs, notes, tables, charts, and statistical procedures. The right document area contains the selected output. Pivot tables and text output are usually readable with NVDA; charts, tree diagrams, and model views are usually not screen-reader accessible in SPSS. Use the outline to move between results, then use the read output command for a concise summary. For pivot tables, check Edit, Options, Output, Screen Reader Accessibility."
+msgstr "Προβολή αποτελεσμάτων. Το αριστερό περίγραμμα περιέχει αποτελέσματα όπως log, σημειώσεις, πίνακες, γραφήματα και στατιστικές διαδικασίες. Η δεξιά περιοχή περιέχει το επιλεγμένο αποτέλεσμα. Οι pivot tables και τα αποτελέσματα κειμένου συνήθως διαβάζονται με NVDA. Τα γραφήματα, τα tree diagrams και τα model views συνήθως δεν είναι προσβάσιμα με αναγνώστη οθόνης στο SPSS. Χρησιμοποιήστε το περίγραμμα για μετακίνηση μεταξύ αποτελεσμάτων και μετά την εντολή ανάγνωσης αποτελέσματος για σύντομη περίληψη. Για pivot tables, ελέγξτε Edit, Options, Output, Screen Reader Accessibility."
+
+msgid "Data View. Rows are cases and columns are variables. Use arrow keys to move cell by cell, or type a value into the current cell editor. The data-cell command reports the case number, variable name, and current value when SPSS exposes that information."
+msgstr "Data View. Οι γραμμές είναι περιπτώσεις και οι στήλες είναι μεταβλητές. Χρησιμοποιήστε τα βελάκια για μετακίνηση κελί προς κελί ή πληκτρολογήστε τιμή στον τρέχοντα επεξεργαστή κελιού. Η εντολή κελιού δεδομένων αναφέρει τον αριθμό περίπτωσης, το όνομα μεταβλητής και την τρέχουσα τιμή όταν το SPSS εκθέτει αυτές τις πληροφορίες."
+
+msgid "Variable View. Each row defines one variable. Columns describe properties such as name, type, width, decimals, label, values, missing values, measure, and role. Use the variable command to report the current property and value. Press Space on Type, Values, or Missing to open the detailed edit dialog when SPSS exposes that action."
+msgstr "Variable View. Κάθε γραμμή ορίζει μία μεταβλητή. Οι στήλες περιγράφουν ιδιότητες όπως όνομα, τύπος, πλάτος, δεκαδικά, ετικέτα, τιμές, ελλείπουσες τιμές, μέτρο και ρόλος. Χρησιμοποιήστε την εντολή μεταβλητής για ανάγνωση της τρέχουσας ιδιότητας και τιμής. Πατήστε Space στο Type, Values ή Missing για να ανοίξετε τον αντίστοιχο διάλογο επεξεργασίας όταν το SPSS εκθέτει αυτή την ενέργεια."
+
+msgid "Syntax Editor. This is the command text area. You can review, edit, and run SPSS syntax. Dialog Paste buttons often place commands here before execution. The Syntax Editor also has a command navigation pane, gutter, and error pane when those areas are visible."
+msgstr "Syntax Editor. Αυτή είναι η περιοχή κειμένου εντολών. Μπορείτε να ελέγξετε, να επεξεργαστείτε και να εκτελέσετε σύνταξη SPSS. Τα κουμπιά Paste στους διαλόγους συχνά τοποθετούν εδώ τις εντολές πριν από την εκτέλεση. Ο Syntax Editor έχει επίσης περιοχή πλοήγησης εντολών, gutter και περιοχή σφαλμάτων όταν αυτές οι περιοχές είναι ορατές."
+
+msgid "Chart Builder. The dialog contains a variables list, optional categories list, chart canvas with drop zones, and tabs such as Gallery, Basic Elements, Groups or Point ID, and Titles or Footnotes. Select a chart type from the Gallery, copy a variable from the variables list, move to a drop zone, and paste it. Use Shift+F10 on the canvas for chart-building commands."
+msgstr "Chart Builder. Ο διάλογος περιέχει λίστα μεταβλητών, προαιρετική λίστα κατηγοριών, καμβά γραφήματος με ζώνες απόθεσης και καρτέλες όπως Gallery, Basic Elements, Groups or Point ID και Titles or Footnotes. Επιλέξτε τύπο γραφήματος από το Gallery, αντιγράψτε μια μεταβλητή από τη λίστα μεταβλητών, μεταβείτε σε ζώνη απόθεσης και επικολλήστε τη. Χρησιμοποιήστε Shift+F10 στον καμβά για εντολές δημιουργίας γραφήματος."
+
+msgid "SPSS menus. File manages files and import or export. Data changes cases and datasets. Transform computes and recodes variables. Analyze runs statistics. Graphs creates charts. Insert and Format affect output objects. Utilities, Extensions, and Add-ons manage metadata, integration commands, and add-ons."
+msgstr "Μενού SPSS. Το File διαχειρίζεται αρχεία και εισαγωγή ή εξαγωγή. Το Data αλλάζει περιπτώσεις και σύνολα δεδομένων. Το Transform υπολογίζει και επανακωδικοποιεί μεταβλητές. Το Analyze εκτελεί στατιστικές αναλύσεις. Το Graphs δημιουργεί γραφήματα. Τα Insert και Format επηρεάζουν αντικείμενα αποτελεσμάτων. Τα Utilities, Extensions και Add-ons διαχειρίζονται μεταδεδομένα, εντολές ενσωμάτωσης και πρόσθετα."
+
+msgid "Overview."
+msgstr "Επισκόπηση."
+
+msgid "Output Viewer. Use the outline for results. Pivot tables and text are readable; charts and model views may need export."
+msgstr "Προβολή αποτελεσμάτων. Χρησιμοποιήστε το περίγραμμα για τα αποτελέσματα. Οι pivot tables και το κείμενο διαβάζονται. Τα γραφήματα και τα model views μπορεί να χρειάζονται εξαγωγή."
+
+msgid "Data View. Rows are cases, columns are variables."
+msgstr "Data View. Οι γραμμές είναι περιπτώσεις και οι στήλες είναι μεταβλητές."
+
+msgid "Variable View. Rows are variables, columns are properties."
+msgstr "Variable View. Οι γραμμές είναι μεταβλητές και οι στήλες είναι ιδιότητες."
+
+msgid "Syntax Editor. Review, edit, paste, and run SPSS commands."
+msgstr "Syntax Editor. Ελέγξτε, επεξεργαστείτε, επικολλήστε και εκτελέστε εντολές SPSS."
+
+msgid "Chart Builder. Use the variables list, gallery, canvas drop zones, and Shift+F10 canvas menu."
+msgstr "Chart Builder. Χρησιμοποιήστε τη λίστα μεταβλητών, το gallery, τις ζώνες απόθεσης του καμβά και το μενού καμβά με Shift+F10."
+
+msgid "SPSS menu bar."
+msgstr "Γραμμή μενού SPSS."
+
+msgid "File: new, open, save, import data, export output, print, and manage SPSS data, syntax, and output files."
+msgstr "File: νέο αρχείο, άνοιγμα, αποθήκευση, εισαγωγή δεδομένων, εξαγωγή αποτελεσμάτων, εκτύπωση και διαχείριση αρχείων δεδομένων, σύνταξης και αποτελεσμάτων SPSS."
+
+msgid "Edit: undo, copy, paste, find, replace, and open Options, including Output screen-reader accessibility settings."
+msgstr "Edit: αναίρεση, αντιγραφή, επικόλληση, εύρεση, αντικατάσταση και άνοιγμα Options, συμπεριλαμβανομένων των ρυθμίσεων προσβασιμότητας αναγνώστη οθόνης για Output."
+
+msgid "View: show or hide toolbars, status information, value labels, line numbers, command spans, and visible panels."
+msgstr "View: εμφάνιση ή απόκρυψη γραμμών εργαλείων, πληροφοριών κατάστασης, ετικετών τιμών, αριθμών γραμμών, command spans και ορατών περιοχών."
+
+msgid "Data: define variable properties, copy data properties, sort cases, select cases, split files, weight cases, merge files, and restructure datasets."
+msgstr "Data: ορισμός ιδιοτήτων μεταβλητών, αντιγραφή ιδιοτήτων δεδομένων, ταξινόμηση περιπτώσεων, επιλογή περιπτώσεων, διαχωρισμός αρχείων, στάθμιση περιπτώσεων, συγχώνευση αρχείων και αναδιάρθρωση συνόλων δεδομένων."
+
+msgid "Transform: compute variables, recode values into same or different variables, automatic recode, count values, rank cases, and prepare derived fields."
+msgstr "Transform: υπολογισμός μεταβλητών, επανακωδικοποίηση τιμών στις ίδιες ή σε διαφορετικές μεταβλητές, αυτόματη επανακωδικοποίηση, μέτρηση τιμών, κατάταξη περιπτώσεων και προετοιμασία παραγόμενων πεδίων."
+
+msgid "Analyze: run Frequencies, Descriptives, Explore, Crosstabs, Compare Means, Correlations, Regression, nonparametric tests, and models."
+msgstr "Analyze: εκτέλεση Frequencies, Descriptives, Explore, Crosstabs, Compare Means, Correlations, Regression, μη παραμετρικών ελέγχων και μοντέλων."
+
+msgid "Graphs: open Chart Builder, Graphboard, legacy dialogs, and graph editing commands."
+msgstr "Graphs: άνοιγμα Chart Builder, Graphboard, legacy dialogs και εντολών επεξεργασίας γραφημάτων."
+
+msgid "Insert: add titles, text, page breaks, charts, tables, or other output objects when the active window supports them."
+msgstr "Insert: προσθήκη τίτλων, κειμένου, αλλαγών σελίδας, γραφημάτων, πινάκων ή άλλων αντικειμένων αποτελεσμάτων όταν το ενεργό παράθυρο το υποστηρίζει."
+
+msgid "Format: change table looks, fonts, alignment, chart formatting, and output object appearance when available."
+msgstr "Format: αλλαγή εμφάνισης πινάκων, γραμματοσειρών, στοίχισης, μορφοποίησης γραφημάτων και εμφάνισης αντικειμένων αποτελεσμάτων όταν είναι διαθέσιμα."
+
+msgid "Utilities: inspect variables, file information, variable sets, dictionaries, and extension or custom-dialog utilities."
+msgstr "Utilities: έλεγχος μεταβλητών, πληροφοριών αρχείου, συνόλων μεταβλητών, λεξικών και εργαλείων επεκτάσεων ή προσαρμοσμένων διαλόγων."
+
+msgid "Extensions and Add-ons: run extension commands, Extension Hub, Python or R integrations, and custom procedures when installed."
+msgstr "Extensions και Add-ons: εκτέλεση εντολών επεκτάσεων, Extension Hub, ενσωματώσεων Python ή R και προσαρμοσμένων διαδικασιών όταν είναι εγκατεστημένες."
+
+msgid "Run: run all syntax, selected syntax, current command, or commands up to the cursor in Syntax Editor windows."
+msgstr "Run: εκτέλεση όλης της σύνταξης, της επιλεγμένης σύνταξης, της τρέχουσας εντολής ή των εντολών μέχρι τον δρομέα σε παράθυρα Syntax Editor."
+
+msgid "Window: move between open Data Editor, Output Viewer, Workbook, Syntax Editor, and dialog windows."
+msgstr "Window: μετακίνηση μεταξύ ανοιχτών παραθύρων Data Editor, Output Viewer, Workbook, Syntax Editor και διαλόγων."
+
+msgid "Help: open SPSS help, tutorials, command syntax reference, accessibility topics, and product information."
+msgstr "Help: άνοιγμα βοήθειας SPSS, tutorials, αναφοράς σύνταξης εντολών, θεμάτων προσβασιμότητας και πληροφοριών προϊόντος."
+
+msgid "Data Editor menus. Use Data for Define Variable Properties, Copy Data Properties, Sort Cases, Select Cases, Split File, and Weight Cases. Use Transform to compute or recode variables. Use Analyze to run procedures."
+msgstr "Μενού Data Editor. Χρησιμοποιήστε το Data για Define Variable Properties, Copy Data Properties, Sort Cases, Select Cases, Split File και Weight Cases. Χρησιμοποιήστε το Transform για υπολογισμό ή επανακωδικοποίηση μεταβλητών. Χρησιμοποιήστε το Analyze για εκτέλεση διαδικασιών."
+
+msgid "Data View menus. Data controls cases and datasets; Transform prepares new or recoded variables; Analyze runs procedures on the active dataset; Graphs opens Chart Builder and legacy chart dialogs."
+msgstr "Μενού Data View. Το Data ελέγχει περιπτώσεις και σύνολα δεδομένων. Το Transform προετοιμάζει νέες ή επανακωδικοποιημένες μεταβλητές. Το Analyze εκτελεί διαδικασίες στο ενεργό σύνολο δεδομένων. Το Graphs ανοίγει Chart Builder και παλιούς διαλόγους γραφημάτων."
+
+msgid "Variable View menus. Data includes Define Variable Properties and Copy Data Properties. Use Utilities, Variables for a readable variable information dialog with labels, missing values, measure, and value labels."
+msgstr "Μενού Variable View. Το Data περιλαμβάνει Define Variable Properties και Copy Data Properties. Χρησιμοποιήστε Utilities, Variables για αναγνώσιμο διάλογο πληροφοριών μεταβλητής με ετικέτες, ελλείπουσες τιμές, μέτρο και ετικέτες τιμών."
+
+msgid "Output Viewer menus. Use the outline to select results. File exports output. Edit, Options, Output contains screen-reader accessibility for pivot-table labels. Insert and Format affect output objects. Charts and model views may need export because SPSS does not expose them as readable text."
+msgstr "Μενού Output Viewer. Χρησιμοποιήστε το περίγραμμα για επιλογή αποτελεσμάτων. Το File εξάγει αποτελέσματα. Το Edit, Options, Output περιέχει προσβασιμότητα αναγνώστη οθόνης για ετικέτες pivot-table. Τα Insert και Format επηρεάζουν αντικείμενα αποτελεσμάτων. Τα γραφήματα και τα model views μπορεί να χρειάζονται εξαγωγή επειδή το SPSS δεν τα εκθέτει ως αναγνώσιμο κείμενο."
+
+msgid "Syntax Editor menus. Run executes all syntax, selected syntax, the current command, or commands to the cursor. View can show line numbers and command spans. Paste from dialogs sends syntax to the designated Syntax window."
+msgstr "Μενού Syntax Editor. Το Run εκτελεί όλη τη σύνταξη, την επιλεγμένη σύνταξη, την τρέχουσα εντολή ή τις εντολές μέχρι τον δρομέα. Το View μπορεί να εμφανίσει αριθμούς γραμμών και command spans. Το Paste από διαλόγους στέλνει τη σύνταξη στο designated Syntax window."
+
+msgid "Chart Builder menus and dialog controls. Use Gallery or Basic Elements to choose the chart structure, copy variables from the variables list, paste them into canvas drop zones, and use Shift+F10 for canvas commands. OK and Paste are disabled until required drop zones are filled."
+msgstr "Μενού και στοιχεία διαλόγου Chart Builder. Χρησιμοποιήστε Gallery ή Basic Elements για επιλογή της δομής γραφήματος, αντιγράψτε μεταβλητές από τη λίστα μεταβλητών, επικολλήστε τις στις ζώνες απόθεσης του καμβά και χρησιμοποιήστε Shift+F10 για εντολές καμβά. Τα OK και Paste είναι ανενεργά μέχρι να συμπληρωθούν οι απαιτούμενες ζώνες απόθεσης."
+
+msgid "SPSS menu bar. Use left and right arrows between menus, down arrow to open a menu, and Enter to activate a command."
+msgstr "Γραμμή μενού SPSS. Χρησιμοποιήστε αριστερό και δεξί βέλος για μετακίνηση μεταξύ μενού, κάτω βέλος για άνοιγμα μενού και Enter για ενεργοποίηση εντολής."
+
+msgid "Press Space to open the Variable Type dialog."
+msgstr "Πατήστε Space για να ανοίξετε τον διάλογο Variable Type."
+
+msgid "Press Space to edit value labels for this variable."
+msgstr "Πατήστε Space για επεξεργασία ετικετών τιμών αυτής της μεταβλητής."
+
+msgid "Press Space to define missing values for this variable."
+msgstr "Πατήστε Space για ορισμό ελλειπουσών τιμών αυτής της μεταβλητής."
+
+msgid "Use this property to mark the variable as nominal, ordinal, or scale."
+msgstr "Χρησιμοποιήστε αυτή την ιδιότητα για να ορίσετε τη μεταβλητή ως nominal, ordinal ή scale."
+
+msgid "Use this property to mark how the variable is used in procedures, such as input or target."
+msgstr "Χρησιμοποιήστε αυτή την ιδιότητα για να ορίσετε πώς χρησιμοποιείται η μεταβλητή σε διαδικασίες, όπως input ή target."
+
+msgid "Run selection"
+msgstr "Εκτέλεση επιλογής"
+
+msgid "Run current command"
+msgstr "Εκτέλεση τρέχουσας εντολής"
+
+msgid "Spelling"
+msgstr "Ορθογραφικός έλεγχος"
+
+msgid "Gallery"
+msgstr "Gallery"
+
+msgid "Basic Elements"
+msgstr "Basic Elements"
+
+msgid "Groups or Point ID"
+msgstr "Groups ή Point ID"
+
+msgid "Titles or Footnotes"
+msgstr "Titles ή Footnotes"
+
+msgid "Choose from chart types"
+msgstr "Επιλογή από τύπους γραφημάτων"
+
+msgid "Chart preview canvas"
+msgstr "Καμβάς προεπισκόπησης γραφήματος"
+
+msgid "Chart canvas"
+msgstr "Καμβάς γραφήματος"
+
+msgid "Drop zone"
+msgstr "Ζώνη απόθεσης"
+
+msgid "Drop zones"
+msgstr "Ζώνες απόθεσης"
+
+msgid "Element Properties"
+msgstr "Ιδιότητες στοιχείου"
+
+msgid "Categories"
+msgstr "Κατηγορίες"
+
+msgid "Source variable list"
+msgstr "Λίστα μεταβλητών προέλευσης"
+
+msgid "Variables list"
+msgstr "Λίστα μεταβλητών"
+
+msgid "Variable Type"
+msgstr "Τύπος μεταβλητής"
+
+msgid "Missing Values"
+msgstr "Ελλείπουσες τιμές"
+
+msgid "Discrete missing values"
+msgstr "Διακριτές ελλείπουσες τιμές"
+
+msgid "No missing values"
+msgstr "Δεν υπάρχουν ελλείπουσες τιμές"
+
+msgid "Range plus one optional discrete missing value"
+msgstr "Εύρος συν μία προαιρετική διακριτή ελλείπουσα τιμή"
+
+msgid "Add"
+msgstr "Προσθήκη"
+
+msgid "Change"
+msgstr "Αλλαγή"
+
+msgid "Remove"
+msgstr "Αφαίρεση"
+
+msgid "Read Excel File"
+msgstr "Ανάγνωση αρχείου Excel"
+
+msgid "Text Import Wizard"
+msgstr "Οδηγός εισαγωγής κειμένου"
+
+msgid "Database Wizard"
+msgstr "Οδηγός βάσης δεδομένων"
+
+msgid "Select Cases"
+msgstr "Επιλογή περιπτώσεων"
+
+msgid "Split File"
+msgstr "Διαχωρισμός αρχείου"
+
+msgid "Weight Cases"
+msgstr "Στάθμιση περιπτώσεων"
+
+msgid "Define Variable Properties"
+msgstr "Ορισμός ιδιοτήτων μεταβλητών"
+
+msgid "Copy Data Properties"
+msgstr "Αντιγραφή ιδιοτήτων δεδομένων"
+
+msgid "Frequencies"
+msgstr "Συχνότητες"
+
+msgid "Descriptives"
+msgstr "Περιγραφικά στατιστικά"
+
+msgid "Crosstabs"
+msgstr "Πίνακες συνάφειας"
+
+msgid "Compare Means"
+msgstr "Σύγκριση μέσων"
+
+msgid "Correlations"
+msgstr "Συσχετίσεις"
+
+msgid "Regression"
+msgstr "Παλινδρόμηση"
+
+msgid "Extension Hub"
+msgstr "Extension Hub"
+
+msgid "Move to SPSS Overview"
+msgstr "Μετάβαση στην Επισκόπηση SPSS"
+
+msgid "Move to or describe SPSS Chart Builder"
+msgstr "Μετάβαση ή περιγραφή του Chart Builder του SPSS"
+
+msgid "SPSS output accessibility. Pivot tables and text output are usually readable. Charts, tree diagrams, and model views are usually not screen-reader accessible. For pivot tables, choose Edit, Options, Output, then Screen Reader Accessibility to control whether full row and column labels are read. For inaccessible charts or models, export output with File, Export to Word, PDF, Excel, HTML, text, or an image format, or use syntax and OMS to capture results as data or text."
+msgstr "Προσβασιμότητα αποτελεσμάτων SPSS. Οι pivot tables και τα αποτελέσματα κειμένου συνήθως διαβάζονται. Τα γραφήματα, τα tree diagrams και τα model views συνήθως δεν είναι προσβάσιμα με αναγνώστη οθόνης. Για pivot tables, επιλέξτε Edit, Options, Output και μετά Screen Reader Accessibility για να ελέγξετε αν διαβάζονται πλήρεις ετικέτες γραμμών και στηλών. Για μη προσβάσιμα γραφήματα ή μοντέλα, εξαγάγετε το αποτέλεσμα με File, Export σε Word, PDF, Excel, HTML, κείμενο ή μορφή εικόνας, ή χρησιμοποιήστε syntax και OMS για καταγραφή αποτελεσμάτων ως δεδομένα ή κείμενο."
+
+msgid "Describe SPSS output accessibility and export options"
+msgstr "Περιγραφή προσβασιμότητας αποτελεσμάτων SPSS και επιλογών εξαγωγής"
+
+msgid "NVDA+Control+Alt+U: Overview."
+msgstr "NVDA+Control+Alt+U: Επισκόπηση."
+
+msgid "NVDA+Control+Alt+C: Chart Builder."
+msgstr "NVDA+Control+Alt+C: Chart Builder."
+
+msgid "NVDA+Control+Alt+Shift+E: describe output accessibility and export options."
+msgstr "NVDA+Control+Alt+Shift+E: περιγραφή προσβασιμότητας αποτελεσμάτων και επιλογών εξαγωγής."
+
+msgid "NVDA+Control+Alt+Shift+B: toggle beginner or concise SPSS guidance."
+msgstr "NVDA+Control+Alt+Shift+B: εναλλαγή αναλυτικής ή σύντομης καθοδήγησης SPSS."
+
+msgid "NVDA+Control+Alt+Shift+G: log the current SPSS accessibility object for troubleshooting."
+msgstr "NVDA+Control+Alt+Shift+G: καταγραφή του τρέχοντος αντικειμένου προσβασιμότητας SPSS για αντιμετώπιση προβλημάτων."
+
+msgid "SPSS guidance set to beginner detail."
+msgstr "Η καθοδήγηση SPSS ορίστηκε σε αναλυτική μορφή."
+
+msgid "SPSS guidance set to concise announcements."
+msgstr "Η καθοδήγηση SPSS ορίστηκε σε σύντομες ανακοινώσεις."
+
+msgid "Toggle beginner or concise SPSS guidance"
+msgstr "Εναλλαγή αναλυτικής ή σύντομης καθοδήγησης SPSS"
+
+msgid "Current SPSS accessibility object was written to the NVDA log."
+msgstr "Το τρέχον αντικείμενο προσβασιμότητας SPSS γράφτηκε στο log του NVDA."
+
+msgid "Log the current SPSS accessibility object for troubleshooting"
+msgstr "Καταγραφή του τρέχοντος αντικειμένου προσβασιμότητας SPSS για αντιμετώπιση προβλημάτων"
+
+msgid "Focus object"
+msgstr "Αντικείμενο εστίασης"
+
+msgid "Ancestors"
+msgstr "Γονικά αντικείμενα"
+
+msgid "Output outline item"
+msgstr "Στοιχείο περιγράμματος αποτελεσμάτων"
+
+msgid "Outline level {level}"
+msgstr "Επίπεδο περιγράμματος {level}"
+
+msgid "Item {index} of {total}"
+msgstr "Στοιχείο {index} από {total}"
+
+msgid "Output item type: pivot table or table. This is usually readable with NVDA."
+msgstr "Τύπος στοιχείου αποτελέσματος: pivot table ή πίνακας. Συνήθως διαβάζεται με NVDA."
+
+msgid "Output item type: tree diagram or tree model. SPSS usually does not expose this as screen-reader accessible text."
+msgstr "Τύπος στοιχείου αποτελέσματος: tree diagram ή tree model. Το SPSS συνήθως δεν το εκθέτει ως προσβάσιμο κείμενο για αναγνώστη οθόνης."
+
+msgid "Output item type: model view. SPSS usually does not expose this as screen-reader accessible text."
+msgstr "Τύπος στοιχείου αποτελέσματος: model view. Το SPSS συνήθως δεν το εκθέτει ως προσβάσιμο κείμενο για αναγνώστη οθόνης."
+
+msgid "Output item type: chart. SPSS usually does not expose charts as screen-reader accessible text; export the output or review the source table when possible."
+msgstr "Τύπος στοιχείου αποτελέσματος: γράφημα. Το SPSS συνήθως δεν εκθέτει τα γραφήματα ως προσβάσιμο κείμενο για αναγνώστη οθόνης. Εξαγάγετε το αποτέλεσμα ή ελέγξτε τον πίνακα προέλευσης όταν είναι δυνατό."
+
+msgid "Output item type: log."
+msgstr "Τύπος στοιχείου αποτελέσματος: log."
+
+msgid "Output item type: notes."
+msgstr "Τύπος στοιχείου αποτελέσματος: σημειώσεις."
+
+msgid "Output item type: warning."
+msgstr "Τύπος στοιχείου αποτελέσματος: προειδοποίηση."
+
+msgid "Output item type: title."
+msgstr "Τύπος στοιχείου αποτελέσματος: τίτλος."
+
+msgid "Output item type: outline entry."
+msgstr "Τύπος στοιχείου αποτελέσματος: καταχώρηση περιγράμματος."
+
+msgid "Output document area."
+msgstr "Περιοχή εγγράφου αποτελεσμάτων."
+
+msgid "Expanded"
+msgstr "Αναπτυγμένο"
+
+msgid "Collapsed"
+msgstr "Συμπτυγμένο"
+
+msgid "Data View cell editor. Current value {value}"
+msgstr "Επεξεργαστής κελιού Data View. Τρέχουσα τιμή {value}"
+
+msgid "Data View cell editor."
+msgstr "Επεξεργαστής κελιού Data View."
+
+msgid "Overview table"
+msgstr "Πίνακας επισκόπησης"
+
+msgid "{name} was not found in the current SPSS window. Open the Data Editor, then use the Overview, Data View, or Variable View tabs in the editor."
+msgstr "Το {name} δεν βρέθηκε στο τρέχον παράθυρο SPSS. Ανοίξτε τον Data Editor και μετά χρησιμοποιήστε τις καρτέλες Overview, Data View ή Variable View στον editor."
+
+msgid "Chart Builder was not found. Open it from Graphs, Chart Builder."
+msgstr "Το Chart Builder δεν βρέθηκε. Ανοίξτε το από Graphs, Chart Builder."
+
+msgid "Frequencies dialog. Choose one or more source variables, move them to the Variables target list, then use Statistics, Charts, Format, OK, or Paste. Use Paste when you want reproducible syntax."
+msgstr "Διάλογος Frequencies. Επιλέξτε μία ή περισσότερες μεταβλητές προέλευσης, μετακινήστε τις στη λίστα Variables και μετά χρησιμοποιήστε Statistics, Charts, Format, OK ή Paste. Χρησιμοποιήστε Paste όταν θέλετε αναπαραγώγιμη syntax."
+
+msgid "Descriptives dialog. Choose scale variables, move them to the Variables target list, then use Options for mean, standard deviation, minimum, maximum, and related statistics."
+msgstr "Διάλογος Descriptives. Επιλέξτε μεταβλητές scale, μετακινήστε τις στη λίστα Variables και μετά χρησιμοποιήστε Options για μέσο όρο, τυπική απόκλιση, ελάχιστο, μέγιστο και σχετικά στατιστικά."
+
+msgid "Crosstabs dialog. Move categorical variables to Row and Column target lists. Use Statistics for chi-square and measures, Cells for counts and percentages, then OK or Paste."
+msgstr "Διάλογος Crosstabs. Μετακινήστε κατηγορικές μεταβλητές στις λίστες Row και Column. Χρησιμοποιήστε Statistics για χι-τετράγωνο και μέτρα, Cells για πλήθη και ποσοστά και μετά OK ή Paste."
+
+msgid "Regression dialog. Move the outcome to Dependent and predictors to Independent variables. Use Statistics, Plots, Save, Options, OK, or Paste."
+msgstr "Διάλογος Regression. Μετακινήστε την έκβαση στο Dependent και τους προβλεπτικούς παράγοντες στα Independent variables. Χρησιμοποιήστε Statistics, Plots, Save, Options, OK ή Paste."
+
+msgid "Linear Regression dialog. Move the outcome to Dependent and predictors to Independent variables. Use Statistics, Plots, Save, Options, OK, or Paste."
+msgstr "Διάλογος Linear Regression. Μετακινήστε την έκβαση στο Dependent και τους προβλεπτικούς παράγοντες στα Independent variables. Χρησιμοποιήστε Statistics, Plots, Save, Options, OK ή Paste."
+
+msgid "Explore dialog. Move scale variables to Dependent List and grouping variables to Factor List. Use Statistics, Plots, Options, OK, or Paste."
+msgstr "Διάλογος Explore. Μετακινήστε μεταβλητές scale στο Dependent List και μεταβλητές ομαδοποίησης στο Factor List. Χρησιμοποιήστε Statistics, Plots, Options, OK ή Paste."
+
+msgid "Nonparametric Tests dialog. Choose test fields and settings, then review model or test options before OK or Paste."
+msgstr "Διάλογος Nonparametric Tests. Επιλέξτε πεδία και ρυθμίσεις ελέγχου και μετά ελέγξτε επιλογές μοντέλου ή test πριν από OK ή Paste."
+
+msgid "Custom Tables dialog. Use source variables and the canvas row, column, and layer areas. Copy variables from the source list and paste them into the canvas or use Shift+F10 for context commands."
+msgstr "Διάλογος Custom Tables. Χρησιμοποιήστε τις μεταβλητές προέλευσης και τις περιοχές row, column και layer του καμβά. Αντιγράψτε μεταβλητές από τη λίστα προέλευσης και επικολλήστε τις στον καμβά ή χρησιμοποιήστε Shift+F10 για εντολές περιβάλλοντος."
+
+msgid "Compute Variable dialog. Enter the target variable, build a numeric expression from variables and functions, then choose OK or Paste."
+msgstr "Διάλογος Compute Variable. Πληκτρολογήστε τη μεταβλητή στόχο, δημιουργήστε αριθμητική έκφραση από μεταβλητές και συναρτήσεις και μετά επιλέξτε OK ή Paste."
+
+msgid "Recode into Same Variables dialog. Select variables, define old and new values, and consider Paste so the transformation is documented."
+msgstr "Διάλογος Recode into Same Variables. Επιλέξτε μεταβλητές, ορίστε παλιές και νέες τιμές και εξετάστε το Paste ώστε ο μετασχηματισμός να τεκμηριωθεί."
+
+msgid "Recode into Different Variables dialog. Select input variables, define output variable names and labels, set old and new values, then OK or Paste."
+msgstr "Διάλογος Recode into Different Variables. Επιλέξτε μεταβλητές εισόδου, ορίστε ονόματα και ετικέτες μεταβλητών εξόδου, ορίστε παλιές και νέες τιμές και μετά OK ή Paste."
+
+msgid "Select Cases dialog. Choose whether all cases, cases satisfying a condition, a random sample, a time range, or filtered cases are used. Review the output option before OK or Paste."
+msgstr "Διάλογος Select Cases. Επιλέξτε αν θα χρησιμοποιηθούν όλες οι περιπτώσεις, περιπτώσεις που ικανοποιούν συνθήκη, τυχαίο δείγμα, χρονικό εύρος ή φιλτραρισμένες περιπτώσεις. Ελέγξτε την επιλογή output πριν από OK ή Paste."
+
+msgid "Split File dialog. Choose whether output is analyzed together or by groups, then move grouping variables into the Groups Based on list."
+msgstr "Διάλογος Split File. Επιλέξτε αν τα αποτελέσματα θα αναλυθούν μαζί ή ανά ομάδες και μετά μετακινήστε μεταβλητές ομαδοποίησης στη λίστα Groups Based on."
+
+msgid "Weight Cases dialog. Choose Do not weight cases or Weight cases by, then move a numeric frequency or weight variable to the Frequency Variable field."
+msgstr "Διάλογος Weight Cases. Επιλέξτε Do not weight cases ή Weight cases by και μετά μετακινήστε αριθμητική μεταβλητή συχνότητας ή βάρους στο πεδίο Frequency Variable."
+
+msgid "Value Labels dialog. Enter a data value and its label, choose Add, Change, or Remove, then OK. This is used for categorical code labels such as 0 equals No and 1 equals Yes."
+msgstr "Διάλογος Value Labels. Πληκτρολογήστε τιμή δεδομένων και την ετικέτα της, επιλέξτε Add, Change ή Remove και μετά OK. Χρησιμοποιείται για ετικέτες κατηγορικών κωδικών, όπως 0 ίσον Όχι και 1 ίσον Ναι."
+
+msgid "Missing Values dialog. Choose no missing values, discrete missing values, or a range plus one optional discrete value, then enter the missing-value definitions."
+msgstr "Διάλογος Missing Values. Επιλέξτε χωρίς ελλείπουσες τιμές, διακριτές ελλείπουσες τιμές ή εύρος με μία προαιρετική διακριτή τιμή και μετά πληκτρολογήστε τους ορισμούς ελλειπουσών τιμών."
+
+msgid "Variable Type dialog. Choose Numeric, Comma, Dot, Scientific notation, Date, Dollar, Custom Currency, or String. Review width and decimals when available."
+msgstr "Διάλογος Variable Type. Επιλέξτε Numeric, Comma, Dot, Scientific notation, Date, Dollar, Custom Currency ή String. Ελέγξτε width και decimals όταν είναι διαθέσιμα."
+
+msgid "Read Excel File dialog. Confirm the worksheet, variable-name row, cell range, and import settings before OK."
+msgstr "Διάλογος Read Excel File. Επιβεβαιώστε worksheet, γραμμή ονομάτων μεταβλητών, περιοχή κελιών και ρυθμίσεις εισαγωγής πριν από OK."
+
+msgid "Text Import Wizard. Move through the wizard steps to define delimiters or fixed widths, variable names, data formats, and import range."
+msgstr "Text Import Wizard. Μετακινηθείτε στα βήματα του οδηγού για να ορίσετε διαχωριστικά ή σταθερά πλάτη, ονόματα μεταβλητών, μορφές δεδομένων και εύρος εισαγωγής."
+
+msgid "Database Wizard. Choose the data source, select tables and fields, define joins or filters, and review variable definitions before import."
+msgstr "Database Wizard. Επιλέξτε την πηγή δεδομένων, επιλέξτε πίνακες και πεδία, ορίστε joins ή φίλτρα και ελέγξτε τους ορισμούς μεταβλητών πριν από την εισαγωγή."
+
+msgid "Frequencies: Συχνότητες. Counts values and percentages for categorical or discrete variables."
+msgstr "Frequencies: Συχνότητες. Μετρά τιμές και ποσοστά για κατηγορικές ή διακριτές μεταβλητές."
+
+msgid "Descriptives: Περιγραφικά στατιστικά. Reports mean, standard deviation, minimum, maximum, and similar summaries."
+msgstr "Descriptives: Περιγραφικά στατιστικά. Αναφέρει μέσο όρο, τυπική απόκλιση, ελάχιστο, μέγιστο και παρόμοιες συνόψεις."
+
+msgid "Crosstabs: Πίνακες συνάφειας. Compares categories of two or more variables in a contingency table."
+msgstr "Crosstabs: Πίνακες συνάφειας. Συγκρίνει κατηγορίες δύο ή περισσότερων μεταβλητών σε πίνακα συνάφειας."
+
+msgid "Regression: Παλινδρόμηση. Models an outcome variable from one or more predictors."
+msgstr "Regression: Παλινδρόμηση. Μοντελοποιεί μεταβλητή έκβασης από έναν ή περισσότερους προβλεπτικούς παράγοντες."
+
+msgid "Correlations: Συσχετίσεις. Measures association between variables."
+msgstr "Correlations: Συσχετίσεις. Μετρά τη συσχέτιση μεταξύ μεταβλητών."
+
+msgid "Compare Means: Σύγκριση μέσων. Compares averages across groups."
+msgstr "Compare Means: Σύγκριση μέσων. Συγκρίνει μέσους όρους μεταξύ ομάδων."
+
+msgid "Explore: Διερεύνηση. Reviews distributions, outliers, and group summaries."
+msgstr "Explore: Διερεύνηση. Ελέγχει κατανομές, ακραίες τιμές και συνόψεις ομάδων."
+
+msgid "Nonparametric Tests: Μη παραμετρικοί έλεγχοι. Runs tests that do not assume normal distributions."
+msgstr "Nonparametric Tests: Μη παραμετρικοί έλεγχοι. Εκτελεί ελέγχους που δεν προϋποθέτουν κανονικές κατανομές."
+
+msgid "Value Labels: Ετικέτες τιμών. Human-readable labels for coded values."
+msgstr "Value Labels: Ετικέτες τιμών. Αναγνώσιμες ετικέτες για κωδικοποιημένες τιμές."
+
+msgid "Missing Values: Ελλείπουσες τιμές. User-defined values that SPSS treats as missing."
+msgstr "Missing Values: Ελλείπουσες τιμές. Τιμές ορισμένες από τον χρήστη που το SPSS αντιμετωπίζει ως ελλείπουσες."
+
+msgid "Describe where you are in SPSS and what is available"
+msgstr "Περιγραφή του πού βρίσκεστε στο SPSS και τι είναι διαθέσιμο"
+
+msgid "Read the current SPSS menu path"
+msgstr "Ανάγνωση της τρέχουσας διαδρομής μενού SPSS"
+
+msgid "Describe the current SPSS dialog"
+msgstr "Περιγραφή του τρέχοντος διαλόγου SPSS"
+
+msgid "Summarize SPSS dialog variable lists"
+msgstr "Σύνοψη λιστών μεταβλητών διαλόγου SPSS"
+
+msgid "Read the current SPSS table summary"
+msgstr "Ανάγνωση σύνοψης του τρέχοντος πίνακα SPSS"
+
+msgid "Read all available properties for the current SPSS variable"
+msgstr "Ανάγνωση όλων των διαθέσιμων ιδιοτήτων της τρέχουσας μεταβλητής SPSS"
+
+msgid "Summarize the SPSS Output Viewer outline"
+msgstr "Σύνοψη του περιγράμματος στο SPSS Output Viewer"
+
+msgid "Read current SPSS output table row and column"
+msgstr "Ανάγνωση τρέχουσας γραμμής και στήλης πίνακα αποτελεσμάτων SPSS"
+
+msgid "Copy a readable SPSS output summary to the clipboard"
+msgstr "Αντιγραφή αναγνώσιμης σύνοψης αποτελέσματος SPSS στο πρόχειρο"
+
+msgid "Read Greek and English SPSS statistics glossary"
+msgstr "Ανάγνωση ελληνικού και αγγλικού γλωσσαρίου στατιστικής SPSS"
+
+msgid "NVDA+Control+Alt+W: where am I in SPSS."
+msgstr "NVDA+Control+Alt+W: πού βρίσκομαι στο SPSS."
+
+msgid "NVDA+Control+Alt+Shift+N: read current menu path."
+msgstr "NVDA+Control+Alt+Shift+N: ανάγνωση τρέχουσας διαδρομής μενού."
+
+msgid "NVDA+Control+Alt+Shift+I: describe current dialog."
+msgstr "NVDA+Control+Alt+Shift+I: περιγραφή τρέχοντος διαλόγου."
+
+msgid "NVDA+Control+Alt+Shift+L: summarize dialog variable lists."
+msgstr "NVDA+Control+Alt+Shift+L: σύνοψη λιστών μεταβλητών διαλόγου."
+
+msgid "NVDA+Control+Alt+Shift+T: read table summary."
+msgstr "NVDA+Control+Alt+Shift+T: ανάγνωση σύνοψης πίνακα."
+
+msgid "NVDA+Control+Alt+Shift+R: read all properties for current variable."
+msgstr "NVDA+Control+Alt+Shift+R: ανάγνωση όλων των ιδιοτήτων της τρέχουσας μεταβλητής."
+
+msgid "NVDA+Control+Alt+Shift+U: summarize Output Viewer outline."
+msgstr "NVDA+Control+Alt+Shift+U: σύνοψη περιγράμματος Output Viewer."
+
+msgid "NVDA+Control+Alt+Shift+Y: read output table row and column."
+msgstr "NVDA+Control+Alt+Shift+Y: ανάγνωση γραμμής και στήλης πίνακα αποτελεσμάτων."
+
+msgid "NVDA+Control+Alt+Shift+C: copy readable output summary."
+msgstr "NVDA+Control+Alt+Shift+C: αντιγραφή αναγνώσιμης σύνοψης αποτελέσματος."
+
+msgid "NVDA+Control+Alt+Shift+F: read Greek and English statistics glossary."
+msgstr "NVDA+Control+Alt+Shift+F: ανάγνωση ελληνικού και αγγλικού γλωσσαρίου στατιστικής."
+
+msgid "NVDA+Control+Alt+Shift+A: toggle automatic table cell announcements."
+msgstr "NVDA+Control+Alt+Shift+A: εναλλαγή αυτόματων ανακοινώσεων κελιών πίνακα."
+
+msgid "Toggle automatic SPSS table cell announcements"
+msgstr "Εναλλαγή αυτόματων ανακοινώσεων κελιών πίνακα SPSS"
+
+msgid "Press Enter or Space to activate."
+msgstr "Πατήστε Enter ή Space για ενεργοποίηση."
+
+msgid "Use arrow keys to move and Space to select items."
+msgstr "Χρησιμοποιήστε τα βελάκια για μετακίνηση και Space για επιλογή στοιχείων."
+
+msgid "Use arrow keys to move in the table."
+msgstr "Χρησιμοποιήστε τα βελάκια για μετακίνηση στον πίνακα."
+
+msgid "Paste a copied variable here with Control+V, or open context commands with Shift+F10."
+msgstr "Επικολλήστε εδώ μια αντιγραμμένη μεταβλητή με Control+V ή ανοίξτε εντολές περιβάλλοντος με Shift+F10."
+
+msgid "SPSS dialog"
+msgstr "Διάλογος SPSS"
+
+msgid "No SPSS context is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμο πλαίσιο SPSS στην τρέχουσα εστίαση."
+
+msgid "No SPSS menu path is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη διαδρομή μενού SPSS στην τρέχουσα εστίαση."
+
+msgid "No SPSS dialog help is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη βοήθεια διαλόγου SPSS στην τρέχουσα εστίαση."
+
+msgid "No source or target variable lists were found in the current SPSS dialog."
+msgstr "Δεν βρέθηκαν λίστες μεταβλητών προέλευσης ή στόχου στον τρέχοντα διάλογο SPSS."
+
+msgid "No SPSS table summary is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη σύνοψη πίνακα SPSS στην τρέχουσα εστίαση."
+
+msgid "No SPSS variable row summary is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη σύνοψη γραμμής μεταβλητής SPSS στην τρέχουσα εστίαση."
+
+msgid "No SPSS output outline was found."
+msgstr "Δεν βρέθηκε περίγραμμα αποτελεσμάτων SPSS."
+
+msgid "No SPSS output table row or column summary is available at the current focus."
+msgstr "Δεν υπάρχει διαθέσιμη σύνοψη γραμμής ή στήλης πίνακα αποτελεσμάτων SPSS στην τρέχουσα εστίαση."
+
+msgid "No readable SPSS output summary is available to copy."
+msgstr "Δεν υπάρχει διαθέσιμη αναγνώσιμη σύνοψη αποτελέσματος SPSS για αντιγραφή."
+
+msgid "Copied readable SPSS output summary to the clipboard."
+msgstr "Η αναγνώσιμη σύνοψη αποτελέσματος SPSS αντιγράφηκε στο πρόχειρο."
+
+msgid "Clipboard copy is unavailable. The readable SPSS output summary was written to the NVDA log."
+msgstr "Η αντιγραφή στο πρόχειρο δεν είναι διαθέσιμη. Η αναγνώσιμη σύνοψη αποτελέσματος SPSS γράφτηκε στο log του NVDA."
+
+msgid "Automatic SPSS table cell announcements on."
+msgstr "Οι αυτόματες ανακοινώσεις κελιών πίνακα SPSS είναι ενεργές."
+
+msgid "Automatic SPSS table cell announcements off."
+msgstr "Οι αυτόματες ανακοινώσεις κελιών πίνακα SPSS είναι ανενεργές."
+
+msgid "Use arrow keys to move, Space to select, Control+C to copy a variable, and Shift+F10 for context commands."
+msgstr "Χρησιμοποιήστε τα βελάκια για μετακίνηση, Space για επιλογή, Control+C για αντιγραφή μεταβλητής και Shift+F10 για εντολές περιβάλλοντος."
+
+msgid "Menu path: {path}"
+msgstr "Διαδρομή μενού: {path}"
+
+msgid "SPSS dialog {name}. Use Tab and Shift+Tab to move between controls, arrow keys inside lists or option groups, Space to select, Enter for the default action, Escape to cancel, and Paste when you want syntax."
+msgstr "Διάλογος SPSS {name}. Χρησιμοποιήστε Tab και Shift+Tab για μετακίνηση μεταξύ στοιχείων, βελάκια μέσα σε λίστες ή ομάδες επιλογών, Space για επιλογή, Enter για την προεπιλεγμένη ενέργεια, Escape για ακύρωση και Paste όταν θέλετε syntax."
+
+msgid "Dialog variable lists. {summary}"
+msgstr "Λίστες μεταβλητών διαλόγου. {summary}"
+
+msgid "{name}. Visible items {items}."
+msgstr "{name}. Ορατά στοιχεία {items}."
+
+msgid "Variable summary for {variable}. {summary}"
+msgstr "Σύνοψη μεταβλητής για {variable}. {summary}"
+
+msgid "Output outline contains {count} visible items. {items}"
+msgstr "Το περίγραμμα αποτελεσμάτων περιέχει {count} ορατά στοιχεία. {items}"
+
+msgid "Dialog {name}."
+msgstr "Διάλογος {name}."
+
+msgid "Target variable list"
+msgstr "Λίστα μεταβλητών στόχου"
+
+msgid "Variable list"
+msgstr "Λίστα μεταβλητών"
+
+msgid "{name}. Selected {selected}. Visible items {items}."
+msgstr "{name}. Επιλεγμένα {selected}. Ορατά στοιχεία {items}."
+
+msgid "none"
+msgstr "κανένα"
+
+msgid "Window {name}"
+msgstr "Παράθυρο {name}"
+
+msgid "Pane {pane}"
+msgstr "Περιοχή {pane}"
+
+msgid "{property}: {value}"
+msgstr "{property}: {value}"
+
+msgid "Level {level} {name}"
+msgstr "Επίπεδο {level} {name}"
+
+msgid "{label}, {state}"
+msgstr "{label}, {state}"
+
+msgid "Current output row: {items}"
+msgstr "Τρέχουσα γραμμή αποτελεσμάτων: {items}"
+
+msgid "Current output column: {items}"
+msgstr "Τρέχουσα στήλη αποτελεσμάτων: {items}"
+
+msgid "Value label {label}"
+msgstr "Ετικέτα τιμής {label}"
+
+msgid "Cases {count}"
+msgstr "Περιπτώσεις {count}"
+
+msgid "Rows {count}"
+msgstr "Γραμμές {count}"
+
+msgid "Variables or properties {count}"
+msgstr "Μεταβλητές ή ιδιότητες {count}"
+
+msgid "Columns {count}"
+msgstr "Στήλες {count}"
+
+msgid "{header}: {value}"
+msgstr "{header}: {value}"
+
+msgid "Copy the current SPSS output table row to the clipboard"
+msgstr "Αντιγραφή της τρέχουσας γραμμής πίνακα αποτελεσμάτων SPSS στο πρόχειρο"
+
+msgid "NVDA+Control+Alt+Shift+X: copy current output table row."
+msgstr "NVDA+Control+Alt+Shift+X: αντιγραφή τρέχουσας γραμμής πίνακα αποτελεσμάτων."
+
+msgid "No SPSS output table row is available to copy."
+msgstr "Δεν υπάρχει διαθέσιμη γραμμή πίνακα αποτελεσμάτων SPSS για αντιγραφή."
+
+msgid "Copied current SPSS output table row to the clipboard."
+msgstr "Η τρέχουσα γραμμή πίνακα αποτελεσμάτων SPSS αντιγράφηκε στο πρόχειρο."
+
+msgid "Clipboard copy is unavailable. The current SPSS output table row was written to the NVDA log."
+msgstr "Η αντιγραφή στο πρόχειρο δεν είναι διαθέσιμη. Η τρέχουσα γραμμή πίνακα αποτελεσμάτων SPSS γράφτηκε στο log του NVDA."
+
+msgid "{path}. {help}"
+msgstr "{path}. {help}"
+
+msgid "{item}, {description}"
+msgstr "{item}, {description}"
+
+msgid "{menu} menu items: {items}"
+msgstr "Στοιχεία μενού {menu}: {items}"
+
+msgid "Table size: {dimensions}"
+msgstr "Μέγεθος πίνακα: {dimensions}"
+
+msgid "{item}: {description}"
+msgstr "{item}: {description}"

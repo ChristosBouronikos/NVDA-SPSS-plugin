@@ -1,0 +1,38 @@
+{
+  "addonId": "spssAccessibility",
+  "addonVersionNumber": {
+    "major": 1,
+    "minor": 1,
+    "patch": 0
+  },
+  "addonVersionName": "1.1.0",
+  "displayName": "SPSS Accessibility Plugin",
+  "publisher": "Bouronikos Christos",
+  "description": "SPSS Accessibility Plugin improves IBM SPSS Statistics accessibility for blind and visually impaired users. Created by Bouronikos Christos, contact: chrisbouronikos@gmail.com. If this add-on helps you, please consider a kind donation via PayPal: https://paypal.me/christosbouronikos",
+  "homepage": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "minNVDAVersion": {
+    "major": 2023,
+    "minor": 1,
+    "patch": 0
+  },
+  "lastTestedVersion": {
+    "major": 2025,
+    "minor": 3,
+    "patch": 0
+  },
+  "channel": "stable",
+  "URL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.0/spssAccessibility-1.1.0.nvda-addon",
+  "sha256": "f92f576dd45ebe73f866d38119e40f06e0cb1cf6492e383544bf3f3f6a725cda",
+  "sourceURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "license": "GPL v2",
+  "licenseURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE",
+  "changelog": "Added expanded SPSS menu, dialog, table, output, Variable View, Greek glossary, automatic table-cell announcement, and value-label support. Added Greek documentation and translations.",
+  "translations": [
+    {
+      "language": "el",
+      "displayName": "SPSS Accessibility Plugin",
+      "description": "Το SPSS Accessibility Plugin βελτιώνει την προσβασιμότητα του IBM SPSS Statistics για τυφλούς χρήστες και χρήστες με προβλήματα όρασης. Δημιουργός: Bouronikos Christos, email: chrisbouronikos@gmail.com. Αν σας βοηθά αυτό το πρόσθετο, παρακαλώ σκεφτείτε μια ευγενική δωρεά μέσω PayPal: https://paypal.me/christosbouronikos",
+      "changelog": "Προστέθηκαν εκτεταμένες εντολές για μενού, διαλόγους, πίνακες, αποτελέσματα, Variable View, ελληνικό γλωσσάρι, αυτόματες ανακοινώσεις κελιών και ετικέτες τιμών."
+    }
+  ]
+}

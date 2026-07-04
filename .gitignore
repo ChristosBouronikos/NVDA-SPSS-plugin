@@ -1,0 +1,11 @@
+dist/
+*.nvda-addon
+*.zip
+*.pyc
+__pycache__/
+.DS_Store
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.venv/
+venv/
