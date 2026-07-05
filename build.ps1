@@ -106,4 +106,4 @@ Remove-Item $stageDir -Recurse -Force
 Write-Host ""
 Write-Host "Build complete: $outputPath"
 Write-Host ""
-Write-Host "Install by double-clicking the .nvda-addon file on a Windows machine with NVDA installed."
+Write-Host "Package ready for NVDA Add-on Store submission."

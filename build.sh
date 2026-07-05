@@ -108,4 +108,4 @@ fi
 echo ""
 echo "Build complete: ${OUTPUT_PATH}"
 echo ""
-echo "Install by double-clicking the .nvda-addon file on a Windows machine with NVDA installed."
+echo "Package ready for NVDA Add-on Store submission."

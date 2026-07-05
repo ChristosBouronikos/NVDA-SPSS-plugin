@@ -187,41 +187,12 @@
 7. Επανεκκινήστε το NVDA όταν σας ζητηθεί.
 8. Ανοίξτε το IBM SPSS Statistics και ελέγξτε ότι οι συντομεύσεις του πρόσθετου λειτουργούν.
 
-### Χειροκίνητη εγκατάσταση από GitHub release
-
-Χρησιμοποιήστε αυτή τη μέθοδο μόνο για δοκιμή, ανάπτυξη ή όταν το πρόσθετο δεν είναι ακόμη διαθέσιμο στο NVDA Add-on Store. Η εγκατάσταση από το store παραμένει η προτεινόμενη μέθοδος για τους περισσότερους χρήστες.
-
-1. Κατεβάστε από το GitHub release το αρχείο `spssAccessibility-1.1.0.nvda-addon`.
-2. Ανοίξτε το NVDA σε υπολογιστή Windows.
-3. Ανοίξτε το μενού του NVDA με `NVDA+N`.
-4. Επιλέξτε `Tools`.
-5. Επιλέξτε `Add-on Store`.
-6. Επιλέξτε `Install from external source`.
-7. Βρείτε και ανοίξτε το αρχείο `spssAccessibility-1.1.0.nvda-addon` που κατεβάσατε.
-8. Επιβεβαιώστε ότι θέλετε να εγκαταστήσετε το πρόσθετο.
-9. Επανεκκινήστε το NVDA όταν σας ζητηθεί.
-
-### Εγκατάσταση με διπλό κλικ
-
-Σε πολλές εγκαταστάσεις των Windows μπορείτε επίσης να κάνετε διπλό κλικ στο αρχείο `spssAccessibility-1.1.0.nvda-addon`. Αυτή είναι χειροκίνητη εγκατάσταση από εξωτερική πηγή και προορίζεται κυρίως για δοκιμή ή για εκδόσεις που δεν είναι ακόμη διαθέσιμες στο store. Το NVDA θα ανοίξει το παράθυρο εγκατάστασης πρόσθετου και θα ζητήσει επιβεβαίωση. Μετά την εγκατάσταση, επανεκκινήστε το NVDA.
-
-### Παλαιότερες εκδόσεις NVDA
-
-Αν η έκδοση του NVDA δεν έχει `Add-on Store`, χρησιμοποιήστε τον παλιό διαχειριστή προσθέτων:
-
-1. Ανοίξτε το μενού του NVDA με `NVDA+N`.
-2. Επιλέξτε `Tools`.
-3. Επιλέξτε `Manage add-ons`.
-4. Επιλέξτε `Install`.
-5. Επιλέξτε το αρχείο `spssAccessibility-1.1.0.nvda-addon`.
-6. Επιβεβαιώστε την εγκατάσταση και επανεκκινήστε το NVDA.
-
 ### Έλεγχος μετά την εγκατάσταση
 
 1. Ανοίξτε το IBM SPSS Statistics.
 2. Πατήστε `NVDA+Control+Alt+Shift+H`.
 3. Αν ακούσετε τη λίστα συντομεύσεων του πρόσθετου, η εγκατάσταση ολοκληρώθηκε σωστά.
-4. Αν δεν ακούσετε τη λίστα, ανοίξτε το μενού του NVDA, `Tools`, `Add-on Store` ή `Manage add-ons`, και ελέγξτε ότι το πρόσθετο είναι εγκατεστημένο και ενεργό.
+4. Αν δεν ακούσετε τη λίστα, ανοίξτε το μενού του NVDA, `Tools`, `Add-on Store`, και ελέγξτε ότι το πρόσθετο είναι εγκατεστημένο και ενεργό.
 
 ## Τι Έχει Προστεθεί Και Τι Απομένει
 
@@ -251,7 +222,7 @@
 .\build.ps1
 ```
 
-Για επίσημο GitHub release και υποβολή στο NVDA Add-on Store, χρησιμοποιήστε το `./build.sh`, επειδή δημιουργεί σταθερό SHA256 checksum για το αρχείο υποβολής.
+Για δημιουργία πακέτου και υποβολή στο NVDA Add-on Store, χρησιμοποιήστε το `./build.sh`, επειδή δημιουργεί σταθερό SHA256 checksum για το αρχείο υποβολής.
 
 Η δημιουργία παράγει:
 
@@ -490,41 +461,12 @@ This is the recommended method when the add-on is available in the NVDA Add-on S
 7. Restart NVDA when prompted.
 8. Open IBM SPSS Statistics and verify that the add-on shortcuts work.
 
-### Manual Install From A GitHub Release
-
-Use this method only for testing, development, or when the add-on is not yet available in the NVDA Add-on Store. Store installation remains the recommended method for most users.
-
-1. Download `spssAccessibility-1.1.0.nvda-addon` from the GitHub release.
-2. Open NVDA on a Windows computer.
-3. Open the NVDA menu with `NVDA+N`.
-4. Choose `Tools`.
-5. Choose `Add-on Store`.
-6. Choose `Install from external source`.
-7. Find and open the downloaded `spssAccessibility-1.1.0.nvda-addon` file.
-8. Confirm that you want to install the add-on.
-9. Restart NVDA when prompted.
-
-### Install By Double-Clicking
-
-On many Windows systems, you can also double-click `spssAccessibility-1.1.0.nvda-addon`. This is a manual external-source installation and is mainly intended for testing or for releases that are not yet available in the store. NVDA opens the add-on installation dialog and asks for confirmation. Restart NVDA after installation.
-
-### Older NVDA Versions
-
-If your NVDA version does not have `Add-on Store`, use the older add-on manager:
-
-1. Open the NVDA menu with `NVDA+N`.
-2. Choose `Tools`.
-3. Choose `Manage add-ons`.
-4. Choose `Install`.
-5. Select `spssAccessibility-1.1.0.nvda-addon`.
-6. Confirm installation and restart NVDA.
-
 ### Verify The Installation
 
 1. Open IBM SPSS Statistics.
 2. Press `NVDA+Control+Alt+Shift+H`.
 3. If you hear the add-on shortcut list, installation is working.
-4. If you do not hear the list, open the NVDA menu, `Tools`, `Add-on Store` or `Manage add-ons`, and check that the add-on is installed and enabled.
+4. If you do not hear the list, open the NVDA menu, `Tools`, `Add-on Store`, and check that the add-on is installed and enabled.
 
 ## What Has Been Added And What Remains
 
@@ -554,7 +496,7 @@ On Windows PowerShell:
 .\build.ps1
 ```
 
-For the official GitHub release and NVDA Add-on Store submission, use `./build.sh` because it creates a deterministic SHA256 checksum for the submitted package.
+For packaging and NVDA Add-on Store submission, use `./build.sh` because it creates a deterministic SHA256 checksum for the submitted package.
 
 The build creates:
 
