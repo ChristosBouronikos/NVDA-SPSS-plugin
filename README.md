@@ -16,7 +16,7 @@
 - Syntax Editor, χρήση Paste, μενού Run και βασικές περιοχές παραθύρου σύνταξης.
 - Ανάγνωση πινάκων τύπου Excel με καρτέλα, γραμμή, στήλη, κεφαλίδες, αναφορά κελιού και τιμή.
 - Προαιρετικές αυτόματες ανακοινώσεις κελιών πίνακα και ανάγνωση ετικετών τιμών όταν το SPSS εκθέτει και κωδικό και ετικέτα.
-- Συνηθισμένοι διάλογοι SPSS όπως Value Labels, Missing Values, Variable Type, Select Cases, Split File, Weight Cases, οδηγοί εισαγωγής και διάλογοι αναλύσεων.
+- Συνηθισμένα παράθυρα διαλόγου του SPSS όπως Value Labels, Missing Values, Variable Type, Select Cases, Split File, Weight Cases, οδηγοί εισαγωγής και διάλογοι αναλύσεων.
 - Αναλυτικό χάρτη μενού για File, Edit, View, Data, Transform, Analyze, Graphs, Utilities, Extensions/Add-ons, Run, Insert, Format, Window και Help.
 
 Το πρόσθετο χρησιμοποιεί πληροφορίες UI Automation όταν το SPSS τις εκθέτει. Επειδή οι εκδόσεις του SPSS διαφέρουν, χρησιμοποιεί επίσης εναλλακτικούς ελέγχους με βάση όνομα αντικειμένου, ρόλο, κλάση παραθύρου, automation id, κεφαλίδες πινάκων και γονικές περιοχές.

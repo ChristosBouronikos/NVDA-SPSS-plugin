@@ -1047,3 +1047,51 @@ msgstr "Μέγεθος πίνακα: {dimensions}"
 
 msgid "{item}: {description}"
 msgstr "{item}: {description}"
+
+msgid "Button"
+msgstr "Κουμπί"
+
+msgid "Text box"
+msgstr "Πλαίσιο κειμένου"
+
+msgid "Checkbox"
+msgstr "Πλαίσιο επιλογής"
+
+msgid "Radio button"
+msgstr "Κουμπί επιλογής"
+
+msgid "Dropdown menu"
+msgstr "Αναπτυσσόμενο μενού"
+
+msgid "List"
+msgstr "Λίστα"
+
+msgid "List item"
+msgstr "Στοιχείο λίστας"
+
+msgid "Tree item"
+msgstr "Στοιχείο δέντρου"
+
+msgid "Current value {value}"
+msgstr "Τρέχουσα τιμή {value}"
+
+msgid "Press Alt+Down Arrow or Space to open the dropdown menu."
+msgstr "Πατήστε Alt+Κάτω βέλος ή Space για να ανοίξετε το αναπτυσσόμενο μενού."
+
+msgid "Press Space or Enter to activate."
+msgstr "Πατήστε Space ή Enter για ενεργοποίηση."
+
+msgid "Type text or use editing commands."
+msgstr "Πληκτρολογήστε κείμενο ή χρησιμοποιήστε εντολές επεξεργασίας."
+
+msgid "Press Space to change the selection."
+msgstr "Πατήστε Space για αλλαγή της επιλογής."
+
+msgid "Use arrow keys to move through items."
+msgstr "Χρησιμοποιήστε τα βελάκια για μετακίνηση στα στοιχεία."
+
+msgid "Data View cell editor. Text box. Current value {value}"
+msgstr "Επεξεργαστής κελιού προβολής δεδομένων. Πλαίσιο κειμένου. Τρέχουσα τιμή {value}"
+
+msgid "Data View cell editor. Text box."
+msgstr "Επεξεργαστής κελιού προβολής δεδομένων. Πλαίσιο κειμένου."

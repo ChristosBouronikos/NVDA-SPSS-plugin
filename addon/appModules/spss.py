@@ -102,6 +102,25 @@ TEXT_ROLES = tuple(
 	if role is not None
 )
 
+FORM_CONTROL_ROLES = tuple(
+	role for role in (
+		ROLE_BUTTON, ROLE_EDITABLETEXT, ROLE_CHECKBOX, ROLE_RADIOBUTTON,
+		ROLE_COMBOBOX, ROLE_LIST, ROLE_LISTITEM, ROLE_TREEVIEWITEM,
+	)
+	if role is not None
+)
+
+CONTROL_TYPE_LABELS = (
+	(ROLE_BUTTON, _("Button")),
+	(ROLE_EDITABLETEXT, _("Text box")),
+	(ROLE_CHECKBOX, _("Checkbox")),
+	(ROLE_RADIOBUTTON, _("Radio button")),
+	(ROLE_COMBOBOX, _("Dropdown menu")),
+	(ROLE_LIST, _("List")),
+	(ROLE_LISTITEM, _("List item")),
+	(ROLE_TREEVIEWITEM, _("Tree item")),
+)
+
 
 PANE_DEFINITIONS = {
 	"overview": {
@@ -569,6 +588,20 @@ VARIABLE_PROPERTY_HINTS = {
 	"Role": _("Use this property to mark how the variable is used in procedures, such as input or target."),
 }
 
+VARIABLE_PROPERTY_CONTROL_TYPES = {
+	"Name": _("Text box"),
+	"Type": _("Button"),
+	"Width": _("Text box"),
+	"Decimals": _("Text box"),
+	"Label": _("Text box"),
+	"Values": _("Button"),
+	"Missing": _("Button"),
+	"Columns": _("Text box"),
+	"Align": _("Dropdown menu"),
+	"Measure": _("Dropdown menu"),
+	"Role": _("Dropdown menu"),
+}
+
 CONTROL_LABELS = {
 	"ok": _("OK"),
 	"cancel": _("Cancel"),
@@ -832,6 +865,43 @@ class AppModule(appModuleHandler.AppModule):
 		except Exception as e:
 			log.debugWarning("SPSS object labeling failed: %s" % e)
 
+	def _controlTypeLabel(self, obj):
+		role = _safe_get(obj, "role")
+		for candidateRole, label in CONTROL_TYPE_LABELS:
+			if candidateRole is not None and role == candidateRole:
+				return label
+		return _role_name(obj)
+
+	def _controlActionHint(self, obj):
+		role = _safe_get(obj, "role")
+		if role == ROLE_COMBOBOX:
+			return _("Press Alt+Down Arrow or Space to open the dropdown menu.")
+		if role == ROLE_BUTTON:
+			return _("Press Space or Enter to activate.")
+		if role == ROLE_EDITABLETEXT:
+			return _("Type text or use editing commands.")
+		if role in (ROLE_CHECKBOX, ROLE_RADIOBUTTON):
+			return _("Press Space to change the selection.")
+		if role in (ROLE_LIST, ROLE_LISTITEM, ROLE_TREEVIEWITEM):
+			return _("Use arrow keys to move through items.")
+		return ""
+
+	def _describeControl(self, obj):
+		controlType = self._controlTypeLabel(obj)
+		if not controlType:
+			return ""
+		name = _clean(_safe_get(obj, "name")) or self._labelForControl(obj)
+		value = _clean(_safe_get(obj, "value")) or _clean(_safe_get(obj, "displayText"))
+		parts = [controlType]
+		if name:
+			parts.append(name)
+		if value and _norm(value) != _norm(name):
+			parts.append(_("Current value {value}").format(value=value))
+		hint = self._controlActionHint(obj)
+		if hint:
+			parts.append(hint)
+		return ". ".join(parts)
+
 	def event_gainFocus(self, obj, nextHandler):
 		nextHandler()
 		try:
@@ -844,6 +914,11 @@ class AppModule(appModuleHandler.AppModule):
 				tabMessage = self._describeTab(obj)
 				if tabMessage:
 					ui.message(tabMessage)
+					return
+			if _safe_get(obj, "role") in FORM_CONTROL_ROLES:
+				controlMessage = self._describeControl(obj)
+				if controlMessage:
+					ui.message(controlMessage)
 					return
 			pane = self._detectPaneFromObject(obj)
 			if self._announceTableMovement and _safe_get(obj, "role") in TABLE_ROLES:
@@ -1941,8 +2016,8 @@ class AppModule(appModuleHandler.AppModule):
 			if pane == "data" and _safe_get(obj, "role") == ROLE_EDITABLETEXT:
 				value = self._cellValue(obj)
 				if value:
-					return _("Data View cell editor. Current value {value}").format(value=value)
-				return _("Data View cell editor.")
+					return _("Data View cell editor. Text box. Current value {value}").format(value=value)
+				return _("Data View cell editor. Text box.")
 			return None
 		pane = preferPane or self._guessPaneFromCell(cell) or self._detectPaneFromObject(cell)
 		value = self._cellValue(cell)
@@ -1976,12 +2051,17 @@ class AppModule(appModuleHandler.AppModule):
 				details.append(_("Column {column}").format(column=columnNumber))
 			if rowNumber:
 				details.append(_("Row {row}").format(row=rowNumber))
-			if value:
-				details.append(_("Value {value}").format(value=value))
 			propertyKey = self._variablePropertyKey(propertyName, columnNumber)
+			controlType = VARIABLE_PROPERTY_CONTROL_TYPES.get(propertyKey)
+			if controlType:
+				details.append(controlType)
+			if value:
+				details.append(_("Current value {value}").format(value=value))
 			hint = VARIABLE_PROPERTY_HINTS.get(propertyKey)
 			if hint:
 				details.append(hint)
+			if propertyKey in ("Align", "Measure", "Role"):
+				details.append(_("Press Alt+Down Arrow or Space to open the dropdown menu."))
 			return ". ".join(details)
 		if pane == "output":
 			details = [_("{tab} table cell").format(tab=tabName)]
