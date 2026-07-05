@@ -36,7 +36,7 @@ dist/SHA256SUMS
 Current SHA256:
 
 ```text
-f92f576dd45ebe73f866d38119e40f06e0cb1cf6492e383544bf3f3f6a725cda
+d696817f9f1b11ba42ba7cbaa4bcb74448a850396c855b6b9b2103528777a49a
 ```
 
 ## GitHub Release
@@ -76,7 +76,7 @@ Publisher: Bouronikos Christos
 Homepage: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin
 Source URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin
 Download URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.0/spssAccessibility-1.1.0.nvda-addon
-SHA256: f92f576dd45ebe73f866d38119e40f06e0cb1cf6492e383544bf3f3f6a725cda
+SHA256: d696817f9f1b11ba42ba7cbaa4bcb74448a850396c855b6b9b2103528777a49a
 License: GPL v2
 License URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE
 Minimum NVDA version: 2023.1.0

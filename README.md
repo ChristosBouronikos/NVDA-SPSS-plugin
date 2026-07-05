@@ -176,9 +176,22 @@
 
 ### Εγκατάσταση από το NVDA Add-on Store
 
-Αυτός είναι ο προτεινόμενος τρόπος εγκατάστασης όταν έχετε ήδη κατεβάσει το αρχείο `.nvda-addon` από το GitHub.
+Αυτός είναι ο προτεινόμενος τρόπος εγκατάστασης όταν το πρόσθετο είναι διαθέσιμο στο NVDA Add-on Store. Με αυτή τη μέθοδο το NVDA κατεβάζει το πρόσθετο από το store και ελέγχει την ακεραιότητά του.
 
-1. Κατεβάστε από το GitHub το αρχείο `spssAccessibility-1.1.0.nvda-addon`.
+1. Ανοίξτε το NVDA σε υπολογιστή Windows.
+2. Ανοίξτε το μενού του NVDA με `NVDA+N`.
+3. Επιλέξτε `Tools`.
+4. Επιλέξτε `Add-on Store`.
+5. Αναζητήστε `SPSS Accessibility Plugin`.
+6. Επιλέξτε το πρόσθετο και εγκαταστήστε το από το store.
+7. Επανεκκινήστε το NVDA όταν σας ζητηθεί.
+8. Ανοίξτε το IBM SPSS Statistics και ελέγξτε ότι οι συντομεύσεις του πρόσθετου λειτουργούν.
+
+### Χειροκίνητη εγκατάσταση από GitHub release
+
+Χρησιμοποιήστε αυτή τη μέθοδο μόνο για δοκιμή, ανάπτυξη ή όταν το πρόσθετο δεν είναι ακόμη διαθέσιμο στο NVDA Add-on Store. Η εγκατάσταση από το store παραμένει η προτεινόμενη μέθοδος για τους περισσότερους χρήστες.
+
+1. Κατεβάστε από το GitHub release το αρχείο `spssAccessibility-1.1.0.nvda-addon`.
 2. Ανοίξτε το NVDA σε υπολογιστή Windows.
 3. Ανοίξτε το μενού του NVDA με `NVDA+N`.
 4. Επιλέξτε `Tools`.
@@ -187,11 +200,10 @@
 7. Βρείτε και ανοίξτε το αρχείο `spssAccessibility-1.1.0.nvda-addon` που κατεβάσατε.
 8. Επιβεβαιώστε ότι θέλετε να εγκαταστήσετε το πρόσθετο.
 9. Επανεκκινήστε το NVDA όταν σας ζητηθεί.
-10. Ανοίξτε το IBM SPSS Statistics και ελέγξτε ότι οι συντομεύσεις του πρόσθετου λειτουργούν.
 
 ### Εγκατάσταση με διπλό κλικ
 
-Σε πολλές εγκαταστάσεις των Windows μπορείτε επίσης να κάνετε διπλό κλικ στο αρχείο `spssAccessibility-1.1.0.nvda-addon`. Το NVDA θα ανοίξει το παράθυρο εγκατάστασης πρόσθετου και θα ζητήσει επιβεβαίωση. Μετά την εγκατάσταση, επανεκκινήστε το NVDA.
+Σε πολλές εγκαταστάσεις των Windows μπορείτε επίσης να κάνετε διπλό κλικ στο αρχείο `spssAccessibility-1.1.0.nvda-addon`. Αυτή είναι χειροκίνητη εγκατάσταση από εξωτερική πηγή και προορίζεται κυρίως για δοκιμή ή για εκδόσεις που δεν είναι ακόμη διαθέσιμες στο store. Το NVDA θα ανοίξει το παράθυρο εγκατάστασης πρόσθετου και θα ζητήσει επιβεβαίωση. Μετά την εγκατάσταση, επανεκκινήστε το NVDA.
 
 ### Παλαιότερες εκδόσεις NVDA
 
@@ -467,9 +479,22 @@ For charts, tree diagrams, and model views, SPSS often does not expose readable 
 
 ### Install From The NVDA Add-on Store
 
-This is the recommended method after you download the `.nvda-addon` file from GitHub.
+This is the recommended method when the add-on is available in the NVDA Add-on Store. With this method, NVDA downloads the add-on from the store and checks its integrity.
 
-1. Download `spssAccessibility-1.1.0.nvda-addon` from GitHub.
+1. Open NVDA on a Windows computer.
+2. Open the NVDA menu with `NVDA+N`.
+3. Choose `Tools`.
+4. Choose `Add-on Store`.
+5. Search for `SPSS Accessibility Plugin`.
+6. Select the add-on and install it from the store.
+7. Restart NVDA when prompted.
+8. Open IBM SPSS Statistics and verify that the add-on shortcuts work.
+
+### Manual Install From A GitHub Release
+
+Use this method only for testing, development, or when the add-on is not yet available in the NVDA Add-on Store. Store installation remains the recommended method for most users.
+
+1. Download `spssAccessibility-1.1.0.nvda-addon` from the GitHub release.
 2. Open NVDA on a Windows computer.
 3. Open the NVDA menu with `NVDA+N`.
 4. Choose `Tools`.
@@ -478,11 +503,10 @@ This is the recommended method after you download the `.nvda-addon` file from Gi
 7. Find and open the downloaded `spssAccessibility-1.1.0.nvda-addon` file.
 8. Confirm that you want to install the add-on.
 9. Restart NVDA when prompted.
-10. Open IBM SPSS Statistics and verify that the add-on shortcuts work.
 
 ### Install By Double-Clicking
 
-On many Windows systems, you can also double-click `spssAccessibility-1.1.0.nvda-addon`. NVDA opens the add-on installation dialog and asks for confirmation. Restart NVDA after installation.
+On many Windows systems, you can also double-click `spssAccessibility-1.1.0.nvda-addon`. This is a manual external-source installation and is mainly intended for testing or for releases that are not yet available in the store. NVDA opens the add-on installation dialog and asks for confirmation. Restart NVDA after installation.
 
 ### Older NVDA Versions
 
