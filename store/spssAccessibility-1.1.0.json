@@ -22,7 +22,7 @@
   },
   "channel": "stable",
   "URL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.0/spssAccessibility-1.1.0.nvda-addon",
-  "sha256": "d23ed104f4e915e886e4babecc7154fa50ff33f85110cafca20c305c089caf4d",
+  "sha256": "41a955b421349bfb0f9f0c0ff0b77e9be6103188b9a1c4930841df9833bfdc82",
   "sourceURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
   "license": "GPL v2",
   "licenseURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE",

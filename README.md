@@ -191,8 +191,8 @@
 
 1. Ανοίξτε το IBM SPSS Statistics.
 2. Πατήστε `NVDA+Control+Alt+Shift+H`.
-3. Αν ακούσετε τη λίστα συντομεύσεων του πρόσθετου, η εγκατάσταση ολοκληρώθηκε σωστά.
-4. Αν δεν ακούσετε τη λίστα, ανοίξτε το μενού του NVDA, `Tools`, `Add-on Store`, και ελέγξτε ότι το πρόσθετο είναι εγκατεστημένο και ενεργό.
+3. Αν το NVDA ανακοινώσει τη λίστα συντομεύσεων του πρόσθετου, η εγκατάσταση ολοκληρώθηκε σωστά.
+4. Αν η λίστα συντομεύσεων δεν ανακοινωθεί, ανοίξτε το μενού του NVDA, `Tools`, `Add-on Store`, και ελέγξτε ότι το πρόσθετο είναι εγκατεστημένο και ενεργό.
 
 ## Τι Έχει Προστεθεί Και Τι Απομένει
 
@@ -465,8 +465,8 @@ This is the recommended method when the add-on is available in the NVDA Add-on S
 
 1. Open IBM SPSS Statistics.
 2. Press `NVDA+Control+Alt+Shift+H`.
-3. If you hear the add-on shortcut list, installation is working.
-4. If you do not hear the list, open the NVDA menu, `Tools`, `Add-on Store`, and check that the add-on is installed and enabled.
+3. If NVDA announces the add-on shortcut list, installation is working.
+4. If the shortcut list is not announced, open the NVDA menu, `Tools`, `Add-on Store`, and check that the add-on is installed and enabled.
 
 ## What Has Been Added And What Remains
 
