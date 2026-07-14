@@ -1,0 +1,38 @@
+{
+  "addonId": "spssAccessibility",
+  "addonVersionNumber": {
+    "major": 1,
+    "minor": 1,
+    "patch": 1
+  },
+  "addonVersionName": "1.1.1",
+  "displayName": "SPSS Accessibility Plugin",
+  "publisher": "Bouronikos Christos",
+  "description": "SPSS Accessibility Plugin improves IBM SPSS Statistics accessibility for blind and visually impaired users. Created by Bouronikos Christos, contact: chrisbouronikos@gmail.com. If this add-on helps you, please consider a kind donation via PayPal: https://paypal.me/christosbouronikos",
+  "homepage": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "minNVDAVersion": {
+    "major": 2023,
+    "minor": 1,
+    "patch": 0
+  },
+  "lastTestedVersion": {
+    "major": 2026,
+    "minor": 1,
+    "patch": 1
+  },
+  "channel": "stable",
+  "URL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.1/spssAccessibility-1.1.1.nvda-addon",
+  "sha256": "04642a6e6433feb4461765ccaaf01274b57ee6ad536e572ff162316f4a9af5fe",
+  "sourceURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "license": "GPL v2",
+  "licenseURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE",
+  "changelog": "Maintenance release for store review feedback. Updated the last tested NVDA version to 2026.1.1 after testing with NVDA 2026.1.1 (64-bit) and IBM SPSS Statistics 31.0.0.0 (build 117) on Windows 11. Removed unnecessary __init__.py files, documented registered SPSS executable names, removed undocumented executable aliases, and added Testing and AI Assistance Disclosure sections to the documentation.",
+  "translations": [
+    {
+      "language": "el",
+      "displayName": "SPSS Accessibility Plugin",
+      "description": "Το SPSS Accessibility Plugin βελτιώνει την προσβασιμότητα του IBM SPSS Statistics για τυφλούς χρήστες και χρήστες με προβλήματα όρασης. Δημιουργός: Bouronikos Christos, email: chrisbouronikos@gmail.com. Αν σας βοηθά αυτό το πρόσθετο, παρακαλώ σκεφτείτε μια ευγενική δωρεά μέσω PayPal: https://paypal.me/christosbouronikos",
+      "changelog": "Έκδοση συντήρησης μετά από σχόλια αξιολόγησης του store. Ενημερώθηκε η τελευταία δοκιμασμένη έκδοση NVDA σε 2026.1.1 μετά από δοκιμές με NVDA 2026.1.1 (64-bit) και IBM SPSS Statistics 31.0.0.0 (build 117) σε Windows 11. Αφαιρέθηκαν περιττά αρχεία __init__.py, τεκμηριώθηκαν τα καταχωρημένα ονόματα εκτελέσιμων SPSS, αφαιρέθηκαν μη τεκμηριωμένα aliases και προστέθηκαν ενότητες Δοκιμών και Δήλωσης Χρήσης Τεχνητής Νοημοσύνης στην τεκμηρίωση."
+    }
+  ]
+}

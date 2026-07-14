@@ -12,19 +12,19 @@ Before submitting, publish a GitHub release with the `.nvda-addon` file attached
 
 - Add-on id: `spssAccessibility`
 - Display name: `SPSS Accessibility Plugin`
-- Current version: `1.1.0`
+- Current version: `1.1.1`
 - Channel: `stable`
 - Minimum NVDA version: `2023.1.0`
-- Last tested NVDA version: `2025.3.0`
+- Last tested NVDA version: `2026.1.1`
 - Publisher: `Bouronikos Christos`
 - License: `GPL v2`
 - Homepage/source: `https://github.com/ChristosBouronikos/NVDA-SPSS-plugin`
 
 These values must match:
 
-- `addon/manifest.ini`
+- `manifest.ini`
 - the GitHub release asset name
-- `store/spssAccessibility-1.1.0.json`
+- `store/spssAccessibility-1.1.1.json`
 - the Add-on Store issue form
 
 ## Release Asset
@@ -35,19 +35,19 @@ Build the release asset with:
 ./build.sh
 ```
 
-Use `build.sh` for the official GitHub release asset and Add-on Store checksum. `build.ps1` is kept for Windows convenience, but the store checksum in `store/spssAccessibility-1.1.0.json` is generated from the deterministic `build.sh` archive.
+Use `build.sh` for the official GitHub release asset and Add-on Store checksum. `build.ps1` is kept for Windows convenience, but the store checksum in `store/spssAccessibility-1.1.1.json` is generated from the deterministic `build.sh` archive.
 
 Expected output:
 
 ```text
-dist/spssAccessibility-1.1.0.nvda-addon
+dist/spssAccessibility-1.1.1.nvda-addon
 dist/SHA256SUMS
 ```
 
 Suggested GitHub release asset URL:
 
 ```text
-https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.0/spssAccessibility-1.1.0.nvda-addon
+https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.1/spssAccessibility-1.1.1.nvda-addon
 ```
 
 ## Package Contents
@@ -103,8 +103,8 @@ Greek description:
 Before submitting a release:
 
 1. Run `scripts/validate.sh`.
-2. Confirm `dist/spssAccessibility-1.1.0.nvda-addon` exists.
-3. Confirm the SHA256 in `dist/SHA256SUMS` matches `store/spssAccessibility-1.1.0.json`.
+2. Confirm `dist/spssAccessibility-1.1.1.nvda-addon` exists.
+3. Confirm the SHA256 in `dist/SHA256SUMS` matches `store/spssAccessibility-1.1.1.json`.
 4. Confirm `manifest.ini` is at the archive root.
 5. Confirm `locale/el/LC_MESSAGES/nvda.mo` and `locale/el/manifest.ini` are included.
 6. Confirm no `.po`, `__pycache__`, `.pyc`, `.DS_Store`, or Git files are inside the package.

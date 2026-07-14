@@ -10,7 +10,7 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 PROJECT_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 cd "$PROJECT_ROOT"
 
-MANIFEST="addon/manifest.ini"
+MANIFEST="manifest.ini"
 ADDON_NAME="$(awk -F= '/^[[:space:]]*name[[:space:]]*=/ {print $2; exit}' "$MANIFEST" | xargs | sed 's/^"//; s/"$//')"
 VERSION="$(awk -F= '/^[[:space:]]*version[[:space:]]*=/ {print $2; exit}' "$MANIFEST" | xargs | sed 's/^"//; s/"$//')"
 PACKAGE="dist/${ADDON_NAME}-${VERSION}.nvda-addon"

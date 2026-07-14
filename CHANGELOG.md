@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.1.1
+
+Maintenance release addressing NVDA Add-on Store review feedback.
+
+- Updated the last tested NVDA version to 2026.1.1 after testing with NVDA 2026.1.1 (64-bit), IBM SPSS Statistics 31.0.0.0 (build 117), and Windows 11.
+- Removed the unnecessary `__init__.py` files from `appModules` and `globalPlugins`.
+- Documented each registered SPSS executable name with a source comment explaining which SPSS release or component uses it.
+- Removed window-title-like entries and undocumented executable aliases (`spssstatistics`, `ibmspssstatistics`) from executable registration.
+- Added a Testing section and an AI Assistance Disclosure section to the README in English and Greek.
+
 ## 1.1.0
 
 - Added Overview and Chart Builder recognition, help, and shortcuts.

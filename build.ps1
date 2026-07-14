@@ -8,12 +8,12 @@ $ErrorActionPreference = "Stop"
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Path
 Set-Location $scriptDir
 
-$manifest = Get-Content "addon\manifest.ini"
+$manifest = Get-Content "manifest.ini"
 $addonName = (($manifest | Select-String '^\s*name\s*=' | Select-Object -First 1) -replace '^[^=]+=', '').Trim().Trim('"')
 $version = (($manifest | Select-String '^\s*version\s*=' | Select-Object -First 1) -replace '^[^=]+=', '').Trim().Trim('"')
 
 if ([string]::IsNullOrWhiteSpace($addonName) -or [string]::IsNullOrWhiteSpace($version)) {
-	throw "name/version missing from addon\manifest.ini"
+	throw "name/version missing from manifest.ini"
 }
 
 $distDir = Join-Path $scriptDir "dist"
@@ -86,6 +86,7 @@ Get-ChildItem "addon" -Recurse -File | Where-Object {
 	Copy-Item $_.FullName $destination -Force
 }
 
+Copy-Item "manifest.ini" (Join-Path $stageDir "manifest.ini") -Force
 Copy-Item "LICENSE" (Join-Path $stageDir "LICENSE") -Force
 
 New-Item -ItemType Directory -Force -Path (Join-Path $stageDir "doc\en") | Out-Null

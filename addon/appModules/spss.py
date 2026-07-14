@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
 # SPSS Accessibility Plugin App Module for NVDA
-# Version: 1.1.0
+# Version: 1.1.1
+#
+# This module is loaded directly for spss.exe, the main process name used by
+# older SPSS releases before the IBM-era rename. Alias modules in this folder
+# reuse its AppModule for the other SPSS process names.
 # =============================================================================
 #
 # Author: Bouronikos Christos
@@ -843,7 +847,7 @@ class AppModule(appModuleHandler.AppModule):
 		self._verboseHelp = True
 		self._announceTableMovement = False
 		self._headerCache = {}
-		log.info("IBM SPSS Statistics accessibility app module 1.1.0 loaded")
+		log.info("IBM SPSS Statistics accessibility app module 1.1.1 loaded")
 
 	def terminate(self):
 		log.info("IBM SPSS Statistics accessibility app module unloaded")

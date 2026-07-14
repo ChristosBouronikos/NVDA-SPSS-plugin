@@ -194,6 +194,14 @@
 
 Αν μια περιοχή δεν αναγνωρίζεται, φέρτε μπροστά το σχετικό παράθυρο από το μενού Window του SPSS και δοκιμάστε ξανά την εντολή του πρόσθετου. Αν ένα στοιχείο δεν επισημαίνεται σωστά, χρησιμοποιήστε την εντολή αντιμετώπισης προβλημάτων και συμπεριλάβετε την αναφορά του log όταν ανοίξετε issue.
 
+## Δοκιμές
+
+Η έκδοση 1.1.1 δοκιμάστηκε με NVDA 2026.1.1 (64-bit) και IBM SPSS Statistics 31.0.0.0 (build 117) σε Windows 11. Ο δημιουργός είναι βλέπων, οπότε οι δοκιμές επιβεβαιώνουν τις ανακοινώσεις και τις εντολές του πρόσθετου αλλά όχι πλήρεις ροές εργασίας τυφλών χρηστών. Σχόλια από χρήστες αναγνωστών οθόνης είναι πολύ ευπρόσδεκτα μέσω GitHub issues ή email.
+
+## Δήλωση Χρήσης Τεχνητής Νοημοσύνης
+
+Αυτό το πρόσθετο αναπτύχθηκε με σημαντική βοήθεια τεχνητής νοημοσύνης (Claude της Anthropic), συμπεριλαμβανομένου μεγάλου μέρους του κώδικα του app module και της τεκμηρίωσης. Οι στόχοι σχεδίασης, η συμπεριφορά που αφορά το SPSS, οι αποφάσεις για τις λειτουργίες και όλες οι δοκιμές σε πραγματικό περιβάλλον (NVDA 2026.1.1 64-bit, IBM SPSS Statistics 31.0.0.0 build 117, Windows 11) έγιναν από τον δημιουργό, ο οποίος συντηρεί τον κώδικα και φέρει την ευθύνη για αυτόν.
+
 ## Άδεια
 
 GNU General Public License v2.0.
@@ -397,6 +405,14 @@ This is the recommended method when the add-on is available in the NVDA Add-on S
 SPSS does not expose every part of its interface consistently across versions. This add-on improves the experience where UI Automation information is available, but some charts, legacy dialogs, model viewers, and custom extension windows may still need SPSS keyboard commands, object navigation, export, or syntax-based workflows.
 
 If a pane is not detected, bring the relevant SPSS window forward from the Window menu, then try the add-on command again. If a control is not labeled correctly, use the troubleshooting command and include the NVDA log report when filing an issue.
+
+## Testing
+
+Version 1.1.1 was tested with NVDA 2026.1.1 (64-bit) and IBM SPSS Statistics 31.0.0.0 (build 117) on Windows 11. The author is sighted, so testing verifies the add-on's announcements and commands rather than complete blind-user workflows. Feedback from screen reader users is very welcome through GitHub issues or email.
+
+## AI Assistance Disclosure
+
+This add-on was developed with substantial AI assistance (Anthropic's Claude), including much of the app module code and the documentation. The design goals, SPSS-specific behavior, feature decisions, and all testing on a real setup (NVDA 2026.1.1 64-bit, IBM SPSS Statistics 31.0.0.0 build 117, Windows 11) were done by the author, who maintains and takes responsibility for the code.
 
 ## License
 

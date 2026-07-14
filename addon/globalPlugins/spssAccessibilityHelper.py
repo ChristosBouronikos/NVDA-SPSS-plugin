@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
 # SPSS Accessibility Plugin Helper Global Plugin for NVDA
-# Version: 1.1.0
+# Version: 1.1.1
 # =============================================================================
 
 """
@@ -22,16 +22,12 @@ import globalPluginHandler
 from logHandler import log
 
 
+# Process names (without .exe) that IBM SPSS Statistics has used across releases.
 SPSS_EXECUTABLES = (
-	"stats",
-	"spss",
-	"spsswin",
-	"spssstatistics",
-	"ibmspssstatistics",
-	"spssprod",
-	"IBM SPSS Statistics",
-	"IBM SPSS Statistics Data Editor",
-	"IBM SPSS Statistics Viewer",
+	"stats",  # stats.exe: the main IBM SPSS Statistics process in modern releases (roughly version 21 onward, including SPSS Statistics 31).
+	"spss",  # spss.exe: the main process name used by older SPSS releases before the IBM-era rename.
+	"spsswin",  # spsswin.exe: the main process name of early SPSS for Windows releases.
+	"spssprod",  # spssprod.exe: the SPSS Production Facility component for running unattended production jobs.
 )
 
 

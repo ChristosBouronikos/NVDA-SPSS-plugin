@@ -1,4 +1,5 @@
-# Alias app module for older IBM SPSS Statistics executable names.
+# Alias app module for spsswin.exe, the main process name of early SPSS for
+# Windows releases.
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
 # Donation: https://paypal.me/christosbouronikos

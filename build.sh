@@ -11,6 +11,7 @@ cd "$SCRIPT_DIR"
 
 DIST_DIR="$SCRIPT_DIR/dist"
 ADDON_ROOT="$SCRIPT_DIR/addon"
+MANIFEST="$SCRIPT_DIR/manifest.ini"
 
 manifest_value() {
 	local key="$1"
@@ -22,14 +23,14 @@ manifest_value() {
 			print value
 			exit
 		}
-	' "$ADDON_ROOT/manifest.ini"
+	' "$MANIFEST"
 }
 
 ADDON_NAME="$(manifest_value name)"
 VERSION="$(manifest_value version)"
 
 if [[ -z "${ADDON_NAME}" || -z "${VERSION}" ]]; then
-	echo "Error: name/version missing from addon/manifest.ini" >&2
+	echo "Error: name/version missing from manifest.ini" >&2
 	exit 1
 fi
 
@@ -70,6 +71,7 @@ rsync -a "$ADDON_ROOT/" "$TMP_STAGE/" \
 	--exclude '*.po' \
 	--exclude 'doc/'
 
+cp "$MANIFEST" "$TMP_STAGE/manifest.ini"
 cp LICENSE "$TMP_STAGE/LICENSE"
 
 mkdir -p "$TMP_STAGE/doc/en" "$TMP_STAGE/doc/el"
