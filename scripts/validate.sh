@@ -40,10 +40,11 @@ if grep -E '\.po|\.pyc|__pycache__|\.DS_Store|\.git' <<< "$archive_listing" >/de
 fi
 
 echo "Checking README source policy"
-readme_count="$(rg --files | rg -i '(^|/)readme[^/]*\.md$' | wc -l | tr -d ' ')"
-if [[ "$readme_count" != "1" ]]; then
-	echo "Error: expected only the root README.md source file; found $readme_count README files" >&2
-	rg --files | rg -i '(^|/)readme[^/]*\.md$' >&2
+readme_files="$(rg --files | rg -i '(^|/)readme[^/]*\.md$' | sort)"
+expected_readme_files="$(printf '%s\n' "README.md" "docs/README.el.md" | sort)"
+if [[ "$readme_files" != "$expected_readme_files" ]]; then
+	echo "Error: expected exactly README.md (English) and docs/README.el.md (Greek); found:" >&2
+	echo "$readme_files" >&2
 	exit 1
 fi
 

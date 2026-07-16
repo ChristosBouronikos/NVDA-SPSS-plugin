@@ -18,7 +18,7 @@ addon_info = {
 		"chrisbouronikos@gmail.com. If this add-on helps you, please consider a "
 		"kind donation via PayPal: https://paypal.me/christosbouronikos"
 	),
-	"addon_version": "1.1.1",
+	"addon_version": "1.1.2",
 	"addon_author": "Bouronikos Christos <chrisbouronikos@gmail.com>",
 	"addon_url": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
 	"addon_docFileName": "readme.md",

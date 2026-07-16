@@ -41,32 +41,6 @@ if (Test-Path $tempZip) {
 New-Item -ItemType Directory -Force -Path $distDir | Out-Null
 New-Item -ItemType Directory -Force -Path $stageDir | Out-Null
 
-function Export-ReadmeSection {
-	param(
-		[string] $StartMarker,
-		[string] $EndMarker,
-		[string] $OutputPath
-	)
-	$inSection = $false
-	$selected = New-Object System.Collections.Generic.List[string]
-	foreach ($line in Get-Content "README.md") {
-		if ($line -eq $StartMarker) {
-			$inSection = $true
-			continue
-		}
-		if ($line -eq $EndMarker) {
-			break
-		}
-		if ($inSection) {
-			$selected.Add($line)
-		}
-	}
-	if ($selected.Count -eq 0) {
-		throw "Could not extract $StartMarker from README.md"
-	}
-	Set-Content -Path $OutputPath -Value $selected -Encoding UTF8
-}
-
 $addonRoot = (Resolve-Path "addon").Path
 Get-ChildItem "addon" -Recurse -File | Where-Object {
 	$_.Name -notlike "*.pyc" -and
@@ -91,8 +65,8 @@ Copy-Item "LICENSE" (Join-Path $stageDir "LICENSE") -Force
 
 New-Item -ItemType Directory -Force -Path (Join-Path $stageDir "doc\en") | Out-Null
 New-Item -ItemType Directory -Force -Path (Join-Path $stageDir "doc\el") | Out-Null
-Export-ReadmeSection "<!-- ENGLISH-README-START -->" "<!-- ENGLISH-README-END -->" (Join-Path $stageDir "doc\en\readme.md")
-Export-ReadmeSection "<!-- GREEK-README-START -->" "<!-- GREEK-README-END -->" (Join-Path $stageDir "doc\el\readme.md")
+Copy-Item "README.md" (Join-Path $stageDir "doc\en\readme.md") -Force
+Copy-Item "docs\README.el.md" (Join-Path $stageDir "doc\el\readme.md") -Force
 Copy-Item "CHANGELOG.md" (Join-Path $stageDir "doc\en\changelog.md") -Force
 Copy-Item "docs\CHANGELOG.el.md" (Join-Path $stageDir "doc\el\changelog.md") -Force
 

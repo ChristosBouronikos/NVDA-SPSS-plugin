@@ -1,0 +1,38 @@
+{
+  "addonId": "spssAccessibility",
+  "addonVersionNumber": {
+    "major": 1,
+    "minor": 1,
+    "patch": 2
+  },
+  "addonVersionName": "1.1.2",
+  "displayName": "SPSS Accessibility Plugin",
+  "publisher": "Bouronikos Christos",
+  "description": "SPSS Accessibility Plugin improves IBM SPSS Statistics accessibility for blind and visually impaired users. Created by Bouronikos Christos, contact: chrisbouronikos@gmail.com. If this add-on helps you, please consider a kind donation via PayPal: https://paypal.me/christosbouronikos",
+  "homepage": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "minNVDAVersion": {
+    "major": 2023,
+    "minor": 1,
+    "patch": 0
+  },
+  "lastTestedVersion": {
+    "major": 2026,
+    "minor": 1,
+    "patch": 1
+  },
+  "channel": "stable",
+  "URL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.2/spssAccessibility-1.1.2.nvda-addon",
+  "sha256": "e9693ca09f2f60fcc52ad61e7746e17533968cabe9fbeeafe74da8dbc42d751d",
+  "sourceURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "license": "GPL v2",
+  "licenseURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE",
+  "changelog": "Documentation release addressing NVDA Add-on Store review feedback. Split the README into an English source file and a Greek translation in docs/, matching the existing changelog split, instead of one bilingual file. Added a link to the IBM SPSS Statistics product page in the README overview.",
+  "translations": [
+    {
+      "language": "el",
+      "displayName": "SPSS Accessibility Plugin",
+      "description": "Το SPSS Accessibility Plugin βελτιώνει την προσβασιμότητα του IBM SPSS Statistics για τυφλούς χρήστες και χρήστες με προβλήματα όρασης. Δημιουργός: Bouronikos Christos, email: chrisbouronikos@gmail.com. Αν σας βοηθά αυτό το πρόσθετο, παρακαλώ σκεφτείτε μια ευγενική δωρεά μέσω PayPal: https://paypal.me/christosbouronikos",
+      "changelog": "Έκδοση τεκμηρίωσης μετά από σχόλια αξιολόγησης του store. Χωρίστηκε το README σε αγγλικό αρχείο πηγής και ελληνική μετάφραση στο docs/, όπως ήδη γίνεται με το changelog, αντί για ένα δίγλωσσο αρχείο. Προστέθηκε σύνδεσμος προς τη σελίδα προϊόντος του IBM SPSS Statistics στην επισκόπηση του README."
+    }
+  ]
+}

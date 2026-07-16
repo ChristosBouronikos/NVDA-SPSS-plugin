@@ -39,21 +39,6 @@ OUTPUT_PATH="$DIST_DIR/$OUTPUT_FILE"
 TMP_STAGE="$(mktemp -d)"
 trap 'rm -rf "$TMP_STAGE"' EXIT
 
-extract_readme_section() {
-	local start_marker="$1"
-	local end_marker="$2"
-	local output_path="$3"
-	awk -v start="$start_marker" -v end="$end_marker" '
-		$0 == start { in_section = 1; next }
-		$0 == end { in_section = 0; exit }
-		in_section { print }
-	' README.md > "$output_path"
-	if [[ ! -s "$output_path" ]]; then
-		echo "Error: could not extract $start_marker from README.md" >&2
-		exit 1
-	fi
-}
-
 echo "Building SPSS Accessibility Plugin NVDA Add-on"
 echo "=============================================="
 echo "Version: ${VERSION}"
@@ -75,8 +60,8 @@ cp "$MANIFEST" "$TMP_STAGE/manifest.ini"
 cp LICENSE "$TMP_STAGE/LICENSE"
 
 mkdir -p "$TMP_STAGE/doc/en" "$TMP_STAGE/doc/el"
-extract_readme_section "<!-- ENGLISH-README-START -->" "<!-- ENGLISH-README-END -->" "$TMP_STAGE/doc/en/readme.md"
-extract_readme_section "<!-- GREEK-README-START -->" "<!-- GREEK-README-END -->" "$TMP_STAGE/doc/el/readme.md"
+cp README.md "$TMP_STAGE/doc/en/readme.md"
+cp docs/README.el.md "$TMP_STAGE/doc/el/readme.md"
 cp CHANGELOG.md "$TMP_STAGE/doc/en/changelog.md"
 cp docs/CHANGELOG.el.md "$TMP_STAGE/doc/el/changelog.md"
 

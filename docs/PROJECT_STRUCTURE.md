@@ -9,7 +9,8 @@ This repository is organized so the source tree is ready for GitHub and the NVDA
 - `addon/globalPlugins/`: global plugin helper commands.
 - `addon/locale/`: compiled add-on translations and locale-specific manifest files.
 - `manifest.ini`: add-on package metadata copied to the archive root during build.
-- `README.md`: the single source for GitHub documentation and generated package readmes. Greek comes first, English second.
+- `README.md`: English readme, the source for GitHub documentation and package `doc/en/readme.md`.
+- `docs/README.el.md`: Greek readme used for package `doc/el/readme.md`.
 - `CHANGELOG.md`: English changelog used for GitHub releases and package `doc/en/changelog.md`.
 - `docs/CHANGELOG.el.md`: Greek changelog used for package `doc/el/changelog.md`.
 
@@ -22,7 +23,7 @@ This repository is organized so the source tree is ready for GitHub and the NVDA
 ## Store Files
 
 - `store/ADDON_STORE_SUBMISSION.md`: human-readable Add-on Store submission notes.
-- `store/spssAccessibility-1.1.1.json`: draft metadata matching the Add-on Store schema. Update the URL and checksum after publishing the GitHub release asset.
+- `store/spssAccessibility-1.1.2.json`: draft metadata matching the Add-on Store schema. Update the URL and checksum after publishing the GitHub release asset.
 
 ## Automation
 

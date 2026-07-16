@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.1.2
+
+Documentation release addressing NVDA Add-on Store review feedback.
+
+- Split the README into an English source file (`README.md`) and a Greek translation (`docs/README.el.md`), matching the existing changelog split, instead of one bilingual file.
+- Added a link to the IBM SPSS Statistics product page in the README overview.
+
 ## 1.1.1
 
 Maintenance release addressing NVDA Add-on Store review feedback.

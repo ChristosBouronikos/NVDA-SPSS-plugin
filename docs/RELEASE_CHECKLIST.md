@@ -8,7 +8,7 @@ Use this checklist for every public NVDA add-on release.
 - Update `buildVars.py`.
 - Update `CHANGELOG.md`.
 - Update `docs/CHANGELOG.el.md`.
-- Confirm README install examples mention the new `.nvda-addon` filename.
+- Confirm install examples in both `README.md` and `docs/README.el.md` mention the new `.nvda-addon` filename.
 
 ## Build
 
@@ -23,7 +23,7 @@ Use `./build.sh` for the official release asset and Add-on Store checksum. The P
 ## Package Review
 
 ```bash
-unzip -l dist/spssAccessibility-1.1.1.nvda-addon
+unzip -l dist/spssAccessibility-1.1.2.nvda-addon
 ```
 
 Confirm:
@@ -52,15 +52,15 @@ Confirm:
 
 ## GitHub Release
 
-- Tag the release, for example `v1.1.1`.
-- Attach `dist/spssAccessibility-1.1.1.nvda-addon`.
+- Tag the release, for example `v1.1.2`.
+- Attach `dist/spssAccessibility-1.1.2.nvda-addon`.
 - Attach or paste the checksum from `dist/SHA256SUMS`.
 - Include the changelog section for the version.
 - Link to the manual test notes.
 
 ## NVDA Add-on Store
 
-- Confirm `manifest.ini` and `store/spssAccessibility-1.1.1.json` agree on add-on id, version, display name, minimum NVDA version, last tested NVDA version, channel, homepage, and license.
+- Confirm `manifest.ini` and `store/spssAccessibility-1.1.2.json` agree on add-on id, version, display name, minimum NVDA version, last tested NVDA version, channel, homepage, and license.
 - Confirm the `URL` in the store JSON points to the final GitHub release asset.
 - Confirm the `sha256` in the store JSON matches `dist/SHA256SUMS`.
 - Submit through the NVDA `addon-datastore` Add-on registration issue form.
