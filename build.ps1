@@ -1,6 +1,7 @@
 # Build SPSS Accessibility Plugin as a distributable NVDA add-on.
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
+# GitHub: https://github.com/ChristosBouronikos
 # Donation: https://paypal.me/christosbouronikos
 
 $ErrorActionPreference = "Stop"

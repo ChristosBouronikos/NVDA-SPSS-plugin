@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
+# GitHub: https://github.com/ChristosBouronikos
 # Donation: https://paypal.me/christosbouronikos
 """Build metadata for the SPSS Accessibility Plugin NVDA add-on.
 
@@ -18,7 +19,7 @@ addon_info = {
 		"chrisbouronikos@gmail.com. If this add-on helps you, please consider a "
 		"kind donation via PayPal: https://paypal.me/christosbouronikos"
 	),
-	"addon_version": "1.1.2",
+	"addon_version": "1.2.0",
 	"addon_author": "Bouronikos Christos <chrisbouronikos@gmail.com>",
 	"addon_url": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
 	"addon_docFileName": "readme.md",

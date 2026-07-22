@@ -2,5 +2,6 @@
 # for running unattended production jobs.
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
+# GitHub: https://github.com/ChristosBouronikos
 # Donation: https://paypal.me/christosbouronikos
 from .spss import AppModule

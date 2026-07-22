@@ -1,5 +1,24 @@
 # Changelog
 
+## 1.2.0
+
+A major content and architecture release: reads far more of SPSS, in the language SPSS itself is running in.
+
+- Added `addon/appModules/_spssdata`, a bilingual (English/Greek) knowledge base package covering the full IBM SPSS Statistics 31 menu tree (including submenus and statistical-procedure submenus such as Analyze, Compare Means and Proportions, Independent-Samples T Test), Data Editor/Viewer/Syntax Editor/Pivot Table Editor panes, Variable View columns, output item kinds, statistical procedure dialogs with their sub-dialogs, and a plain-language statistics glossary. Content is grounded in the IBM SPSS Statistics 31 Core System and Base documentation.
+- Added detailed dialog coverage for T Tests (One-Sample, Independent-Samples with Define Groups/Options/Bootstrap, Paired-Samples), One-Way ANOVA (with Contrasts and Post Hoc), Frequencies, Descriptives, Explore, Crosstabs, Bivariate Correlations, Linear Regression, Binary Logistic Regression, Reliability Analysis, modern and legacy Nonparametric Tests, and data-preparation dialogs (Value Labels, Missing Values, Variable Type, Select Cases, Split File, Weight Cases, Compute Variable, Recode into Different Variables, Bootstrap).
+- Added spoken-language resolution for SPSS content: the add-on detects whether SPSS itself is running in English or Greek from its visible menu text, and speaks menu, dialog, pane, variable-column, output-kind, and glossary descriptions in that language. This can be overridden with `NVDA+Control+Alt+Shift+J` (cycles automatic/English/Greek) or from the new SPSS Accessibility settings panel. This is independent of NVDA's own interface language, which continues to drive the add-on's own voice (shortcut lists, status/error messages).
+- Added an "SPSS Accessibility" category to NVDA's Settings dialog (`addon/globalPlugins/spssAccessibilityHelper.py`), with a persistent spoken-language choice.
+- Added `NVDA+Control+Alt+Shift+K` to read every field and button currently visible in the focused SPSS dialog, each with its kind and a short description — for getting the whole picture of a dialog with many options (like a t-test's main fields plus its sub-dialog buttons) before tabbing through it.
+- Added `NVDA+Control+Alt+Shift+Q` to list every item in the menu or submenu that is currently open.
+- Added a Pivot Table Editor pane, recognized alongside the existing Overview, Data View, Variable View, Output Viewer, Syntax Editor, and Chart Builder panes.
+- Menu-item and dialog-field recognition now uses accent-insensitive, alias-aware lookup, so Greek SPSS text (which carries accents) matches the same knowledge base entries as English text.
+- Replaced the flat, English-only `SPSS_MENU_MAP` with the full nested menu tree from `_spssdata.menus`, including previously uncovered menus (Tools, Pivot) and dozens of previously uncovered submenu items and statistical procedures.
+- Regenerated the Greek gettext catalogue (`addon/locale/el/LC_MESSAGES/nvda.po`) for the rewritten app module; every message the add-on itself speaks (as opposed to SPSS content, which now follows the resolved SPSS language) is translated.
+- Added an offline automated test suite (`tests/`), including stub NVDA modules and a fake UI Automation tree builder, that exercises pane detection, language resolution, menu/dialog recognition, and the new commands without requiring NVDA or SPSS to be installed. Wired into `scripts/validate.sh`.
+- Hardened modal-dialog support after review: foreground dialog roots and dialog windows are now recognized correctly; bilingual title matching is preferred before heuristic control matching; Greek dialog controls participate in fallback recognition; generic single controls can no longer misidentify a dialog; and the detected SPSS language is preserved while a modal dialog hides the menu bar. Added regression tests for these paths, the settings panel, and current NVDA executable registration/cleanup.
+- Added documentation-based compatibility coverage for IBM SPSS Statistics 24–31. Legacy `Compare Means` parent aliases now participate in menu-path matching, newer optional t-test controls are not required for dialog recognition, and offline tests cover SPSS 24–26, 27–30, and 31 dialog profiles plus the pre-Overview Data Editor layout.
+- `scripts/validate.sh` now also compiles `addon/appModules/_spssdata` and runs the new test suite before building the package.
+
 ## 1.1.2
 
 Documentation release addressing NVDA Add-on Store review feedback.

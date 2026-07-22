@@ -2,6 +2,7 @@
 # Validate source files and the distributable NVDA add-on package.
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
+# GitHub: https://github.com/ChristosBouronikos
 # Donation: https://paypal.me/christosbouronikos
 
 set -euo pipefail
@@ -17,7 +18,10 @@ PACKAGE="dist/${ADDON_NAME}-${VERSION}.nvda-addon"
 
 echo "Checking Python syntax"
 PYTHONPYCACHEPREFIX="${PYTHONPYCACHEPREFIX:-/tmp/nvda_spss_pycache}" \
-	python3 -m py_compile addon/appModules/*.py addon/globalPlugins/*.py
+	python3 -m py_compile addon/appModules/*.py addon/appModules/_spssdata/*.py addon/globalPlugins/*.py
+
+echo "Running offline test suite"
+python3 -m unittest discover -s tests -v
 
 echo "Checking Greek gettext catalog"
 msgfmt --check -o addon/locale/el/LC_MESSAGES/nvda.mo addon/locale/el/LC_MESSAGES/nvda.po

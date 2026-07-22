@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 # =============================================================================
 # SPSS Accessibility Plugin App Module for NVDA
-# Version: 1.1.1
+# Version: 1.2.0
 #
 # This module is loaded directly for spss.exe, the main process name used by
 # older SPSS releases before the IBM-era rename. Alias modules in this folder
@@ -10,6 +10,7 @@
 #
 # Author: Bouronikos Christos
 # Email: chrisbouronikos@gmail.com
+# GitHub: https://github.com/ChristosBouronikos
 # Donation: https://paypal.me/christosbouronikos
 #
 # Copyright (C) 2026 Bouronikos Christos
@@ -20,18 +21,39 @@
 SPSS Accessibility Plugin app module for NVDA.
 
 Created by Bouronikos Christos. Contact: chrisbouronikos@gmail.com.
+GitHub: https://github.com/ChristosBouronikos.
 If this add-on helps you, please consider a kind donation via PayPal:
 https://paypal.me/christosbouronikos
 
 This module improves day-to-day use of IBM SPSS Statistics with NVDA by adding:
-- Pane recognition for Output Viewer, Data Editor views, syntax, Chart Builder, and menus.
-- Detailed descriptions when entering important SPSS work areas.
-- Commands for reading output items, data cells, and variable definitions.
+- Pane recognition for Output Viewer, Data Editor views, syntax, Chart Builder,
+  Pivot Table Editor, and menus.
+- A bilingual (English/Greek) knowledge base (the ``_spssdata`` package) that
+  describes SPSS menus and submenus, statistical procedure dialogs and their
+  sub-dialogs, Data Editor and Variable View controls, output item kinds, and
+  a plain-language statistics glossary.
+- Detailed descriptions when entering important SPSS work areas, spoken in
+  English or Greek to match the language IBM SPSS Statistics itself is
+  running in (detected automatically, or set manually).
+- Commands for reading output items, data cells, variable definitions, whole
+  dialogs, and open menus or submenus.
 - Better fallback labels for unlabeled toolbar and dialog controls.
 
 SPSS exposes different UI Automation names across versions, so most detection is
 deliberately heuristic and combines object role, name, description, class name,
 automation id, table coordinates, and surrounding ancestors.
+
+Two languages are involved and are kept deliberately independent:
+- The add-on's own voice (script descriptions, shortcuts list, status and
+  error messages, generic template phrases such as "Cell {cell}") follows
+  NVDA's own interface language, through the standard gettext catalog.
+- The content that explains what a piece of SPSS actually is or does (pane
+  help, menu and dialog descriptions, dialog field meaning, variable column
+  meaning, output item kinds, and the statistics glossary) follows the
+  language IBM SPSS Statistics is running in, resolved by
+  ``AppModule._resolveLanguage``. This can be detected automatically from the
+  visible SPSS menu text, or fixed to English or Greek from NVDA+Control+
+  Alt+Shift+J or the SPSS Accessibility category of NVDA settings.
 """
 
 import re
@@ -43,6 +65,13 @@ import controlTypes
 import ui
 from logHandler import log
 from scriptHandler import script
+
+try:
+	import config
+except Exception:
+	config = None
+
+from . import _spssdata as kb
 
 
 addonHandler.initTranslation()
@@ -125,651 +154,92 @@ CONTROL_TYPE_LABELS = (
 	(ROLE_TREEVIEWITEM, _("Tree item")),
 )
 
+# Which NVDA roles count as evidence for each SPSS pane. Combined with the
+# bilingual token lists in _spssdata.panes to score candidate objects.
+PANE_ROLE_MAP = {
+	"overview": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL, ROLE_PANE),
+	"output": (ROLE_DOCUMENT, ROLE_TREEVIEW, ROLE_TREEVIEWITEM, ROLE_PANE, ROLE_TABLE),
+	"data": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL),
+	"variable": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL),
+	"syntax": (ROLE_DOCUMENT, ROLE_EDITABLETEXT, ROLE_PANE),
+	"chartbuilder": (ROLE_PANE, ROLE_LIST, ROLE_LISTITEM, ROLE_TAB, ROLE_TABCONTROL, ROLE_BUTTON, ROLE_GROUPING),
+	"pivottable": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_PANE, ROLE_DOCUMENT),
+	"menus": (ROLE_MENUBAR, ROLE_MENU, ROLE_MENUITEM),
+}
 
 PANE_DEFINITIONS = {
-	"overview": {
-		"name": _("Overview"),
-		"tokens": (
-			"overview", "over view", "data overview", "variable overview",
-			"data set overview", "dataset overview", "update", "quality",
-			"επισκόπηση", "σύνοψη", "γενική προβολή", "ενημέρωση",
-		),
-		"roles": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL, ROLE_PANE),
-	},
-	"output": {
-		"name": _("Output Viewer"),
-		"tokens": (
-			"output viewer", "output", "viewer", "outline", "pivot table",
-			"pivot", "log", "notes", "chart", "model viewer", "export output",
-			"προβολή αποτελεσμάτων", "αποτελέσματα", "έξοδος", "προβολή",
-			"περίγραμμα", "πίνακας pivot", "γράφημα", "σημειώσεις",
-		),
-		"roles": (ROLE_DOCUMENT, ROLE_TREEVIEW, ROLE_TREEVIEWITEM, ROLE_PANE, ROLE_TABLE),
-	},
-	"data": {
-		"name": _("Data View"),
-		"tokens": (
-			"data view", "data editor", "data grid", "case", "case number",
-			"cases", "cell editor", "data set", "active dataset",
-			"προβολή δεδομένων", "δεδομένα", "επεξεργαστής δεδομένων",
-			"πλέγμα δεδομένων", "περίπτωση", "περιπτώσεις", "σύνολο δεδομένων",
-		),
-		"roles": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL),
-	},
-	"variable": {
-		"name": _("Variable View"),
-		"tokens": (
-			"variable view", "variables", "variable", "name type width",
-			"decimals label values missing columns align measure role",
-			"measure", "values", "missing", "variable properties",
-			"προβολή μεταβλητών", "μεταβλητές", "μεταβλητή", "όνομα τύπος πλάτος",
-			"δεκαδικά ετικέτα τιμές ελλείπουσες στήλες στοίχιση μέτρο ρόλος",
-			"ιδιότητες μεταβλητής",
-		),
-		"roles": (ROLE_TABLE, ROLE_ROW, ROLE_CELL, ROLE_TAB, ROLE_TABCONTROL),
-	},
-	"syntax": {
-		"name": _("Syntax Editor"),
-		"tokens": (
-			"syntax editor", "syntax", "command syntax", "spss syntax",
-			"run selection", "paste syntax", "designated syntax", "syntax window",
-			"gutter", "bookmarks", "breakpoints", "command spans", "error pane",
-			"επεξεργαστής σύνταξης", "σύνταξη", "εντολές", "εκτέλεση επιλογής",
-			"επικόλληση σύνταξης", "παράθυρο σύνταξης", "σελιδοδείκτες",
-		),
-		"roles": (ROLE_DOCUMENT, ROLE_EDITABLETEXT, ROLE_PANE),
-	},
-	"chartbuilder": {
-		"name": _("Chart Builder"),
-		"tokens": (
-			"chart builder", "chart preview", "gallery", "basic elements",
-			"groups/point id", "groups point id", "titles/footnotes",
-			"titles footnotes", "choose from", "drop zone", "drop zones",
-			"canvas", "axis set", "graphic elements", "categories list",
-			"element properties", "chart type", "pie/polar", "scatter/dot",
-			"histogram", "boxplot", "dual axes",
-			"δημιουργός γραφημάτων", "προεπισκόπηση γραφήματος", "καμβάς",
-			"συλλογή", "βασικά στοιχεία", "ζώνη απόθεσης",
-		),
-		"roles": (ROLE_PANE, ROLE_LIST, ROLE_LISTITEM, ROLE_TAB, ROLE_TABCONTROL, ROLE_BUTTON, ROLE_GROUPING),
-	},
-	"menus": {
-		"name": _("SPSS menu bar"),
-		"tokens": (
-			"menu bar", "file edit view data transform analyze graphs utilities",
-			"extensions window help", "insert format run add-ons", "analyze",
-			"transform", "graphs", "add-ons",
-			"γραμμή μενού", "αρχείο επεξεργασία προβολή δεδομένα μετασχηματισμός ανάλυση γραφήματα",
-			"βοήθεια", "ανάλυση", "μετασχηματισμός", "γραφήματα", "πρόσθετα",
-		),
-		"roles": (ROLE_MENUBAR, ROLE_MENU, ROLE_MENUITEM),
-	},
+	paneKey: {
+		"tokens": kb.panes.PANE_TOKENS[paneKey],
+		"roles": tuple(role for role in PANE_ROLE_MAP[paneKey] if role is not None),
+	}
+	for paneKey in kb.panes.PANE_ORDER
 }
 
-PANE_ORDER = ("output", "overview", "data", "variable", "syntax", "chartbuilder", "menus")
+PANE_ORDER = kb.panes.PANE_ORDER
 
-PANE_HELP = {
-	"overview": _(
-		"Overview. This Data Editor view summarizes the active dataset. It can help "
-		"you check variable and data quality before moving to Data View or Variable "
-		"View. Use the Update control when SPSS asks for a refreshed representation "
-		"of the data."
-	),
-	"output": _(
-		"Output Viewer. The left outline lists result blocks such as logs, notes, "
-		"tables, charts, and statistical procedures. The right document area contains "
-		"the selected output. Pivot tables and text output are usually readable with "
-		"NVDA; charts, tree diagrams, and model views are usually not screen-reader "
-		"accessible in SPSS. Use the outline to move between results, then use the "
-		"read output command for a concise summary. For pivot tables, check Edit, "
-		"Options, Output, Screen Reader Accessibility."
-	),
-	"data": _(
-		"Data View. Rows are cases and columns are variables. Use arrow keys to move "
-		"cell by cell, or type a value into the current cell editor. The data-cell "
-		"command reports the case number, variable name, and current value when SPSS "
-		"exposes that information."
-	),
-	"variable": _(
-		"Variable View. Each row defines one variable. Columns describe properties "
-		"such as name, type, width, decimals, label, values, missing values, measure, "
-		"and role. Use the variable command to report the current property and value. "
-		"Press Space on Type, Values, or Missing to open the detailed edit dialog "
-		"when SPSS exposes that action."
-	),
-	"syntax": _(
-		"Syntax Editor. This is the command text area. You can review, edit, and run "
-		"SPSS syntax. Dialog Paste buttons often place commands here before execution. "
-		"The Syntax Editor also has a command navigation pane, gutter, and error pane "
-		"when those areas are visible."
-	),
-	"chartbuilder": _(
-		"Chart Builder. The dialog contains a variables list, optional categories "
-		"list, chart canvas with drop zones, and tabs such as Gallery, Basic Elements, "
-		"Groups or Point ID, and Titles or Footnotes. Select a chart type from the "
-		"Gallery, copy a variable from the variables list, move to a drop zone, and "
-		"paste it. Use Shift+F10 on the canvas for chart-building commands."
-	),
-	"menus": _(
-		"SPSS menus. File manages files and import or export. Data changes cases and "
-		"datasets. Transform computes and recodes variables. Analyze runs statistics. "
-		"Graphs creates charts. Insert and Format affect output objects. Utilities, "
-		"Extensions, and Add-ons manage metadata, integration commands, and add-ons."
-	),
+# Bilingual (English, Greek) fallback labels for controls that SPSS exposes
+# with no accessible name. Keys must be lower-case and accent-free, matching
+# what AppModule._norm produces, since Greek SPSS text carries accents that
+# are stripped before matching.
+GENERIC_CONTROL_LOOKUP = {
+	"ok": (u"OK", u"OK"),
+	"cancel": (u"Cancel", u"Ακύρωση"),
+	"apply": (u"Apply", u"Εφαρμογή"),
+	"close": (u"Close", u"Κλείσιμο"),
+	"continue": (u"Continue", u"Συνέχεια"),
+	"reset": (u"Reset", u"Επαναφορά"),
+	"paste": (u"Paste syntax", u"Επικόλληση σύνταξης"),
+	"paste syntax": (u"Paste syntax", u"Επικόλληση σύνταξης"),
+	"run": (u"Run command", u"Εκτέλεση εντολής"),
+	"run selection": (u"Run selection", u"Εκτέλεση επιλογής"),
+	"run current": (u"Run current command", u"Εκτέλεση τρέχουσας εντολής"),
+	"open": (u"Open", u"Άνοιγμα"),
+	"save": (u"Save", u"Αποθήκευση"),
+	"print": (u"Print", u"Εκτύπωση"),
+	"browse": (u"Browse", u"Αναζήτηση"),
+	"options": (u"Options", u"Επιλογές"),
+	"spelling": (u"Spelling", u"Ορθογραφία"),
+	"statistics": (u"Statistics", u"Statistics"),
+	"charts": (u"Charts", u"Charts"),
+	"plots": (u"Plots", u"Plots"),
+	"posthoc": (u"Post Hoc", u"Post Hoc"),
+	"post hoc": (u"Post Hoc", u"Post Hoc"),
+	"contrasts": (u"Contrasts", u"Contrasts"),
+	"bootstrap": (u"Bootstrap", u"Bootstrap"),
+	"exact": (u"Exact tests", u"Ακριβείς έλεγχοι"),
+	"style": (u"Style", u"Στυλ"),
+	"format": (u"Format", u"Μορφοποίηση"),
+	"gallery": (u"Gallery", u"Gallery"),
+	"basic elements": (u"Basic Elements", u"Basic Elements"),
+	"groups/point id": (u"Groups or Point ID", u"Groups or Point ID"),
+	"groups point id": (u"Groups or Point ID", u"Groups or Point ID"),
+	"titles/footnotes": (u"Titles or Footnotes", u"Titles or Footnotes"),
+	"titles footnotes": (u"Titles or Footnotes", u"Titles or Footnotes"),
+	"choose from": (u"Choose from chart types", u"Επιλογή τύπου γραφήματος"),
+	"chart preview": (u"Chart preview canvas", u"Καμβάς προεπισκόπησης γραφήματος"),
+	"canvas": (u"Chart canvas", u"Καμβάς γραφήματος"),
+	"drop zone": (u"Drop zone", u"Ζώνη απόθεσης"),
+	"drop zones": (u"Drop zones", u"Ζώνες απόθεσης"),
+	"element properties": (u"Element Properties", u"Element Properties"),
+	"categories": (u"Categories", u"Κατηγορίες"),
+	"source variable list": (u"Source variable list", u"Λίστα μεταβλητών προέλευσης"),
+	"variables list": (u"Variables list", u"Λίστα μεταβλητών"),
+	"variables": (u"Variables", u"Μεταβλητές"),
+	"variable type": (u"Variable Type", u"Τύπος μεταβλητής"),
+	"variable": (u"Variable", u"Μεταβλητή"),
+	"dependent": (u"Dependent variable", u"Εξαρτημένη μεταβλητή"),
+	"independent": (u"Independent variable", u"Ανεξάρτητη μεταβλητή"),
+	"covariates": (u"Covariates", u"Συμμεταβλητές"),
+	"factor": (u"Factor", u"Παράγοντας"),
+	"label": (u"Label", u"Ετικέτα"),
+	"labels": (u"Labels", u"Ετικέτες"),
+	"add": (u"Add", u"Add"),
+	"change": (u"Change", u"Change"),
+	"remove": (u"Remove", u"Remove"),
+	"read excel": (u"Read Excel File", u"Ανάγνωση αρχείου Excel"),
+	"text import wizard": (u"Text Import Wizard", u"Οδηγός εισαγωγής κειμένου"),
+	"database wizard": (u"Database Wizard", u"Οδηγός βάσης δεδομένων"),
 }
-
-PANE_BRIEF = {
-	"overview": _("Overview."),
-	"output": _("Output Viewer. Use the outline for results. Pivot tables and text are readable; charts and model views may need export."),
-	"data": _("Data View. Rows are cases, columns are variables."),
-	"variable": _("Variable View. Rows are variables, columns are properties."),
-	"syntax": _("Syntax Editor. Review, edit, paste, and run SPSS commands."),
-	"chartbuilder": _("Chart Builder. Use the variables list, gallery, canvas drop zones, and Shift+F10 canvas menu."),
-	"menus": _("SPSS menu bar."),
-}
-
-MENU_DESCRIPTIONS = (
-	_("File: new, open, save, import data, export output, print, and manage SPSS data, syntax, and output files."),
-	_("Edit: undo, copy, paste, find, replace, and open Options, including Output screen-reader accessibility settings."),
-	_("View: show or hide toolbars, status information, value labels, line numbers, command spans, and visible panels."),
-	_("Data: define variable properties, copy data properties, sort cases, select cases, split files, weight cases, merge files, and restructure datasets."),
-	_("Transform: compute variables, recode values into same or different variables, automatic recode, count values, rank cases, and prepare derived fields."),
-	_("Analyze: run Frequencies, Descriptives, Explore, Crosstabs, Compare Means, Correlations, Regression, nonparametric tests, and models."),
-	_("Graphs: open Chart Builder, Graphboard, legacy dialogs, and graph editing commands."),
-	_("Insert: add titles, text, page breaks, charts, tables, or other output objects when the active window supports them."),
-	_("Format: change table looks, fonts, alignment, chart formatting, and output object appearance when available."),
-	_("Utilities: inspect variables, file information, variable sets, dictionaries, and extension or custom-dialog utilities."),
-	_("Extensions and Add-ons: run extension commands, Extension Hub, Python or R integrations, and custom procedures when installed."),
-	_("Run: run all syntax, selected syntax, current command, or commands up to the cursor in Syntax Editor windows."),
-	_("Window: move between open Data Editor, Output Viewer, Workbook, Syntax Editor, and dialog windows."),
-	_("Help: open SPSS help, tutorials, command syntax reference, accessibility topics, and product information."),
-)
-
-MENU_CONTEXT_DESCRIPTIONS = {
-	"overview": _(
-		"Data Editor menus. Use Data for Define Variable Properties, Copy Data Properties, Sort Cases, Select Cases, Split File, and Weight Cases. Use Transform to compute or recode variables. Use Analyze to run procedures."
-	),
-	"data": _(
-		"Data View menus. Data controls cases and datasets; Transform prepares new or recoded variables; Analyze runs procedures on the active dataset; Graphs opens Chart Builder and legacy chart dialogs."
-	),
-	"variable": _(
-		"Variable View menus. Data includes Define Variable Properties and Copy Data Properties. Use Utilities, Variables for a readable variable information dialog with labels, missing values, measure, and value labels."
-	),
-	"output": _(
-		"Output Viewer menus. Use the outline to select results. File exports output. Edit, Options, Output contains screen-reader accessibility for pivot-table labels. Insert and Format affect output objects. Charts and model views may need export because SPSS does not expose them as readable text."
-	),
-	"syntax": _(
-		"Syntax Editor menus. Run executes all syntax, selected syntax, the current command, or commands to the cursor. View can show line numbers and command spans. Paste from dialogs sends syntax to the designated Syntax window."
-	),
-	"chartbuilder": _(
-		"Chart Builder menus and dialog controls. Use Gallery or Basic Elements to choose the chart structure, copy variables from the variables list, paste them into canvas drop zones, and use Shift+F10 for canvas commands. OK and Paste are disabled until required drop zones are filled."
-	),
-	"menus": _("SPSS menu bar. Use left and right arrows between menus, down arrow to open a menu, and Enter to activate a command."),
-}
-
-SPSS_MENU_MAP = {
-	"File": (
-		("New", "Create a new Data, Syntax, Output, or Script window."),
-		("Open", "Open SPSS data, syntax, output, script, or other supported files."),
-		("Open Database", "Start the Database Wizard and import data from an ODBC database source."),
-		("Read Text Data", "Start the Text Import Wizard for delimited or fixed-width text files."),
-		("Close", "Close the active SPSS window."),
-		("Save", "Save the active data, syntax, output, or workbook file."),
-		("Save As", "Save the active file with a new name, location, or format."),
-		("Save All Data", "Save all open datasets."),
-		("Export", "Export output or data to formats such as Word, PDF, Excel, HTML, text, or image formats."),
-		("Mark File Read Only", "Protect the active data file from accidental changes."),
-		("Rename Dataset", "Rename the active dataset so it is easier to identify in syntax and dialogs."),
-		("Display Data File Information", "Show dictionary information such as variables, labels, missing values, and value labels."),
-		("Cache Data", "Cache the active dataset for faster access in some workflows."),
-		("Print Preview", "Preview printed output before printing."),
-		("Print", "Print the active output, data, syntax, or selected object."),
-		("Recently Used Data", "Open a recently used data file."),
-		("Recently Used Files", "Open a recently used SPSS file."),
-		("Exit", "Exit IBM SPSS Statistics."),
-	),
-	"Edit": (
-		("Undo", "Undo the last edit when available."),
-		("Redo", "Redo the last undone edit when available."),
-		("Cut", "Cut the selected text, cells, cases, variables, or output object."),
-		("Copy", "Copy the selected text, cells, cases, variables, or output object."),
-		("Paste", "Paste clipboard content into the active editor or dialog target."),
-		("Paste Variables", "Paste copied variable definitions into Variable View."),
-		("Clear", "Delete the selected content or clear selected output objects."),
-		("Insert Variable", "Insert a new variable in Variable View or Data View."),
-		("Insert Cases", "Insert new cases in Data View."),
-		("Find", "Find text, values, variable names, or output content."),
-		("Find Next", "Move to the next match."),
-		("Replace", "Find and replace text or values where supported."),
-		("Go to Case", "Move to a case number in Data View."),
-		("Go to Variable", "Move to a variable by name or position."),
-		("Options", "Open SPSS options. For output tables, check Output and Screen Reader Accessibility."),
-	),
-	"View": (
-		("Status Bar", "Show or hide status information."),
-		("Toolbars", "Show, hide, or customize SPSS toolbars."),
-		("Fonts", "Change display fonts where supported."),
-		("Grid Lines", "Show or hide grid lines in data and table views."),
-		("Value Labels", "Toggle between raw coded values and human-readable value labels."),
-		("Variables", "Open variable information when available."),
-		("Data View", "Switch the Data Editor to case-by-variable data cells."),
-		("Variable View", "Switch the Data Editor to variable definitions and properties."),
-		("Overview", "Switch to the Data Editor overview when available."),
-		("Customize Variable View", "Choose which Variable View properties are visible."),
-	),
-	"Data": (
-		("Define Variable Properties", "Review and define labels, value labels, missing values, and measurement properties."),
-		("Copy Data Properties", "Copy dictionary properties from one dataset or variable set to another."),
-		("New Custom Attribute", "Create custom metadata attributes for variables."),
-		("Define Dates", "Describe date/time structure for time series data."),
-		("Define Multiple Response Sets", "Define sets of variables that represent multiple-response survey questions."),
-		("Validation", "Check data rules, invalid values, and suspicious cases."),
-		("Identify Duplicate Cases", "Find duplicate case identifiers."),
-		("Identify Unusual Cases", "Find cases with unusual patterns or outliers."),
-		("Sort Cases", "Sort rows by one or more variables."),
-		("Sort Variables", "Sort variables by name, type, or dictionary properties."),
-		("Transpose", "Turn cases into variables or variables into cases."),
-		("Restructure", "Reshape data between wide and long formats."),
-		("Merge Files", "Add cases or add variables from another dataset."),
-		("Add Cases", "Append rows from another dataset."),
-		("Add Variables", "Join columns from another dataset."),
-		("Aggregate", "Create grouped summaries such as means, counts, or sums."),
-		("Orthogonal Design", "Create or display orthogonal designs for conjoint workflows."),
-		("Copy Dataset", "Create a copy of the active dataset."),
-		("Split File", "Run output separately by group variables."),
-		("Select Cases", "Filter, sample, or restrict cases used by analyses."),
-		("Weight Cases", "Use a frequency or weight variable in analyses."),
-	),
-	"Transform": (
-		("Compute Variable", "Create or replace a variable using a numeric or string expression."),
-		("Count Values within Cases", "Count how many selected variables contain specified values for each case."),
-		("Shift Values", "Shift values between cases for time or sequence workflows."),
-		("Recode into Same Variables", "Replace values in existing variables."),
-		("Recode into Different Variables", "Create new recoded variables while preserving the originals."),
-		("Automatic Recode", "Convert string or numeric categories into consecutive numeric codes."),
-		("Visual Binning", "Create categorical bins from scale variables using an interactive dialog."),
-		("Optimal Binning", "Create supervised bins based on a guide variable."),
-		("Rank Cases", "Create rank, percentile, normal score, or similar ranking variables."),
-		("Date and Time Wizard", "Create or transform date and time variables."),
-		("Create Time Series", "Create lag, lead, difference, moving average, or related time series variables."),
-		("Replace Missing Values", "Create variables with missing values replaced by selected methods."),
-		("Random Number Generators", "Set random generator settings and seeds."),
-		("Run Pending Transformations", "Force pending transformations to execute immediately."),
-	),
-	"Analyze": (
-		("Reports", "Create case summaries, report summaries, and OLAP cubes."),
-		("Descriptive Statistics", "Open Frequencies, Descriptives, Explore, Crosstabs, Ratio, P-P Plots, and Q-Q Plots."),
-		("Frequencies", "Count values and percentages, usually for categorical or discrete variables."),
-		("Descriptives", "Report mean, standard deviation, minimum, maximum, and standardized values."),
-		("Explore", "Inspect distributions, outliers, confidence intervals, and group summaries."),
-		("Crosstabs", "Create contingency tables with counts, percentages, chi-square, and association measures."),
-		("Compare Means", "Run Means, one-sample, independent-samples, paired-samples, and one-way ANOVA procedures."),
-		("Means", "Compare descriptive statistics across groups."),
-		("One-Sample T Test", "Compare a sample mean to a test value."),
-		("Independent-Samples T Test", "Compare means between two independent groups."),
-		("Paired-Samples T Test", "Compare paired measurements within cases."),
-		("One-Way ANOVA", "Compare means across more than two groups."),
-		("General Linear Model", "Run univariate, multivariate, repeated-measures, and variance components models."),
-		("Mixed Models", "Run linear or generalized mixed models."),
-		("Correlate", "Run bivariate correlations, partial correlations, and distance measures."),
-		("Bivariate", "Compute Pearson, Spearman, or Kendall correlations."),
-		("Partial", "Compute correlations while controlling for other variables."),
-		("Regression", "Run linear, curve estimation, logistic, probit, nonlinear, and related regression procedures."),
-		("Linear", "Run linear regression with one scale dependent variable."),
-		("Binary Logistic", "Run logistic regression for a binary outcome."),
-		("Multinomial Logistic", "Run logistic regression for a nominal outcome with more than two categories."),
-		("Ordinal", "Run regression for an ordered categorical outcome."),
-		("Curve Estimation", "Fit curve models across one predictor."),
-		("Classify", "Run clustering, discriminant, nearest neighbor, decision tree, or related classification procedures."),
-		("Data Reduction", "Run factor analysis, correspondence analysis, or related dimension-reduction procedures."),
-		("Scale", "Run reliability analysis and multidimensional scaling procedures."),
-		("Reliability Analysis", "Estimate scale reliability such as Cronbach's alpha."),
-		("Nonparametric Tests", "Run tests that do not require normal distribution assumptions."),
-		("Forecasting", "Run time series modeling and forecasting procedures."),
-		("Survival", "Run life tables, Kaplan-Meier, and Cox regression procedures."),
-		("Multiple Response", "Analyze multiple-response sets."),
-		("Missing Value Analysis", "Analyze patterns of missing values."),
-		("Multiple Imputation", "Impute missing values and pool analysis results."),
-		("Complex Samples", "Analyze data from complex survey designs."),
-		("ROC Curve", "Evaluate diagnostic or classification performance."),
-		("Power Analysis", "Estimate sample size or statistical power."),
-	),
-	"Graphs": (
-		("Chart Builder", "Create charts using gallery types, variables, and canvas drop zones."),
-		("Graphboard Template Chooser", "Create graphs from Graphboard templates."),
-		("Legacy Dialogs", "Open older chart dialogs such as Bar, Line, Area, Pie, Boxplot, Error Bar, Scatter, and Histogram."),
-		("Bar", "Create bar charts."),
-		("3-D Bar", "Create three-dimensional bar charts."),
-		("Line", "Create line charts."),
-		("Area", "Create area charts."),
-		("Pie", "Create pie charts."),
-		("High-Low", "Create high-low-close style charts."),
-		("Boxplot", "Create boxplots for distributions and outliers."),
-		("Error Bar", "Create charts with confidence intervals or standard errors."),
-		("Population Pyramid", "Create back-to-back histograms for population structures."),
-		("Scatter/Dot", "Create scatterplots or dot plots."),
-		("Histogram", "Create histograms."),
-	),
-	"Utilities": (
-		("Variables", "Show variable dictionary information in a readable dialog."),
-		("File Information", "Show file and dictionary information for the active dataset."),
-		("Define Variable Sets", "Create named sets of variables for easier dialogs and navigation."),
-		("Use Variable Sets", "Limit visible variables to selected variable sets."),
-		("Run Script", "Run an SPSS script."),
-		("Custom Dialogs", "Create, install, or manage custom dialogs."),
-		("Extension Bundles", "Install or manage extension bundles."),
-		("OMS Control Panel", "Control Output Management System routing when available."),
-	),
-	"Extensions": (
-		("Extension Hub", "Find, install, or manage SPSS extensions."),
-		("Extension Dialog Builder", "Build custom extension dialogs."),
-		("Python", "Run or manage Python-based extension commands when installed."),
-		("R", "Run or manage R-based extension commands when installed."),
-	),
-	"Add-ons": (
-		("Extension Hub", "Find, install, or manage SPSS extensions and add-ons."),
-		("Custom Dialogs", "Install or manage custom dialogs."),
-	),
-	"Run": (
-		("All", "Run all syntax in the active Syntax Editor."),
-		("Selection", "Run selected syntax."),
-		("Current", "Run the command containing the cursor."),
-		("To End", "Run from the cursor to the end of the syntax file."),
-		("To Cursor", "Run commands up to the cursor."),
-	),
-	"Insert": (
-		("New Heading", "Insert a heading in the Output Viewer outline."),
-		("Title", "Insert an output title."),
-		("Text", "Insert a text block in output."),
-		("Page Break", "Insert a page break in output."),
-		("Chart", "Insert or create a chart object where supported."),
-		("Table", "Insert or create a table object where supported."),
-	),
-	"Format": (
-		("TableLooks", "Apply or edit table appearance for pivot tables."),
-		("Cell Properties", "Change selected pivot table cell formatting."),
-		("Font", "Change font formatting where supported."),
-		("Alignment", "Change alignment for selected output objects or table cells."),
-		("Pivot Table", "Open formatting commands for selected pivot tables."),
-	),
-	"Window": (
-		("Minimize", "Minimize the active SPSS window."),
-		("Split", "Arrange or split visible windows when supported."),
-		("Data Editor", "Switch to an open Data Editor window."),
-		("Output Viewer", "Switch to an open Output Viewer window."),
-		("Syntax Editor", "Switch to an open Syntax Editor window."),
-		("Workbook", "Switch to an open Workbook window."),
-	),
-	"Help": (
-		("Topics", "Open SPSS help topics."),
-		("Tutorial", "Open SPSS tutorials."),
-		("Case Studies", "Open statistical case studies."),
-		("Command Syntax Reference", "Open syntax command reference documentation."),
-		("Accessibility", "Open accessibility help when available."),
-		("Check for Updates", "Check for product updates."),
-		("About", "Show product version and license information."),
-	),
-}
-
-MENU_ALIASES = {
-	"new data": "New",
-	"new syntax": "New",
-	"new output": "New",
-	"read text data": "Read Text Data",
-	"database wizard": "Open Database",
-	"save as": "Save As",
-	"display data file information": "Display Data File Information",
-	"insert variable": "Insert Variable",
-	"insert cases": "Insert Cases",
-	"go to case": "Go to Case",
-	"go to variable": "Go to Variable",
-	"value labels": "Value Labels",
-	"define variable properties": "Define Variable Properties",
-	"copy data properties": "Copy Data Properties",
-	"define multiple response sets": "Define Multiple Response Sets",
-	"identify duplicate cases": "Identify Duplicate Cases",
-	"identify unusual cases": "Identify Unusual Cases",
-	"sort cases": "Sort Cases",
-	"sort variables": "Sort Variables",
-	"merge files": "Merge Files",
-	"add cases": "Add Cases",
-	"add variables": "Add Variables",
-	"split file": "Split File",
-	"select cases": "Select Cases",
-	"weight cases": "Weight Cases",
-	"compute variable": "Compute Variable",
-	"recode into same variables": "Recode into Same Variables",
-	"recode into different variables": "Recode into Different Variables",
-	"automatic recode": "Automatic Recode",
-	"visual binning": "Visual Binning",
-	"rank cases": "Rank Cases",
-	"replace missing values": "Replace Missing Values",
-	"chart builder": "Chart Builder",
-	"graphboard template chooser": "Graphboard Template Chooser",
-	"legacy dialogs": "Legacy Dialogs",
-	"extension hub": "Extension Hub",
-	"command syntax reference": "Command Syntax Reference",
-}
-
-VARIABLE_COLUMNS = (
-	"Name", "Type", "Width", "Decimals", "Label", "Values", "Missing",
-	"Columns", "Align", "Measure", "Role",
-)
-
-VARIABLE_COLUMN_TOKENS = {
-	"Name": ("name", "όνομα"),
-	"Type": ("type", "τύπος"),
-	"Width": ("width", "πλάτος"),
-	"Decimals": ("decimals", "δεκαδικά"),
-	"Label": ("label", "ετικέτα"),
-	"Values": ("values", "τιμές"),
-	"Missing": ("missing", "ελλείπουσες", "ελλείπουσες τιμές"),
-	"Columns": ("columns", "στήλες"),
-	"Align": ("align", "στοίχιση"),
-	"Measure": ("measure", "μέτρο"),
-	"Role": ("role", "ρόλος"),
-}
-
-VARIABLE_COLUMN_LABELS = {
-	"Name": _("Name"),
-	"Type": _("Type"),
-	"Width": _("Width"),
-	"Decimals": _("Decimals"),
-	"Label": _("Label"),
-	"Values": _("Values"),
-	"Missing": _("Missing"),
-	"Columns": _("Columns"),
-	"Align": _("Align"),
-	"Measure": _("Measure"),
-	"Role": _("Role"),
-}
-
-VARIABLE_PROPERTY_HINTS = {
-	"Type": _("Press Space to open the Variable Type dialog."),
-	"Values": _("Press Space to edit value labels for this variable."),
-	"Missing": _("Press Space to define missing values for this variable."),
-	"Measure": _("Use this property to mark the variable as nominal, ordinal, or scale."),
-	"Role": _("Use this property to mark how the variable is used in procedures, such as input or target."),
-}
-
-VARIABLE_PROPERTY_CONTROL_TYPES = {
-	"Name": _("Text box"),
-	"Type": _("Button"),
-	"Width": _("Text box"),
-	"Decimals": _("Text box"),
-	"Label": _("Text box"),
-	"Values": _("Button"),
-	"Missing": _("Button"),
-	"Columns": _("Text box"),
-	"Align": _("Dropdown menu"),
-	"Measure": _("Dropdown menu"),
-	"Role": _("Dropdown menu"),
-}
-
-CONTROL_LABELS = {
-	"ok": _("OK"),
-	"cancel": _("Cancel"),
-	"apply": _("Apply"),
-	"close": _("Close"),
-	"continue": _("Continue"),
-	"reset": _("Reset"),
-	"paste": _("Paste syntax"),
-	"paste syntax": _("Paste syntax"),
-	"run": _("Run command"),
-	"run selection": _("Run selection"),
-	"run current": _("Run current command"),
-	"open": _("Open"),
-	"save": _("Save"),
-	"print": _("Print"),
-	"browse": _("Browse"),
-	"options": _("Options"),
-	"spelling": _("Spelling"),
-	"statistics": _("Statistics"),
-	"charts": _("Charts"),
-	"plots": _("Plots"),
-	"posthoc": _("Post Hoc"),
-	"post hoc": _("Post Hoc"),
-	"contrasts": _("Contrasts"),
-	"bootstrap": _("Bootstrap"),
-	"exact": _("Exact tests"),
-	"style": _("Style"),
-	"format": _("Format"),
-	"overview": _("Overview"),
-	"over view": _("Overview"),
-	"data view": _("Data View"),
-	"προβολή δεδομένων": _("Data View"),
-	"variable view": _("Variable View"),
-	"προβολή μεταβλητών": _("Variable View"),
-	"output": _("Output Viewer"),
-	"αποτελέσματα": _("Output Viewer"),
-	"syntax": _("Syntax Editor"),
-	"σύνταξη": _("Syntax Editor"),
-	"chart builder": _("Chart Builder"),
-	"gallery": _("Gallery"),
-	"basic elements": _("Basic Elements"),
-	"groups/point id": _("Groups or Point ID"),
-	"groups point id": _("Groups or Point ID"),
-	"titles/footnotes": _("Titles or Footnotes"),
-	"titles footnotes": _("Titles or Footnotes"),
-	"choose from": _("Choose from chart types"),
-	"chart preview": _("Chart preview canvas"),
-	"canvas": _("Chart canvas"),
-	"drop zone": _("Drop zone"),
-	"drop zones": _("Drop zones"),
-	"element properties": _("Element Properties"),
-	"categories": _("Categories"),
-	"source variable list": _("Source variable list"),
-	"variables list": _("Variables list"),
-	"variables": _("Variables"),
-	"variable type": _("Variable Type"),
-	"variable": _("Variable"),
-	"dependent": _("Dependent variable"),
-	"independent": _("Independent variable"),
-	"covariates": _("Covariates"),
-	"factor": _("Factor"),
-	"value labels": _("Value labels"),
-	"missing values": _("Missing Values"),
-	"discrete missing values": _("Discrete missing values"),
-	"no missing values": _("No missing values"),
-	"range plus one optional discrete missing value": _("Range plus one optional discrete missing value"),
-	"label": _("Label"),
-	"labels": _("Labels"),
-	"add": _("Add"),
-	"change": _("Change"),
-	"remove": _("Remove"),
-	"read excel": _("Read Excel File"),
-	"text import wizard": _("Text Import Wizard"),
-	"database wizard": _("Database Wizard"),
-	"select cases": _("Select Cases"),
-	"split file": _("Split File"),
-	"weight cases": _("Weight Cases"),
-	"define variable properties": _("Define Variable Properties"),
-	"copy data properties": _("Copy Data Properties"),
-	"frequencies": _("Frequencies"),
-	"descriptives": _("Descriptives"),
-	"crosstabs": _("Crosstabs"),
-	"compare means": _("Compare Means"),
-	"correlations": _("Correlations"),
-	"regression": _("Regression"),
-	"extension hub": _("Extension Hub"),
-}
-
-DIALOG_HELP = {
-	"frequencies": _(
-		"Frequencies dialog. Choose one or more source variables, move them to the Variables target list, then use Statistics, Charts, Format, OK, or Paste. Use Paste when you want reproducible syntax."
-	),
-	"descriptives": _(
-		"Descriptives dialog. Choose scale variables, move them to the Variables target list, then use Options for mean, standard deviation, minimum, maximum, and related statistics."
-	),
-	"crosstabs": _(
-		"Crosstabs dialog. Move categorical variables to Row and Column target lists. Use Statistics for chi-square and measures, Cells for counts and percentages, then OK or Paste."
-	),
-	"regression": _(
-		"Regression dialog. Move the outcome to Dependent and predictors to Independent variables. Use Statistics, Plots, Save, Options, OK, or Paste."
-	),
-	"linear regression": _(
-		"Linear Regression dialog. Move the outcome to Dependent and predictors to Independent variables. Use Statistics, Plots, Save, Options, OK, or Paste."
-	),
-	"explore": _(
-		"Explore dialog. Move scale variables to Dependent List and grouping variables to Factor List. Use Statistics, Plots, Options, OK, or Paste."
-	),
-	"nonparametric": _(
-		"Nonparametric Tests dialog. Choose test fields and settings, then review model or test options before OK or Paste."
-	),
-	"custom tables": _(
-		"Custom Tables dialog. Use source variables and the canvas row, column, and layer areas. Copy variables from the source list and paste them into the canvas or use Shift+F10 for context commands."
-	),
-	"compute variable": _(
-		"Compute Variable dialog. Enter the target variable, build a numeric expression from variables and functions, then choose OK or Paste."
-	),
-	"recode into same variables": _(
-		"Recode into Same Variables dialog. Select variables, define old and new values, and consider Paste so the transformation is documented."
-	),
-	"recode into different variables": _(
-		"Recode into Different Variables dialog. Select input variables, define output variable names and labels, set old and new values, then OK or Paste."
-	),
-	"select cases": _(
-		"Select Cases dialog. Choose whether all cases, cases satisfying a condition, a random sample, a time range, or filtered cases are used. Review the output option before OK or Paste."
-	),
-	"split file": _(
-		"Split File dialog. Choose whether output is analyzed together or by groups, then move grouping variables into the Groups Based on list."
-	),
-	"weight cases": _(
-		"Weight Cases dialog. Choose Do not weight cases or Weight cases by, then move a numeric frequency or weight variable to the Frequency Variable field."
-	),
-	"value labels": _(
-		"Value Labels dialog. Enter a data value and its label, choose Add, Change, or Remove, then OK. This is used for categorical code labels such as 0 equals No and 1 equals Yes."
-	),
-	"missing values": _(
-		"Missing Values dialog. Choose no missing values, discrete missing values, or a range plus one optional discrete value, then enter the missing-value definitions."
-	),
-	"variable type": _(
-		"Variable Type dialog. Choose Numeric, Comma, Dot, Scientific notation, Date, Dollar, Custom Currency, or String. Review width and decimals when available."
-	),
-	"read excel": _(
-		"Read Excel File dialog. Confirm the worksheet, variable-name row, cell range, and import settings before OK."
-	),
-	"text import wizard": _(
-		"Text Import Wizard. Move through the wizard steps to define delimiters or fixed widths, variable names, data formats, and import range."
-	),
-	"database wizard": _(
-		"Database Wizard. Choose the data source, select tables and fields, define joins or filters, and review variable definitions before import."
-	),
-	"chart builder": PANE_HELP["chartbuilder"],
-}
-
-STATISTICS_GLOSSARY = (
-	_("Frequencies: Συχνότητες. Counts values and percentages for categorical or discrete variables."),
-	_("Descriptives: Περιγραφικά στατιστικά. Reports mean, standard deviation, minimum, maximum, and similar summaries."),
-	_("Crosstabs: Πίνακες συνάφειας. Compares categories of two or more variables in a contingency table."),
-	_("Regression: Παλινδρόμηση. Models an outcome variable from one or more predictors."),
-	_("Correlations: Συσχετίσεις. Measures association between variables."),
-	_("Compare Means: Σύγκριση μέσων. Compares averages across groups."),
-	_("Explore: Διερεύνηση. Reviews distributions, outliers, and group summaries."),
-	_("Nonparametric Tests: Μη παραμετρικοί έλεγχοι. Runs tests that do not assume normal distributions."),
-	_("Value Labels: Ετικέτες τιμών. Human-readable labels for coded values."),
-	_("Missing Values: Ελλείπουσες τιμές. User-defined values that SPSS treats as missing."),
-)
 
 
 def _safe_get(obj, attr, default=None):
@@ -795,7 +265,19 @@ def _clean(value):
 
 
 def _norm(value):
-	return _clean(value).lower()
+	"""Normalise SPSS text for matching: clean, strip accents, lower-case.
+
+	Accent stripping matters for Greek: NVDA reports Greek SPSS text with its
+	normal tonos accents (for example "Επισκόπηση"), while the token lists in
+	``_spssdata`` are written without accents so a single token list matches
+	every accented form. See ``_spssdata.core.stripAccents``.
+	"""
+	return kb.core.stripAccents(_clean(value)).lower()
+
+
+def _containsGreek(value):
+	"""Return whether text contains a Greek or Greek Extended character."""
+	return re.search(r"[\u0370-\u03ff\u1f00-\u1fff]", _safe_str(value)) is not None
 
 
 def _contains_token(text, token):
@@ -836,6 +318,14 @@ def _role_name(obj):
 		return _safe_str(role)
 
 
+# Unaccented Greek words that only appear on a genuinely Greek-localized SPSS
+# menu bar, used to auto-detect which language SPSS itself is running in.
+SPSS_GREEK_MENU_TOKENS = (
+	u"αρχειο", u"επεξεργασια", u"προβολη", u"δεδομενα", u"μετασχηματισμος",
+	u"αναλυση", u"γραφηματα", u"βοηθεια", u"προσθετα", u"παραθυρο", u"μορφοποιηση",
+)
+
+
 class AppModule(appModuleHandler.AppModule):
 	"""NVDA app module for IBM SPSS Statistics."""
 
@@ -847,11 +337,92 @@ class AppModule(appModuleHandler.AppModule):
 		self._verboseHelp = True
 		self._announceTableMovement = False
 		self._headerCache = {}
-		log.info("IBM SPSS Statistics accessibility app module 1.1.1 loaded")
+		self._dialogEntryCache = {}
+		self._languageCache = {}
+		self._lastDetectedLanguage = None
+		log.info("IBM SPSS Statistics accessibility app module 1.2.0 loaded")
 
 	def terminate(self):
 		log.info("IBM SPSS Statistics accessibility app module unloaded")
 		super().terminate()
+
+	# ------------------------------------------------------------------
+	# Spoken-language resolution for SPSS content (menus, dialogs, panes,
+	# variable columns, output kinds, glossary). Independent from NVDA's own
+	# interface language, which continues to drive the add-on's own voice
+	# through the normal gettext ``_()`` calls used throughout this file.
+	# ------------------------------------------------------------------
+
+	def _configLanguageOverride(self):
+		if config is None:
+			return "auto"
+		try:
+			value = config.conf["spssAccessibility"]["language"]
+		except Exception:
+			return "auto"
+		return value if value in ("auto", kb.LANG_EN, kb.LANG_EL) else "auto"
+
+	def _setConfigLanguageOverride(self, value):
+		if config is None:
+			return
+		try:
+			config.conf["spssAccessibility"]["language"] = value
+		except Exception as e:
+			log.debugWarning("Could not persist SPSS Accessibility language setting: %s" % e)
+
+	def _detectSpssLanguage(self):
+		root = self._rootObject()
+		cacheKey = id(root) if root is not None else None
+		cached = self._languageCache
+		if cacheKey is not None and cached.get("key") == cacheKey:
+			return cached["lang"]
+		lang = self._lastDetectedLanguage or kb.LANG_EN
+		try:
+			hits = 0
+			scanned = 0
+			for obj in self._iterObjects(root, maxObjects=260):
+				if _safe_get(obj, "role") not in (ROLE_MENUBAR, ROLE_MENU, ROLE_MENUITEM):
+					continue
+				text = _norm(_safe_get(obj, "name"))
+				if not text:
+					continue
+				scanned += 1
+				if any(token in text for token in SPSS_GREEK_MENU_TOKENS):
+					hits += 1
+				if scanned >= 24:
+					break
+			if hits >= 2:
+				lang = kb.LANG_EL
+				self._lastDetectedLanguage = lang
+			elif scanned >= 2:
+				lang = kb.LANG_EN
+				self._lastDetectedLanguage = lang
+			else:
+				# Modal dialogs usually have no menu bar. Preserve the language
+				# established by the parent SPSS window; if no window has been seen
+				# yet, use Greek text in the dialog itself as positive evidence.
+				greekObjects = 0
+				for obj in self._iterObjects(root, maxObjects=80):
+					if any(_containsGreek(_safe_get(obj, attr)) for attr in ("name", "description", "value")):
+						greekObjects += 1
+						if greekObjects >= 2:
+							lang = kb.LANG_EL
+							self._lastDetectedLanguage = lang
+							break
+		except Exception as e:
+			log.debugWarning("SPSS language detection failed: %s" % e)
+		self._languageCache = {"key": cacheKey, "lang": lang}
+		return lang
+
+	def _resolveLanguage(self):
+		override = self._configLanguageOverride()
+		if override in (kb.LANG_EN, kb.LANG_EL):
+			return override
+		return self._detectSpssLanguage()
+
+	# ------------------------------------------------------------------
+	# Object labeling and description
+	# ------------------------------------------------------------------
 
 	def event_NVDAObject_init(self, obj):
 		"""Give unlabeled SPSS controls useful fallback names where possible."""
@@ -891,20 +462,38 @@ class AppModule(appModuleHandler.AppModule):
 		return ""
 
 	def _describeControl(self, obj):
-		controlType = self._controlTypeLabel(obj)
-		if not controlType:
-			return ""
+		lang = self._resolveLanguage()
 		name = _clean(_safe_get(obj, "name")) or self._labelForControl(obj)
+		dialogEntry, dialogObj = self._currentDialogEntry(obj)
+		fieldEntry = None
+		if dialogEntry and name and dialogObj is not None:
+			fieldEntry, _path = kb.findDialogControl(name, parents=(dialogEntry["en"],))
+		controlType = self._controlTypeLabel(obj)
 		value = _clean(_safe_get(obj, "value")) or _clean(_safe_get(obj, "displayText"))
-		parts = [controlType]
-		if name:
-			parts.append(name)
+		parts = []
+		if fieldEntry:
+			parts.append(kb.label(fieldEntry, lang))
+			kindText = kb.kindLabel(fieldEntry.get("kind"), lang)
+			parts.append(kindText or controlType)
+		else:
+			if controlType:
+				parts.append(controlType)
+			if name:
+				parts.append(name)
 		if value and _norm(value) != _norm(name):
 			parts.append(_("Current value {value}").format(value=value))
-		hint = self._controlActionHint(obj)
-		if hint:
-			parts.append(hint)
-		return ". ".join(parts)
+		if fieldEntry:
+			desc = kb.describe(fieldEntry, lang)
+			if desc:
+				parts.append(desc)
+			action = kb.kindAction(fieldEntry.get("kind"), lang)
+			if action:
+				parts.append(action)
+		else:
+			hint = self._controlActionHint(obj)
+			if hint:
+				parts.append(hint)
+		return kb.joinParts(parts)
 
 	def event_gainFocus(self, obj, nextHandler):
 		nextHandler()
@@ -935,6 +524,10 @@ class AppModule(appModuleHandler.AppModule):
 				ui.message(self._paneHelp(pane))
 		except Exception as e:
 			log.debugWarning("SPSS focus announcement failed: %s" % e)
+
+	# ------------------------------------------------------------------
+	# Scripts: navigation
+	# ------------------------------------------------------------------
 
 	@script(
 		description=_("Move to the SPSS Output Viewer or describe how to use it"),
@@ -989,6 +582,10 @@ class AppModule(appModuleHandler.AppModule):
 			return
 		ui.message(self._paneHelp("chartbuilder"))
 
+	# ------------------------------------------------------------------
+	# Scripts: orientation and description
+	# ------------------------------------------------------------------
+
 	@script(
 		description=_("Describe the current SPSS pane"),
 		gesture="kb:NVDA+control+alt+shift+p",
@@ -1006,8 +603,8 @@ class AppModule(appModuleHandler.AppModule):
 	)
 	def script_describeMenus(self, gesture):
 		pane = self._detectPaneFromObject(api.getFocusObject()) or self._lastPane
-		context = MENU_CONTEXT_DESCRIPTIONS.get(pane)
-		message = " ".join(part for part in (context, self._fullMenuMapDescription()) if part)
+		context = self._menuContextHelp(pane)
+		message = " ".join(part for part in (context, self._topLevelMenuSummary()) if part)
 		ui.message(message)
 
 	@script(
@@ -1015,16 +612,8 @@ class AppModule(appModuleHandler.AppModule):
 		gesture="kb:NVDA+control+alt+shift+e",
 	)
 	def script_describeOutputAccessibility(self, gesture):
-		ui.message(
-			_(
-				"SPSS output accessibility. Pivot tables and text output are usually readable. "
-				"Charts, tree diagrams, and model views are usually not screen-reader accessible. "
-				"For pivot tables, choose Edit, Options, Output, then Screen Reader Accessibility "
-				"to control whether full row and column labels are read. For inaccessible charts "
-				"or models, export output with File, Export to Word, PDF, Excel, HTML, text, or "
-				"an image format, or use syntax and OMS to capture results as data or text."
-			)
-		)
+		lang = self._resolveLanguage()
+		ui.message(kb.pick(kb.panes.OUTPUT_ACCESSIBILITY_HELP, lang))
 
 	@script(
 		description=_("Describe where you are in SPSS and what is available"),
@@ -1041,11 +630,27 @@ class AppModule(appModuleHandler.AppModule):
 		ui.message(self._focusedMenuItemDescription(api.getFocusObject()) or _("No SPSS menu path is available at the current focus."))
 
 	@script(
+		description=_("List the items in the current SPSS menu or submenu"),
+		gesture="kb:NVDA+control+alt+shift+q",
+	)
+	def script_listMenuItems(self, gesture):
+		message = self._currentMenuItemsSummary(api.getFocusObject())
+		ui.message(message or _("No open SPSS menu or submenu was found at the current focus."))
+
+	@script(
 		description=_("Describe the current SPSS dialog"),
 		gesture="kb:NVDA+control+alt+shift+i",
 	)
 	def script_describeCurrentDialog(self, gesture):
 		ui.message(self._dialogHelp(api.getFocusObject()) or _("No SPSS dialog help is available at the current focus."))
+
+	@script(
+		description=_("Read every field and button in the current SPSS dialog"),
+		gesture="kb:NVDA+control+alt+shift+k",
+	)
+	def script_describeDialogStructure(self, gesture):
+		message = self._dialogStructureSummary(api.getFocusObject())
+		ui.message(message or _("No SPSS dialog was found at the current focus."))
 
 	@script(
 		description=_("Summarize SPSS dialog variable lists"),
@@ -1117,7 +722,14 @@ class AppModule(appModuleHandler.AppModule):
 		gesture="kb:NVDA+control+alt+shift+f",
 	)
 	def script_readStatisticsGlossary(self, gesture):
-		ui.message(" ".join(STATISTICS_GLOSSARY))
+		lines = []
+		for entry in kb.terms.GLOSSARY:
+			en = kb.label(entry, kb.LANG_EN)
+			el = kb.label(entry, kb.LANG_EL)
+			enDesc = kb.describe(entry, kb.LANG_EN)
+			elDesc = kb.describe(entry, kb.LANG_EL)
+			lines.append(_("{en} ({el}): {enDesc} {elDesc}").format(en=en, el=el, enDesc=enDesc, elDesc=elDesc))
+		ui.message(" ".join(lines))
 
 	@script(
 		description=_("Read the current SPSS tab and table context"),
@@ -1157,6 +769,26 @@ class AppModule(appModuleHandler.AppModule):
 		ui.message(message or _("No SPSS variable definition information is available at the current focus."))
 
 	@script(
+		description=_("Cycle the spoken language for SPSS content between automatic, English, and Greek"),
+		gesture="kb:NVDA+control+alt+shift+j",
+	)
+	def script_cycleSpokenLanguage(self, gesture):
+		order = ("auto", kb.LANG_EN, kb.LANG_EL)
+		current = self._configLanguageOverride()
+		try:
+			nextValue = order[(order.index(current) + 1) % len(order)]
+		except ValueError:
+			nextValue = "auto"
+		self._setConfigLanguageOverride(nextValue)
+		self._languageCache = {}
+		messages = {
+			"auto": _("SPSS content language set to automatic, following the SPSS interface language."),
+			kb.LANG_EN: _("SPSS content language set to English."),
+			kb.LANG_EL: _("SPSS content language set to Greek."),
+		}
+		ui.message(messages[nextValue])
+
+	@script(
 		description=_("List SPSS accessibility add-on shortcuts"),
 		gesture="kb:NVDA+control+alt+shift+h",
 	)
@@ -1175,7 +807,9 @@ class AppModule(appModuleHandler.AppModule):
 			_("NVDA+Control+Alt+Shift+D: read current data cell."),
 			_("NVDA+Control+Alt+Shift+V: read current variable definition."),
 			_("NVDA+Control+Alt+Shift+N: read current menu path."),
+			_("NVDA+Control+Alt+Shift+Q: list items in the current menu or submenu."),
 			_("NVDA+Control+Alt+Shift+I: describe current dialog."),
+			_("NVDA+Control+Alt+Shift+K: read every field and button in the current dialog."),
 			_("NVDA+Control+Alt+Shift+L: summarize dialog variable lists."),
 			_("NVDA+Control+Alt+Shift+T: read table summary."),
 			_("NVDA+Control+Alt+Shift+R: read all properties for current variable."),
@@ -1187,6 +821,7 @@ class AppModule(appModuleHandler.AppModule):
 			_("NVDA+Control+Alt+Shift+P: describe current pane."),
 			_("NVDA+Control+Alt+Shift+M: describe SPSS menus."),
 			_("NVDA+Control+Alt+Shift+E: describe output accessibility and export options."),
+			_("NVDA+Control+Alt+Shift+J: cycle spoken language for SPSS content."),
 			_("NVDA+Control+Alt+Shift+B: toggle beginner or concise SPSS guidance."),
 			_("NVDA+Control+Alt+Shift+A: toggle automatic table cell announcements."),
 			_("NVDA+Control+Alt+Shift+G: log the current SPSS accessibility object for troubleshooting."),
@@ -1226,6 +861,10 @@ class AppModule(appModuleHandler.AppModule):
 		log.info("SPSS accessibility object report:\n%s" % report)
 		ui.message(_("Current SPSS accessibility object was written to the NVDA log."))
 
+	# ------------------------------------------------------------------
+	# Where am I
+	# ------------------------------------------------------------------
+
 	def _whereAmI(self):
 		obj = api.getFocusObject()
 		if not obj:
@@ -1237,7 +876,7 @@ class AppModule(appModuleHandler.AppModule):
 			parts.append(_("Window {name}").format(name=windowName))
 		pane = self._detectPaneFromObject(obj) or self._lastPane
 		if pane:
-			parts.append(_("Pane {pane}").format(pane=PANE_DEFINITIONS[pane]["name"]))
+			parts.append(_("Pane {pane}").format(pane=self._paneName(pane)))
 		tab = self._describeTab()
 		if tab:
 			parts.append(tab)
@@ -1273,20 +912,27 @@ class AppModule(appModuleHandler.AppModule):
 					self._headerText(obj, ("columnHeaderText", "columnHeaderTexts")),
 					self._numericAttr(obj, ("columnNumber", "column")),
 				)
-				return VARIABLE_PROPERTY_HINTS.get(propertyKey, _("Use arrow keys to move in the table."))
+				if propertyKey:
+					lang = self._resolveLanguage()
+					hint = kb.pick(kb.panes.VARIABLE_COLUMN_HELP.get(propertyKey, ()), lang)
+					if hint:
+						return hint
+				return _("Use arrow keys to move in the table.")
 			return _("Use arrow keys to move in the table.")
 		if "drop zone" in text:
 			return _("Paste a copied variable here with Control+V, or open context commands with Shift+F10.")
 		return ""
 
+	# ------------------------------------------------------------------
+	# Menus
+	# ------------------------------------------------------------------
+
+	def _paneName(self, paneKey):
+		lang = self._resolveLanguage()
+		return kb.pick(kb.panes.PANE_NAMES.get(paneKey, (paneKey, paneKey)), lang)
+
 	def _menuPathDescription(self, obj):
-		items = []
-		for candidate in self._ancestors(obj, maxDepth=12):
-			if _safe_get(candidate, "role") in (ROLE_MENUITEM, ROLE_MENU, ROLE_MENUBAR):
-				name = _clean(_safe_get(candidate, "name"))
-				if name:
-					items.append(name)
-		items = list(reversed(items))
+		items = self._menuPathItems(obj)
 		if not items:
 			return ""
 		return _("Menu path: {path}").format(path=" > ".join(items))
@@ -1295,11 +941,19 @@ class AppModule(appModuleHandler.AppModule):
 		path = self._menuPathItems(obj)
 		if not path:
 			return ""
-		helpText = self._menuItemHelp(path)
+		lang = self._resolveLanguage()
+		entry, _kbPath = kb.findMenuItem(path[-1], parents=tuple(path[:-1]))
 		pathText = _("Menu path: {path}").format(path=" > ".join(path))
-		if helpText:
-			return _("{path}. {help}").format(path=pathText, help=helpText)
-		return pathText
+		if not entry:
+			return pathText
+		parts = [pathText]
+		desc = kb.describe(entry, lang)
+		if desc:
+			parts.append(desc)
+		action = kb.kindAction(entry.get("kind"), lang)
+		if action:
+			parts.append(action)
+		return kb.joinParts(parts)
 
 	def _menuPathItems(self, obj):
 		items = []
@@ -1310,83 +964,149 @@ class AppModule(appModuleHandler.AppModule):
 					items.append(name)
 		return list(reversed(items))
 
-	def _menuItemHelp(self, path):
-		if not path:
+	def _currentMenuItemsSummary(self, obj):
+		if not obj:
 			return ""
-		menuName = self._canonicalMenuName(path[0])
-		itemName = self._canonicalMenuItemName(path[-1])
-		if not itemName:
+		role = _safe_get(obj, "role")
+		if role in (ROLE_MENU, ROLE_MENUBAR):
+			container = obj
+			parentPath = self._menuPathItems(obj)
+		elif role == ROLE_MENUITEM:
+			container = _safe_get(obj, "parent")
+			fullPath = self._menuPathItems(obj)
+			parentPath = fullPath[:-1]
+		else:
 			return ""
-		candidates = []
-		if menuName:
-			candidates.extend((menuName,))
-		candidates.extend(menu for menu in SPSS_MENU_MAP if menu not in candidates)
-		for candidateMenu in candidates:
-			for label, description in SPSS_MENU_MAP.get(candidateMenu, ()):
-				if self._sameMenuItem(label, itemName):
-					return _("{item}: {description}").format(item=label, description=description)
-		return ""
+		if not container or _safe_get(container, "role") not in (ROLE_MENU, ROLE_MENUBAR):
+			return ""
+		lang = self._resolveLanguage()
+		items = []
+		for child in self._children(container):
+			if _safe_get(child, "role") not in (ROLE_MENUITEM, ROLE_MENU):
+				continue
+			childName = _clean(_safe_get(child, "name"))
+			if not childName:
+				continue
+			entry, _p = kb.findMenuItem(childName, parents=tuple(parentPath))
+			items.append(kb.label(entry, lang) if entry else childName)
+			if len(items) >= 40:
+				break
+		if not items:
+			return ""
+		containerName = _clean(_safe_get(container, "name")) or (parentPath[-1] if parentPath else _("menu"))
+		return _("{menu} has {count} items: {items}").format(menu=containerName, count=len(items), items=", ".join(items))
 
-	def _canonicalMenuName(self, value):
-		text = _norm(value)
-		for menuName in SPSS_MENU_MAP:
-			if _norm(menuName) == text:
-				return menuName
-		for menuName in SPSS_MENU_MAP:
-			if _norm(menuName) in text or text in _norm(menuName):
-				return menuName
-		return ""
-
-	def _canonicalMenuItemName(self, value):
-		text = _norm(value)
-		text = re.sub(r"\s+", " ", text.replace("&", "")).strip()
-		return MENU_ALIASES.get(text, value)
-
-	def _sameMenuItem(self, left, right):
-		leftNorm = _norm(left)
-		rightNorm = _norm(right)
-		if not leftNorm or not rightNorm:
-			return False
-		if leftNorm == rightNorm:
-			return True
-		if leftNorm in rightNorm or rightNorm in leftNorm:
-			return True
-		alias = MENU_ALIASES.get(rightNorm)
-		return bool(alias and _norm(alias) == leftNorm)
-
-	def _fullMenuMapDescription(self):
-		parts = list(MENU_DESCRIPTIONS)
-		for menuName, items in SPSS_MENU_MAP.items():
-			itemTexts = [_("{item}, {description}").format(item=item, description=description) for item, description in items]
-			parts.append(_("{menu} menu items: {items}").format(menu=menuName, items="; ".join(itemTexts)))
+	def _topLevelMenuSummary(self):
+		lang = self._resolveLanguage()
+		parts = []
+		for entry in kb.menus.MENUS:
+			name = kb.label(entry, lang)
+			desc = kb.describe(entry, lang)
+			parts.append(_("{menu}: {description}").format(menu=name, description=desc) if desc else name)
 		return " ".join(parts)
 
-	def _dialogHelp(self, obj, concise=False):
+	def _menuContextHelp(self, pane):
+		lang = self._resolveLanguage()
+		menuNames = kb.menus.WINDOW_MENUS.get(pane)
+		if not menuNames:
+			return ""
+		labels = []
+		for menuName in menuNames:
+			entry, _p = kb.findMenuItem(menuName)
+			labels.append(kb.label(entry, lang) if entry else menuName)
+		return _("Menus available here: {menus}.").format(menus=", ".join(labels))
+
+	# ------------------------------------------------------------------
+	# Dialogs
+	# ------------------------------------------------------------------
+
+	def _dialogObject(self, obj):
+		root = self._rootObject()
+		for candidate in self._ancestors(obj, maxDepth=16):
+			role = _safe_get(candidate, "role")
+			if role == ROLE_DIALOG:
+				return candidate
+			if role == ROLE_WINDOW:
+				# Nested windows are dialogs. A foreground root window is accepted
+				# only when its title identifies a known SPSS dialog, avoiding the
+				# main Data Editor/Viewer window being treated as a dialog.
+				if candidate is not root or kb.findDialogByTitle(_safe_get(candidate, "name")):
+					return candidate
+			if root is not None and candidate is root:
+				break
+		return None
+
+	def _currentDialogEntry(self, obj):
 		dialog = self._dialogObject(obj)
 		if not dialog:
+			return None, None
+		key = id(dialog)
+		cached = self._dialogEntryCache.get(key)
+		if cached is not None:
+			return cached, dialog
+		textParts = [self._objectSearchText(dialog)]
+		count = 0
+		for child in self._iterObjects(dialog, maxObjects=260):
+			textParts.append(self._objectSearchText(child))
+			count += 1
+			if count >= 260:
+				break
+		entry = kb.findDialogByTokens(
+			" ".join(textParts),
+			titleText=_safe_get(dialog, "name"),
+		)
+		if len(self._dialogEntryCache) > 200:
+			self._dialogEntryCache.clear()
+		self._dialogEntryCache[key] = entry
+		return entry, dialog
+
+	def _dialogHelp(self, obj, concise=False):
+		entry, dialog = self._currentDialogEntry(obj)
+		if not dialog:
 			return ""
-		name = _clean(_safe_get(dialog, "name")) or _("SPSS dialog")
-		text = self._objectSearchText(dialog)
-		for token, helpText in DIALOG_HELP.items():
-			if token in text:
-				if concise:
-					return _("Dialog {name}.").format(name=name)
-				return helpText
+		lang = self._resolveLanguage()
+		name = _clean(_safe_get(dialog, "name")) or (kb.label(entry, lang) if entry else "") or _("SPSS dialog")
 		if concise:
 			return _("Dialog {name}.").format(name=name)
+		if entry:
+			return kb.describe(entry, lang)
 		return _(
 			"SPSS dialog {name}. Use Tab and Shift+Tab to move between controls, arrow keys inside lists or option groups, Space to select, Enter for the default action, Escape to cancel, and Paste when you want syntax."
 		).format(name=name)
 
-	def _dialogObject(self, obj):
-		for candidate in self._ancestors(obj, maxDepth=16):
-			role = _safe_get(candidate, "role")
-			text = self._objectSearchText(candidate)
-			if role in (ROLE_DIALOG, ROLE_WINDOW) and ("spss" in text or any(token in text for token in DIALOG_HELP)):
-				return candidate
-			if role == ROLE_PANE and any(token in text for token in DIALOG_HELP):
-				return candidate
-		return None
+	def _dialogStructureSummary(self, obj):
+		entry, dialog = self._currentDialogEntry(obj)
+		if not dialog:
+			return ""
+		lang = self._resolveLanguage()
+		name = _clean(_safe_get(dialog, "name")) or (kb.label(entry, lang) if entry else "") or _("SPSS dialog")
+		parents = (entry["en"],) if entry else ()
+		items = []
+		seen = set()
+		for child in self._iterObjects(dialog, maxObjects=520):
+			role = _safe_get(child, "role")
+			if role not in FORM_CONTROL_ROLES and role != ROLE_TAB:
+				continue
+			childLabel = _clean(_safe_get(child, "name"))
+			if not childLabel:
+				continue
+			key = childLabel.lower()
+			if key in seen:
+				continue
+			seen.add(key)
+			fieldEntry, _p = kb.findDialogControl(childLabel, parents=parents)
+			if fieldEntry:
+				kindText = kb.kindLabel(fieldEntry.get("kind"), lang)
+				items.append(kb.joinParts([kb.label(fieldEntry, lang), kindText]))
+			else:
+				controlType = self._controlTypeLabel(child)
+				items.append(kb.joinParts([childLabel, controlType]))
+			if len(items) >= 40:
+				break
+		if not items:
+			return ""
+		header = _("{name}. {count} controls:").format(name=name, count=len(items))
+		return header + " " + ". ".join(items)
 
 	def _dialogListSummary(self, obj):
 		dialog = self._dialogObject(obj) or self._rootObject()
@@ -1435,6 +1155,10 @@ class AppModule(appModuleHandler.AppModule):
 				items=", ".join(items[:8]) or _("none"),
 			)
 		return _("{name}. Visible items {items}.").format(name=name, items=", ".join(items[:8]) or _("none"))
+
+	# ------------------------------------------------------------------
+	# Tables
+	# ------------------------------------------------------------------
 
 	def _tableSummary(self, obj):
 		cell = self._nearestTableObject(obj)
@@ -1509,16 +1233,17 @@ class AppModule(appModuleHandler.AppModule):
 				properties[propertyName] = value
 		if not properties:
 			return self._describeVariableContext(cell)
+		lang = self._resolveLanguage()
 		ordered = []
-		for column in VARIABLE_COLUMNS:
-			label = VARIABLE_COLUMN_LABELS.get(column, column)
+		for column in kb.panes.VARIABLE_COLUMNS:
+			columnLabel = kb.pick(kb.panes.VARIABLE_COLUMN_LABELS.get(column, (column, column)), lang)
 			for key, value in properties.items():
 				if self._variablePropertyKey(key) == column:
-					ordered.append(_("{property}: {value}").format(property=label, value=value))
+					ordered.append(_("{property}: {value}").format(property=columnLabel, value=value))
 					break
 		if not ordered:
 			ordered = [_("{property}: {value}").format(property=k, value=v) for k, v in properties.items()]
-		variableName = properties.get("Name") or properties.get(VARIABLE_COLUMN_LABELS["Name"]) or _("current variable")
+		variableName = properties.get("Name") or _("current variable")
 		return _("Variable summary for {variable}. {summary}").format(variable=variableName, summary=". ".join(ordered[:12]))
 
 	def _outputOutlineSummary(self):
@@ -1645,9 +1370,10 @@ class AppModule(appModuleHandler.AppModule):
 			return False
 
 	def _paneHelp(self, paneKey):
-		if self._verboseHelp:
-			return PANE_HELP[paneKey]
-		return PANE_BRIEF.get(paneKey, PANE_HELP[paneKey])
+		lang = self._resolveLanguage()
+		table = kb.panes.PANE_HELP if self._verboseHelp else kb.panes.PANE_BRIEF
+		pair = table.get(paneKey) or kb.panes.PANE_HELP.get(paneKey)
+		return kb.pick(pair, lang)
 
 	def _debugObjectReport(self, obj):
 		if not obj:
@@ -1699,10 +1425,14 @@ class AppModule(appModuleHandler.AppModule):
 		role = _safe_get(obj, "role")
 		if role not in (ROLE_BUTTON, ROLE_MENUITEM, ROLE_TAB, ROLE_LIST, ROLE_LISTITEM, ROLE_CHECKBOX, ROLE_RADIOBUTTON, ROLE_COMBOBOX):
 			return None
+		lang = self._resolveLanguage()
 		text = self._objectSearchText(obj)
-		for token, label in CONTROL_LABELS.items():
+		for paneKey, names in kb.panes.PANE_NAMES.items():
+			if _contains_token(text, names[0]) or (len(names) > 1 and _contains_token(text, names[1])):
+				return kb.pick(names, lang)
+		for token, pair in GENERIC_CONTROL_LOOKUP.items():
 			if _contains_token(text, token):
-				return label
+				return kb.pick(pair, lang)
 		description = _clean(_safe_get(obj, "description"))
 		if description:
 			return description
@@ -1737,9 +1467,9 @@ class AppModule(appModuleHandler.AppModule):
 
 	def _findTabForView(self, paneKey):
 		wantedByPane = {
-			"overview": ("overview", "over view"),
-			"data": ("data view",),
-			"variable": ("variable view",),
+			"overview": (u"overview", u"over view", u"επισκοπηση"),
+			"data": (u"data view", u"προβολη δεδομενων"),
+			"variable": (u"variable view", u"προβολη μεταβλητων"),
 		}
 		wantedTokens = wantedByPane.get(paneKey)
 		if not wantedTokens:
@@ -1757,11 +1487,11 @@ class AppModule(appModuleHandler.AppModule):
 			score = 0
 			if any(token in text for token in wantedTokens):
 				score += 80
-			if paneKey == "data" and "data" in text and "view" in text:
+			if paneKey == "data" and (("data" in text and "view" in text) or ("δεδομεν" in text and "προβολ" in text)):
 				score += 25
-			if paneKey == "variable" and "variable" in text and "view" in text:
+			if paneKey == "variable" and (("variable" in text and "view" in text) or ("μεταβλητ" in text and "προβολ" in text)):
 				score += 25
-			if paneKey == "overview" and ("overview" in text or ("over" in text and "view" in text)):
+			if paneKey == "overview" and (("overview" in text or ("over" in text and "view" in text)) or "επισκοπ" in text):
 				score += 25
 			if score > bestScore:
 				bestScore = score
@@ -1802,10 +1532,10 @@ class AppModule(appModuleHandler.AppModule):
 		name = _norm(_safe_get(obj, "name"))
 		role = _safe_get(obj, "role")
 		score = 0
-		if role in tuple(role for role in definition["roles"] if role is not None):
+		if role in definition["roles"]:
 			score += 8
 		for token in definition["tokens"]:
-			token = token.lower()
+			token = _norm(token)
 			if not token:
 				continue
 			if name == token:
@@ -1820,7 +1550,7 @@ class AppModule(appModuleHandler.AppModule):
 			score += 45
 		if paneKey == "menus" and role == ROLE_MENUITEM:
 			score += 25
-		if paneKey in ("overview", "data", "variable") and role in TABLE_ROLES:
+		if paneKey in ("overview", "data", "variable", "pivottable") and role in TABLE_ROLES:
 			score += 8
 		if paneKey == "variable" and self._looksLikeVariableView(obj):
 			score += 35
@@ -1835,8 +1565,8 @@ class AppModule(appModuleHandler.AppModule):
 	def _looksLikeVariableView(self, obj):
 		text = self._objectSearchText(obj)
 		hits = 0
-		for tokens in VARIABLE_COLUMN_TOKENS.values():
-			if any(token.lower() in text for token in tokens):
+		for tokens in kb.panes.VARIABLE_COLUMN_TOKENS.values():
+			if any(_norm(token) in text for token in tokens):
 				hits += 1
 		if hits >= 3:
 			return True
@@ -1857,7 +1587,7 @@ class AppModule(appModuleHandler.AppModule):
 
 	def _looksLikeOverview(self, obj):
 		text = self._objectSearchText(obj)
-		if "overview" in text or "over view" in text or "επισκόπηση" in text:
+		if "overview" in text or "over view" in text or "επισκοπηση" in text:
 			return True
 		return "data editor" in text and "update" in text
 
@@ -1931,22 +1661,12 @@ class AppModule(appModuleHandler.AppModule):
 	def _outputObjectKind(self, obj):
 		text = self._objectSearchText(obj)
 		role = _safe_get(obj, "role")
+		lang = self._resolveLanguage()
 		if role in TABLE_ROLES or "pivot table" in text or "pivot" in text:
-			return _("Output item type: pivot table or table. This is usually readable with NVDA.")
-		if "tree diagram" in text or "tree model" in text:
-			return _("Output item type: tree diagram or tree model. SPSS usually does not expose this as screen-reader accessible text.")
-		if "model viewer" in text or "model view" in text or "model" in text:
-			return _("Output item type: model view. SPSS usually does not expose this as screen-reader accessible text.")
-		if "chart" in text or "graph" in text:
-			return _("Output item type: chart. SPSS usually does not expose charts as screen-reader accessible text; export the output or review the source table when possible.")
-		if "log" in text:
-			return _("Output item type: log.")
-		if "notes" in text or "note" in text:
-			return _("Output item type: notes.")
-		if "warning" in text:
-			return _("Output item type: warning.")
-		if "title" in text:
-			return _("Output item type: title.")
+			return kb.pick(kb.panes.OUTPUT_ITEM_KINDS[0][1], lang)
+		for tokens, pair in kb.panes.OUTPUT_ITEM_KINDS:
+			if any(token in text for token in tokens):
+				return kb.pick(pair, lang)
 		if role in (ROLE_TREEVIEWITEM, ROLE_LISTITEM):
 			return _("Output item type: outline entry.")
 		if role == ROLE_DOCUMENT:
@@ -1985,7 +1705,7 @@ class AppModule(appModuleHandler.AppModule):
 		if not obj:
 			pane = self._detectPaneFromObject(api.getFocusObject()) or self._lastPane
 			if pane:
-				return _("Selected tab: {tab}").format(tab=PANE_DEFINITIONS[pane]["name"])
+				return _("Selected tab: {tab}").format(tab=self._paneName(pane))
 			return None
 		name = _clean(_safe_get(obj, "name")) or self._tabNameFromPane(obj)
 		if not name:
@@ -1994,7 +1714,7 @@ class AppModule(appModuleHandler.AppModule):
 		if pane:
 			self._lastPane = pane
 			return _("Selected tab: {tab}. {description}").format(
-				tab=PANE_DEFINITIONS[pane]["name"],
+				tab=self._paneName(pane),
 				description=self._paneHelp(pane),
 			)
 		return _("Selected tab: {tab}").format(tab=name)
@@ -2042,7 +1762,7 @@ class AppModule(appModuleHandler.AppModule):
 		if columnHeader:
 			self._updateHeaderCache(cell, "column", columnNumber, columnHeader)
 		cellReference = self._cellReference(rowNumber, columnNumber)
-		tabName = PANE_DEFINITIONS.get(pane, {}).get("name", _("SPSS table"))
+		tabName = self._paneName(pane) if pane in PANE_ORDER else _("SPSS table")
 		if pane == "variable":
 			variableName = rowHeader or self._nearbyHeaderText(cell, preferRow=True) or _("current variable")
 			propertyName = columnHeader or self._columnNameFromNumber(columnNumber) or _("current property")
@@ -2055,13 +1775,11 @@ class AppModule(appModuleHandler.AppModule):
 				details.append(_("Column {column}").format(column=columnNumber))
 			if rowNumber:
 				details.append(_("Row {row}").format(row=rowNumber))
-			propertyKey = self._variablePropertyKey(propertyName, columnNumber)
-			controlType = VARIABLE_PROPERTY_CONTROL_TYPES.get(propertyKey)
-			if controlType:
-				details.append(controlType)
 			if value:
 				details.append(_("Current value {value}").format(value=value))
-			hint = VARIABLE_PROPERTY_HINTS.get(propertyKey)
+			propertyKey = self._variablePropertyKey(propertyName, columnNumber)
+			lang = self._resolveLanguage()
+			hint = kb.pick(kb.panes.VARIABLE_COLUMN_HELP.get(propertyKey, ()), lang)
 			if hint:
 				details.append(hint)
 			if propertyKey in ("Align", "Measure", "Role"):
@@ -2137,34 +1855,34 @@ class AppModule(appModuleHandler.AppModule):
 
 	def _paneFromTabName(self, name):
 		text = _norm(name)
-		if "overview" in text or "over view" in text or "επισκόπ" in text:
+		if "overview" in text or "over view" in text or "επισκοπ" in text:
 			return "overview"
 		if "variable" in text or "μεταβλητ" in text:
 			return "variable"
 		if "data" in text or "δεδομ" in text:
 			return "data"
-		if "output" in text or "viewer" in text or "αποτελέ" in text:
+		if "output" in text or "viewer" in text or "αποτελε" in text:
 			return "output"
-		if "syntax" in text or "σύνταξ" in text:
+		if "syntax" in text or "συνταξ" in text:
 			return "syntax"
-		if "chart builder" in text or "δημιουργ" in text and "γραφ" in text:
+		if "chart builder" in text or ("δημιουργ" in text and "γραφ" in text):
 			return "chartbuilder"
 		for paneKey in PANE_ORDER:
 			for token in PANE_DEFINITIONS[paneKey]["tokens"]:
-				if token.lower() in text:
+				if _norm(token) in text:
 					return paneKey
 		return None
 
 	def _tabNameFromPane(self, obj):
 		pane = self._detectPaneFromObject(obj)
 		if pane:
-			return PANE_DEFINITIONS[pane]["name"]
+			return self._paneName(pane)
 		return ""
 
 	def _tableName(self, obj, pane=None):
 		if not obj:
 			if pane:
-				return _("Table in {tab}").format(tab=PANE_DEFINITIONS[pane]["name"])
+				return _("Table in {tab}").format(tab=self._paneName(pane))
 			return ""
 		name = _clean(_safe_get(obj, "name")) or _clean(_safe_get(obj, "description"))
 		if name:
@@ -2355,31 +2073,32 @@ class AppModule(appModuleHandler.AppModule):
 			index = int(columnNumber) - 1
 		except Exception:
 			return ""
-		if 0 <= index < len(VARIABLE_COLUMNS):
-			column = VARIABLE_COLUMNS[index]
-			return VARIABLE_COLUMN_LABELS.get(column, column)
+		if 0 <= index < len(kb.panes.VARIABLE_COLUMNS):
+			column = kb.panes.VARIABLE_COLUMNS[index]
+			lang = self._resolveLanguage()
+			return kb.pick(kb.panes.VARIABLE_COLUMN_LABELS.get(column, (column, column)), lang)
 		return ""
 
 	def _variablePropertyKey(self, propertyName, columnNumber=None):
 		text = _norm(propertyName)
-		for column, tokens in VARIABLE_COLUMN_TOKENS.items():
-			if any(token.lower() in text for token in tokens):
+		for column, tokens in kb.panes.VARIABLE_COLUMN_TOKENS.items():
+			if any(_norm(token) in text for token in tokens):
 				return column
 		if columnNumber:
 			try:
 				index = int(columnNumber) - 1
 			except Exception:
 				return None
-			if 0 <= index < len(VARIABLE_COLUMNS):
-				return VARIABLE_COLUMNS[index]
+			if 0 <= index < len(kb.panes.VARIABLE_COLUMNS):
+				return kb.panes.VARIABLE_COLUMNS[index]
 		return None
 
 	def _isVariableColumnName(self, value):
 		value = _norm(value)
 		if not value:
 			return False
-		for tokens in VARIABLE_COLUMN_TOKENS.values():
-			if value in tuple(token.lower() for token in tokens):
+		for tokens in kb.panes.VARIABLE_COLUMN_TOKENS.values():
+			if value in tuple(_norm(token) for token in tokens):
 				return True
 		return False
 
@@ -2416,16 +2135,14 @@ class AppModule(appModuleHandler.AppModule):
 		return self._findBestPaneObject(paneKey)
 
 	def _paneNotFoundMessage(self, paneKey):
-		name = PANE_DEFINITIONS[paneKey]["name"]
+		name = self._paneName(paneKey)
 		if paneKey in ("overview", "data", "variable"):
 			return _(
-				"{name} was not found in the current SPSS window. Open the Data Editor, "
-				"then use the Overview, Data View, or Variable View tabs in the editor."
+				"{name} was not found in the current SPSS window. Open the Data Editor, then use the Overview, Data View, or Variable View tabs in the editor."
 			).format(name=name)
 		if paneKey == "output":
 			return _(
-				"Output Viewer was not found. Run an analysis or open an SPSS output file, "
-				"then use the Window menu to bring the Output Viewer forward."
+				"Output Viewer was not found. Run an analysis or open an SPSS output file, then use the Window menu to bring the Output Viewer forward."
 			)
 		if paneKey == "syntax":
 			return _(

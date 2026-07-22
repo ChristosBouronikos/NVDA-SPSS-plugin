@@ -1,0 +1,38 @@
+{
+  "addonId": "spssAccessibility",
+  "addonVersionNumber": {
+    "major": 1,
+    "minor": 2,
+    "patch": 0
+  },
+  "addonVersionName": "1.2.0",
+  "displayName": "SPSS Accessibility Plugin",
+  "publisher": "Bouronikos Christos",
+  "description": "SPSS Accessibility Plugin improves IBM SPSS Statistics accessibility for blind and visually impaired users. Created by Bouronikos Christos, contact: chrisbouronikos@gmail.com. If this add-on helps you, please consider a kind donation via PayPal: https://paypal.me/christosbouronikos",
+  "homepage": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "minNVDAVersion": {
+    "major": 2023,
+    "minor": 1,
+    "patch": 0
+  },
+  "lastTestedVersion": {
+    "major": 2026,
+    "minor": 1,
+    "patch": 1
+  },
+  "channel": "stable",
+  "URL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.2.0/spssAccessibility-1.2.0.nvda-addon",
+  "sha256": "c0c7b44cbd32e3091f6b1533733ce5f9361f344b943e19aaabe111b9f2212068",
+  "sourceURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin",
+  "license": "GPL v2",
+  "licenseURL": "https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE",
+  "changelog": "Major content and architecture release. Added a bilingual (English/Greek) knowledge base covering the full SPSS menu tree including statistical-procedure submenus, Data Editor/Viewer/Syntax Editor/Pivot Table Editor panes, Variable View columns, output item kinds, statistical procedure dialogs with sub-dialogs (T Tests, ANOVA, Frequencies, Descriptives, Explore, Crosstabs, Correlations, Regression, Reliability Analysis, Nonparametric Tests, and more), and a statistics glossary, grounded in IBM's own SPSS Statistics 24-31 documentation. The add-on now detects which language SPSS itself is running in and speaks SPSS content in that language, with a settings-panel and keyboard override. Added commands to read every field and button in the current dialog and to list items in the current menu or submenu. Added an offline automated test suite, including documentation-based SPSS 24-31 compatibility profiles. Not yet re-tested on a real NVDA and SPSS installation since the rewrite; see the README Testing section.",
+  "translations": [
+    {
+      "language": "el",
+      "displayName": "SPSS Accessibility Plugin",
+      "description": "Το SPSS Accessibility Plugin βελτιώνει την προσβασιμότητα του IBM SPSS Statistics για τυφλούς χρήστες και χρήστες με προβλήματα όρασης. Δημιουργός: Bouronikos Christos, email: chrisbouronikos@gmail.com. Αν σας βοηθά αυτό το πρόσθετο, παρακαλώ σκεφτείτε μια ευγενική δωρεά μέσω PayPal: https://paypal.me/christosbouronikos",
+      "changelog": "Μεγάλη έκδοση περιεχομένου και αρχιτεκτονικής. Προστέθηκε δίγλωσσο (αγγλικά/ελληνικά) γλωσσάριο-βάση που καλύπτει ολόκληρο το δέντρο μενού του SPSS, τις περιοχές Data Editor/Viewer/Syntax Editor/Pivot Table Editor, τις στήλες του Variable View, τους τύπους αντικειμένων αποτελεσμάτων, τους διαλόγους στατιστικών διαδικασιών με υποδιαλόγους, και γλωσσάρι στατιστικής, βασισμένο στην επίσημη τεκμηρίωση IBM SPSS Statistics 24-31. Το πρόσθετο πλέον εντοπίζει σε ποια γλώσσα εκτελείται το ίδιο το SPSS και εκφωνεί το περιεχόμενό του σε αυτή τη γλώσσα, με δυνατότητα παράκαμψης από τον πίνακα ρυθμίσεων ή το πληκτρολόγιο. Προστέθηκαν εντολές για ανάγνωση κάθε πεδίου και κουμπιού του τρέχοντος διαλόγου και για απαρίθμηση στοιχείων του τρέχοντος μενού ή υπομενού. Προστέθηκε αυτοματοποιημένη σουίτα δοκιμών εκτός σύνδεσης, μαζί με προφίλ συμβατότητας SPSS 24-31 βάσει τεκμηρίωσης. Δεν έχει δοκιμαστεί ξανά σε πραγματική εγκατάσταση NVDA και SPSS μετά την αναδιαμόρφωση· δείτε την ενότητα Δοκιμές του README."
+    }
+  ]
+}

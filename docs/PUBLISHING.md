@@ -29,14 +29,14 @@ Run this before every release:
 Expected release files:
 
 ```text
-dist/spssAccessibility-1.1.2.nvda-addon
+dist/spssAccessibility-1.2.0.nvda-addon
 dist/SHA256SUMS
 ```
 
 Current SHA256:
 
 ```text
-04642a6e6433feb4461765ccaaf01274b57ee6ad536e572ff162316f4a9af5fe
+c0c7b44cbd32e3091f6b1533733ce5f9361f344b943e19aaabe111b9f2212068
 ```
 
 ## GitHub Release
@@ -44,18 +44,20 @@ Current SHA256:
 Create a GitHub release with:
 
 ```text
-Tag: v1.1.2
-Title: SPSS Accessibility Plugin 1.1.2
-Asset: dist/spssAccessibility-1.1.2.nvda-addon
+Tag: v1.2.0
+Title: SPSS Accessibility Plugin 1.2.0
+Asset: dist/spssAccessibility-1.2.0.nvda-addon
 ```
 
 After the release is published, the asset URL should be:
 
 ```text
-https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.2/spssAccessibility-1.1.2.nvda-addon
+https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.2.0/spssAccessibility-1.2.0.nvda-addon
 ```
 
 Use that exact URL in the NVDA Add-on Store submission.
+
+Note: version 1.2.0 is a substantial rewrite that has not yet been tested against a real NVDA and IBM SPSS Statistics installation (see the README Testing section). Complete that testing pass before tagging and publishing this release.
 
 ## NVDA Add-on Store
 
@@ -69,14 +71,14 @@ Use these values:
 
 ```text
 Add-on ID: spssAccessibility
-Version: 1.1.2
+Version: 1.2.0
 Channel: stable
 Display name: SPSS Accessibility Plugin
 Publisher: Bouronikos Christos
 Homepage: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin
 Source URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin
-Download URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.1.2/spssAccessibility-1.1.2.nvda-addon
-SHA256: 04642a6e6433feb4461765ccaaf01274b57ee6ad536e572ff162316f4a9af5fe
+Download URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/releases/download/v1.2.0/spssAccessibility-1.2.0.nvda-addon
+SHA256: c0c7b44cbd32e3091f6b1533733ce5f9361f344b943e19aaabe111b9f2212068
 License: GPL v2
 License URL: https://github.com/ChristosBouronikos/NVDA-SPSS-plugin/blob/main/LICENSE
 Minimum NVDA version: 2023.1.0
